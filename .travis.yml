@@ -2,3 +2,4 @@ language: java
 script:
 - cd WebService-backend
 - mvn clean install
+- git subtree push --prefix WebService-backend heroku master
