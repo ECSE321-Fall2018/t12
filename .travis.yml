@@ -1,3 +1,4 @@
 language: java
 script:
+- cd WebService-backend
 - mvn clean install
