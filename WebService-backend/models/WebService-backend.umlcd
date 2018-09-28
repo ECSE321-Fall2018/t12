@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.yattasolutions.uml.diagrams.classifier:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.yattasolutions.diagrams="http://ns.yatta-solutions.com/umllab/diagrams/1.1.0" xmlns:com.yattasolutions.uml.diagrams.classifier="http://ns.yatta-solutions.com/umllab/diagrams/classifier/1.1.0" xmi:id="_SdGgIMKkEei3vbGnzW8Wsg">
+  <modelElement href="WebService-backend.uml#_SZYdwMKkEei3vbGnzW8Wsg"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_c8HqoMLOEeiZVM1MBJjpRg" sourceAnchor="0.0,156.0" targetAnchor="108.0,26.0" target="_pLsDAMLHEeiZVM1MBJjpRg" source="_CVJFoMLGEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_c7xFUMLOEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_c8HqocLOEeiZVM1MBJjpRg"/>
+    <nameVisual xmi:id="_c8HqosLOEeiZVM1MBJjpRg" text="">
+      <visualProperties xmi:id="_dBWv8MLOEeiZVM1MBJjpRg" position="-15.0,2.0000000000000284"/>
+    </nameVisual>
+    <sourceRole xmi:id="_c8Hqo8LOEeiZVM1MBJjpRg" aggregationKind="NONE" name="user" navigable="true">
+      <modelElement href="WebService-backend.uml#_c7xFUcLOEeiZVM1MBJjpRg"/>
+      <visualProperties xmi:id="_dBWI4MLOEeiZVM1MBJjpRg" position="-60.0,2.0"/>
+      <visibility xmi:id="_c8HqpMLOEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_c8HqpcLOEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_c8HqpsLOEeiZVM1MBJjpRg" aggregationKind="NONE" name="registration" navigable="true">
+      <modelElement href="WebService-backend.uml#_c74aEcLOEeiZVM1MBJjpRg"/>
+      <visualProperties xmi:id="_dBXXAMLOEeiZVM1MBJjpRg" position="16.0,-43.0"/>
+      <visibility xmi:id="_c8Hqp8LOEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_c8HqqMLOEeiZVM1MBJjpRg" label="*" max="-1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_zl-hgMLQEeiZVM1MBJjpRg" sourceAnchor="169.0,111.0" targetAnchor="54.0,52.0" target="_pLsDAMLHEeiZVM1MBJjpRg" source="_hHSDgMLOEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_zl8FQMLQEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_zl-hgcLQEeiZVM1MBJjpRg"/>
+    <bendpoints xmi:id="_VhnfIsNWEeinNIpPra4tyg" sourceX="45" targetY="129"/>
+    <nameVisual xmi:id="_zl-hgsLQEeiZVM1MBJjpRg" text="">
+      <visualProperties xmi:id="_zrTGYMLQEeiZVM1MBJjpRg" position="-13.0,-41.0"/>
+    </nameVisual>
+    <sourceRole xmi:id="_zl-hg8LQEeiZVM1MBJjpRg" aggregationKind="NONE" name="trip" navigable="true">
+      <modelElement href="WebService-backend.uml#_zl8FQcLQEeiZVM1MBJjpRg"/>
+      <visualProperties xmi:id="_zrSfUMLQEeiZVM1MBJjpRg" position="12.0,-82.0"/>
+      <visibility xmi:id="_zl-hhMLQEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_zl-hhcLQEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_zl-hhsLQEeiZVM1MBJjpRg" aggregationKind="NONE" name="registration" navigable="true">
+      <modelElement href="WebService-backend.uml#_zl8FRMLQEeiZVM1MBJjpRg"/>
+      <visualProperties xmi:id="_zrTGYcLQEeiZVM1MBJjpRg" position="2.0,22.0"/>
+      <visibility xmi:id="_zl-hh8LQEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_zl-hiMLQEeiZVM1MBJjpRg" label="*" max="-1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_NjIfsMLUEeiZVM1MBJjpRg" sourceAnchor="25.0,52.0" targetAnchor="169.0,153.0" target="_hHSDgMLOEeiZVM1MBJjpRg" source="_OmcBsMLSEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_NjDAIMLUEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_NjIfscLUEeiZVM1MBJjpRg"/>
+    <bendpoints xmi:id="_VhoGMMNWEeinNIpPra4tyg" sourceY="57" targetX="113"/>
+    <nameVisual xmi:id="_NjIfssLUEeiZVM1MBJjpRg" text="">
+      <visualProperties xmi:id="_NplF8MLUEeiZVM1MBJjpRg" position="-67.0,2.0"/>
+    </nameVisual>
+    <sourceRole xmi:id="_NjIfs8LUEeiZVM1MBJjpRg" aggregationKind="NONE" name="tripNode" navigable="true">
+      <modelElement href="WebService-backend.uml#_NjDnMMLUEeiZVM1MBJjpRg"/>
+      <visualProperties xmi:id="_Npke4MLUEeiZVM1MBJjpRg" position="-35.0,40.0"/>
+      <visibility xmi:id="_NjIftMLUEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_NjIftcLUEeiZVM1MBJjpRg" label="2..*" max="-1" min="2"/>
+    </sourceRole>
+    <targetRole xmi:id="_NjIftsLUEeiZVM1MBJjpRg" aggregationKind="NONE" name="trip" navigable="true">
+      <modelElement href="WebService-backend.uml#_NjEOQsLUEeiZVM1MBJjpRg"/>
+      <visualProperties xmi:id="_NplF8cLUEeiZVM1MBJjpRg" position="45.0,-48.0"/>
+      <visibility xmi:id="_NjIft8LUEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_NjIfuMLUEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_7mLVcMLUEeiZVM1MBJjpRg" sourceAnchor="0.0,11.0" targetAnchor="169.0,189.0" target="_hHSDgMLOEeiZVM1MBJjpRg" source="_xqZBwMLUEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_7mISIMLUEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_7mLVccLUEeiZVM1MBJjpRg"/>
+    <nameVisual xmi:id="_7mLVcsLUEeiZVM1MBJjpRg" text="">
+      <visualProperties xmi:id="_7s7dsMLUEeiZVM1MBJjpRg" position="0.0,-17.000000000000057"/>
+    </nameVisual>
+    <sourceRole xmi:id="_7mLVc8LUEeiZVM1MBJjpRg" aggregationKind="NONE" name="vehicle" navigable="true">
+      <modelElement href="WebService-backend.uml#_7mISIcLUEeiZVM1MBJjpRg"/>
+      <visualProperties xmi:id="_7s62oMLUEeiZVM1MBJjpRg" position="-60.0,-43.0"/>
+      <visibility xmi:id="_7mLVdMLUEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_7mLVdcLUEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_7mLVdsLUEeiZVM1MBJjpRg" aggregationKind="NONE" name="trip" navigable="true">
+      <modelElement href="WebService-backend.uml#_7mI5McLUEeiZVM1MBJjpRg"/>
+      <visualProperties xmi:id="_7s7dscLUEeiZVM1MBJjpRg" position="28.0,2.000000000000057"/>
+      <visibility xmi:id="_7mLVd8LUEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_7mLVeMLUEeiZVM1MBJjpRg" label="*" max="-1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_8gm9YMLUEeiZVM1MBJjpRg" sourceAnchor="65.0,0.0" targetAnchor="154.0,107.0" target="_CVJFoMLGEeiZVM1MBJjpRg" source="_xqZBwMLUEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_8gj6EMLUEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_8gm9YcLUEeiZVM1MBJjpRg"/>
+    <bendpoints xmi:id="_VhoGMcNWEeinNIpPra4tyg" sourceY="-271" targetX="57"/>
+    <nameVisual xmi:id="_8gm9YsLUEeiZVM1MBJjpRg" text="">
+      <visualProperties xmi:id="_8mF6UMLUEeiZVM1MBJjpRg" position="-52.0,1.0"/>
+    </nameVisual>
+    <sourceRole xmi:id="_8gm9Y8LUEeiZVM1MBJjpRg" aggregationKind="NONE" name="vehicle" navigable="true">
+      <modelElement href="WebService-backend.uml#_8gj6EcLUEeiZVM1MBJjpRg"/>
+      <visualProperties xmi:id="_8mFTQMLUEeiZVM1MBJjpRg" position="-33.0,-75.0"/>
+      <visibility xmi:id="_8gm9ZMLUEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_8gm9ZcLUEeiZVM1MBJjpRg" label="*" max="-1"/>
+    </sourceRole>
+    <targetRole xmi:id="_8gm9ZsLUEeiZVM1MBJjpRg" aggregationKind="NONE" name="user" navigable="true">
+      <modelElement href="WebService-backend.uml#_8gkhIMLUEeiZVM1MBJjpRg"/>
+      <visualProperties xmi:id="_8mF6UcLUEeiZVM1MBJjpRg" position="19.0,41.0"/>
+      <visibility xmi:id="_8gm9Z8LUEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_8gm9aMLUEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_QRgmgMNNEeinNIpPra4tyg" sourceAnchor="88.0,52.0" targetAnchor="114.0,0.0" target="_MUIK8MNNEeinNIpPra4tyg" source="_OmcBsMLSEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_QRZRwMNNEeinNIpPra4tyg"/>
+    <visualProperties xmi:id="_QRgmgcNNEeinNIpPra4tyg"/>
+    <nameVisual xmi:id="_QRgmgsNNEeinNIpPra4tyg" text="">
+      <visualProperties xmi:id="_QaGh0cNNEeinNIpPra4tyg" position="-13.0,-7.0"/>
+    </nameVisual>
+    <sourceRole xmi:id="_QRgmg8NNEeinNIpPra4tyg" aggregationKind="NONE" name="tripNode" navigable="true">
+      <modelElement href="WebService-backend.uml#_QRaf4MNNEeinNIpPra4tyg"/>
+      <visualProperties xmi:id="_QaGh0MNNEeinNIpPra4tyg" position="2.0,35.0"/>
+      <visibility xmi:id="_QRgmhMNNEeinNIpPra4tyg" label="+"/>
+      <cardinality xmi:id="_QRgmhcNNEeinNIpPra4tyg" label="*" max="-1"/>
+    </sourceRole>
+    <targetRole xmi:id="_QRgmhsNNEeinNIpPra4tyg" aggregationKind="NONE" name="position" navigable="true">
+      <modelElement href="WebService-backend.uml#_QReKQsNNEeinNIpPra4tyg"/>
+      <visualProperties xmi:id="_QaHI4MNNEeinNIpPra4tyg" position="-66.0,-77.0"/>
+      <visibility xmi:id="_QRgmh8NNEeinNIpPra4tyg" label="+"/>
+      <cardinality xmi:id="_QRgmiMNNEeinNIpPra4tyg" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_QRlfAMNNEeinNIpPra4tyg" target="_OmcBsMLSEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_324qsMNMEeinNIpPra4tyg"/>
+    <nameVisual xmi:id="_QRlfAcNNEeinNIpPra4tyg" text=""/>
+    <sourceRole xmi:id="_QRlfAsNNEeinNIpPra4tyg" aggregationKind="NONE" name="time" navigable="true">
+      <modelElement href="WebService-backend.uml#_TLb24MLSEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_QRlfA8NNEeinNIpPra4tyg" label="+"/>
+      <cardinality xmi:id="_QRlfBMNNEeinNIpPra4tyg" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_QRlfBcNNEeinNIpPra4tyg" aggregationKind="NONE" name="">
+      <modelElement href="WebService-backend.uml#_324qscNMEeinNIpPra4tyg"/>
+      <visibility xmi:id="_QRlfBsNNEeinNIpPra4tyg" label="+"/>
+      <cardinality xmi:id="_QRlfB8NNEeinNIpPra4tyg" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.diagrams:ContainmentVisual" xmi:id="_XStM0MNXEeinNIpPra4tyg" enclosingItem="_VSQFUMLFEeiZVM1MBJjpRg" containedItem="_hHSDgMLOEeiZVM1MBJjpRg"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ContainmentVisual" xmi:id="_XpnQ8MNXEeinNIpPra4tyg" enclosingItem="_VSQFUMLFEeiZVM1MBJjpRg" containedItem="_GOGuQMNVEeinNIpPra4tyg"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ContainmentVisual" xmi:id="_YPeXEMNXEeinNIpPra4tyg" enclosingItem="_VSQFUMLFEeiZVM1MBJjpRg" containedItem="_CVJFoMLGEeiZVM1MBJjpRg"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ContainmentVisual" xmi:id="_YnUPUMNXEeinNIpPra4tyg" enclosingItem="_VSQFUMLFEeiZVM1MBJjpRg" containedItem="_pLsDAMLHEeiZVM1MBJjpRg"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ContainmentVisual" xmi:id="_i3gswMNXEeinNIpPra4tyg" enclosingItem="_VSQFUMLFEeiZVM1MBJjpRg" containedItem="_OmcBsMLSEeiZVM1MBJjpRg"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ContainmentVisual" xmi:id="_jPyC0MNXEeinNIpPra4tyg" enclosingItem="_VSQFUMLFEeiZVM1MBJjpRg" containedItem="_MUIK8MNNEeinNIpPra4tyg"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ContainmentVisual" xmi:id="_jqJDkMNXEeinNIpPra4tyg" enclosingItem="_VSQFUMLFEeiZVM1MBJjpRg" containedItem="_xqZBwMLUEeiZVM1MBJjpRg"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ContainmentVisual" xmi:id="_7j5G8MNXEeinNIpPra4tyg" enclosingItem="_VSQFUMLFEeiZVM1MBJjpRg" containedItem="_Do2o4MLJEeiZVM1MBJjpRg"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ContainmentVisual" xmi:id="_8Oh_YMNXEeinNIpPra4tyg" enclosingItem="_VSQFUMLFEeiZVM1MBJjpRg" containedItem="_mMuWgMLSEeiZVM1MBJjpRg"/>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_pLsDAMLHEeiZVM1MBJjpRg" containment="_YnUPUMNXEeinNIpPra4tyg" name="Registration" package="_VSQFUMLFEeiZVM1MBJjpRg" associationsIn="_c8HqoMLOEeiZVM1MBJjpRg _zl-hgMLQEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_pLrb8MLHEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_pLsDAcLHEeiZVM1MBJjpRg" position="359.0,171.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_pLsDAsLHEeiZVM1MBJjpRg" label="+"/>
+    <attributes xmi:id="_XEE5MMLOEeiZVM1MBJjpRg" name="role">
+      <modelElement href="WebService-backend.uml#_XEDEAMLOEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_XEE5McLOEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_XEE5MsLOEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_XEE5M8LOEeiZVM1MBJjpRg" name="Role">
+        <modelElement href="WebService-backend.uml#_Do2B0MLJEeiZVM1MBJjpRg"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_c8IRsMLOEeiZVM1MBJjpRg" name="user">
+      <modelElement href="WebService-backend.uml#_c7xFUcLOEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_c8IRscLOEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_c8IRssLOEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_c8IRs8LOEeiZVM1MBJjpRg" name="User">
+        <modelElement href="WebService-backend.uml#_CVIekMLGEeiZVM1MBJjpRg"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_zl_IkMLQEeiZVM1MBJjpRg" name="trip">
+      <modelElement href="WebService-backend.uml#_zl8FQcLQEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_zl_IkcLQEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_zl_IksLQEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_zl_Ik8LQEeiZVM1MBJjpRg" name="Trip">
+        <modelElement href="WebService-backend.uml#_hHRccMLOEeiZVM1MBJjpRg"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:EnumerationVisual" xmi:id="_mMuWgMLSEeiZVM1MBJjpRg" containment="_8Oh_YMNXEeinNIpPra4tyg" name="PointType" package="_VSQFUMLFEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_mMtIYMLSEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_mMuWgcLSEeiZVM1MBJjpRg" position="51.0,319.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_mMuWgsLSEeiZVM1MBJjpRg" label="+"/>
+    <literals xmi:id="_of7IMMLSEeiZVM1MBJjpRg" name="Start">
+      <modelElement href="WebService-backend.uml#_of6hIMLSEeiZVM1MBJjpRg"/>
+    </literals>
+    <literals xmi:id="_qqrvkMLSEeiZVM1MBJjpRg" name="End">
+      <modelElement href="WebService-backend.uml#_qqrIgMLSEeiZVM1MBJjpRg"/>
+    </literals>
+    <literals xmi:id="_sMaoEMLSEeiZVM1MBJjpRg" name="Middle">
+      <modelElement href="WebService-backend.uml#_sMaBAMLSEeiZVM1MBJjpRg"/>
+    </literals>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_MUIK8MNNEeinNIpPra4tyg" containment="_jPyC0MNXEeinNIpPra4tyg" name="Position" package="_VSQFUMLFEeiZVM1MBJjpRg" associationsIn="_QRgmgMNNEeinNIpPra4tyg">
+    <modelElement href="WebService-backend.uml#_MUGVwMNNEeinNIpPra4tyg"/>
+    <visualProperties xmi:id="_MUIK8cNNEeinNIpPra4tyg" position="430.0,658.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_MUIK8sNNEeinNIpPra4tyg" label="+"/>
+    <attributes xmi:id="_QRh0oMNNEeinNIpPra4tyg" name="tripNode">
+      <modelElement href="WebService-backend.uml#_QRaf4MNNEeinNIpPra4tyg"/>
+      <visibility xmi:id="_QRh0ocNNEeinNIpPra4tyg" label="+"/>
+      <cardinality xmi:id="_QRh0osNNEeinNIpPra4tyg" label="*" max="-1"/>
+      <type xmi:id="_QRh0o8NNEeinNIpPra4tyg" name="TripNode">
+        <modelElement href="WebService-backend.uml#_OmazkMLSEeiZVM1MBJjpRg"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_jfQ00MNNEeinNIpPra4tyg" name="position">
+      <modelElement href="WebService-backend.uml#_jfO_oMNNEeinNIpPra4tyg"/>
+      <visibility xmi:id="_jfQ00cNNEeinNIpPra4tyg" label="+"/>
+      <cardinality xmi:id="_jfQ00sNNEeinNIpPra4tyg" label="1" max="1" min="1"/>
+      <type xmi:id="_jfQ008NNEeinNIpPra4tyg" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_CVJFoMLGEeiZVM1MBJjpRg" containment="_YPeXEMNXEeinNIpPra4tyg" name="User" package="_VSQFUMLFEeiZVM1MBJjpRg" associationsIn="_8gm9YMLUEeiZVM1MBJjpRg" associationsOut="_c8HqoMLOEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_CVIekMLGEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_CVJFocLGEeiZVM1MBJjpRg" position="591.0,41.0" size="154.0,215.0"/>
+    <visibility xmi:id="_CVJFosLGEeiZVM1MBJjpRg" label="+"/>
+    <attributes xmi:id="_hd6UcMLGEeiZVM1MBJjpRg" name="name">
+      <modelElement href="WebService-backend.uml#_hd004MLGEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_hd6UccLGEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_hd6UcsLGEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_hd6Uc8LGEeiZVM1MBJjpRg" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_ki-A4MLGEeiZVM1MBJjpRg" name="iDNumber">
+      <modelElement href="WebService-backend.uml#_ki8ywMLGEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_ki-A4cLGEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_ki-A4sLGEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_ki-A48LGEeiZVM1MBJjpRg" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_mDPg0MLGEeiZVM1MBJjpRg" name="password">
+      <modelElement href="WebService-backend.uml#_mDOSsMLGEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_mDPg0cLGEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_mDPg0sLGEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_mDPg08LGEeiZVM1MBJjpRg" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_nxnuMMLGEeiZVM1MBJjpRg" name="username">
+      <modelElement href="WebService-backend.uml#_nxnHIMLGEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_nxnuMcLGEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_nxnuMsLGEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_nxnuM8LGEeiZVM1MBJjpRg" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_p4eF8MLGEeiZVM1MBJjpRg" name="drivingRate">
+      <modelElement href="WebService-backend.uml#_p4c30MLGEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_p4eF8cLGEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_p4eF8sLGEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_p4eF88LGEeiZVM1MBJjpRg" name="int">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_ryuMIMLGEeiZVM1MBJjpRg" name="passRate">
+      <modelElement href="WebService-backend.uml#_rys-AMLGEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_ryuMIcLGEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_ryuMIsLGEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_ryuMI8LGEeiZVM1MBJjpRg" name="int">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_c8KG4MLOEeiZVM1MBJjpRg" name="registration">
+      <modelElement href="WebService-backend.uml#_c74aEcLOEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_c8KG4cLOEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_c8KG4sLOEeiZVM1MBJjpRg" label="*" max="-1"/>
+      <type xmi:id="_c8KG48LOEeiZVM1MBJjpRg" name="Registration">
+        <modelElement href="WebService-backend.uml#_pLrb8MLHEeiZVM1MBJjpRg"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_8gnkcMLUEeiZVM1MBJjpRg" name="vehicle">
+      <modelElement href="WebService-backend.uml#_8gj6EcLUEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_8gnkccLUEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_8gnkcsLUEeiZVM1MBJjpRg" label="*" max="-1"/>
+      <type xmi:id="_8gnkc8LUEeiZVM1MBJjpRg" name="Vehicle">
+        <modelElement href="WebService-backend.uml#_xqYasMLUEeiZVM1MBJjpRg"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_xqZBwMLUEeiZVM1MBJjpRg" containment="_jqJDkMNXEeinNIpPra4tyg" name="Vehicle" package="_VSQFUMLFEeiZVM1MBJjpRg" associationsOut="_7mLVcMLUEeiZVM1MBJjpRg _8gm9YMLUEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_xqYasMLUEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_xqZBwcLUEeiZVM1MBJjpRg" position="737.0,419.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_xqZBwsLUEeiZVM1MBJjpRg" label="+"/>
+    <attributes xmi:id="_1Ko1YMLUEeiZVM1MBJjpRg" name="model">
+      <modelElement href="WebService-backend.uml#_1KnnQMLUEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_1Ko1YcLUEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_1Ko1YsLUEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_1Ko1Y8LUEeiZVM1MBJjpRg" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_7mNKoMLUEeiZVM1MBJjpRg" name="trip">
+      <modelElement href="WebService-backend.uml#_7mI5McLUEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_7mNKocLUEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_7mNKosLUEeiZVM1MBJjpRg" label="*" max="-1"/>
+      <type xmi:id="_7mNKo8LUEeiZVM1MBJjpRg" name="Trip">
+        <modelElement href="WebService-backend.uml#_hHRccMLOEeiZVM1MBJjpRg"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_8goLgMLUEeiZVM1MBJjpRg" name="user">
+      <modelElement href="WebService-backend.uml#_8gkhIMLUEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_8goLgcLUEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_8goLgsLUEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_8goLg8LUEeiZVM1MBJjpRg" name="User">
+        <modelElement href="WebService-backend.uml#_CVIekMLGEeiZVM1MBJjpRg"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_G6cUAMNOEeinNIpPra4tyg" name="make">
+      <modelElement href="WebService-backend.uml#_G6bs8MNOEeinNIpPra4tyg"/>
+      <visibility xmi:id="_G6cUAcNOEeinNIpPra4tyg" label="+"/>
+      <cardinality xmi:id="_G6cUAsNOEeinNIpPra4tyg" label="1" max="1" min="1"/>
+      <type xmi:id="_G6cUA8NOEeinNIpPra4tyg" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_JN8nsMNOEeinNIpPra4tyg" name="color">
+      <modelElement href="WebService-backend.uml#_JN8AoMNOEeinNIpPra4tyg"/>
+      <visibility xmi:id="_JN8nscNOEeinNIpPra4tyg" label="+"/>
+      <cardinality xmi:id="_JN8nssNOEeinNIpPra4tyg" label="1" max="1" min="1"/>
+      <type xmi:id="_JN8ns8NOEeinNIpPra4tyg" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:EnumerationVisual" xmi:id="_Do2o4MLJEeiZVM1MBJjpRg" containment="_7j5G8MNXEeinNIpPra4tyg" name="Role" package="_VSQFUMLFEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_Do2B0MLJEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_Do2o4cLJEeiZVM1MBJjpRg" position="448.0,17.0" size="101.0,-1.0"/>
+    <visibility xmi:id="_Do2o4sLJEeiZVM1MBJjpRg" label="+"/>
+    <literals xmi:id="_1UQvoMLNEeiZVM1MBJjpRg" name="Passenger">
+      <modelElement href="WebService-backend.uml#_1UPhgMLNEeiZVM1MBJjpRg"/>
+    </literals>
+    <literals xmi:id="_5bQaMMLNEeiZVM1MBJjpRg" name="Driver">
+      <modelElement href="WebService-backend.uml#_5bPzIMLNEeiZVM1MBJjpRg"/>
+    </literals>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_GOGuQMNVEeinNIpPra4tyg" containment="_XpnQ8MNXEeinNIpPra4tyg" name="Admin" package="_VSQFUMLFEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_GOFgIMNVEeinNIpPra4tyg"/>
+    <visualProperties xmi:id="_GOGuQcNVEeinNIpPra4tyg" position="67.0,584.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_GOGuQsNVEeinNIpPra4tyg" label="+"/>
+    <attributes xmi:id="_wZGUYMNVEeinNIpPra4tyg" name="username">
+      <modelElement href="WebService-backend.uml#_wZFtUMNVEeinNIpPra4tyg"/>
+      <visibility xmi:id="_wZGUYcNVEeinNIpPra4tyg" label="+"/>
+      <cardinality xmi:id="_wZGUYsNVEeinNIpPra4tyg" label="1" max="1" min="1"/>
+      <type xmi:id="_wZGUY8NVEeinNIpPra4tyg" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_B8y0oMNWEeinNIpPra4tyg" name="password">
+      <modelElement href="WebService-backend.uml#_B8yNkMNWEeinNIpPra4tyg"/>
+      <visibility xmi:id="_B8y0ocNWEeinNIpPra4tyg" label="+"/>
+      <cardinality xmi:id="_B8y0osNWEeinNIpPra4tyg" label="1" max="1" min="1"/>
+      <type xmi:id="_B8y0o8NWEeinNIpPra4tyg" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_OmcBsMLSEeiZVM1MBJjpRg" containment="_i3gswMNXEeinNIpPra4tyg" name="TripNode" package="_VSQFUMLFEeiZVM1MBJjpRg" associationsIn="_QRlfAMNNEeinNIpPra4tyg" associationsOut="_NjIfsMLUEeiZVM1MBJjpRg _QRgmgMNNEeinNIpPra4tyg">
+    <modelElement href="WebService-backend.uml#_OmazkMLSEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_OmcBscLSEeiZVM1MBJjpRg" position="456.0,285.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_OmcBssLSEeiZVM1MBJjpRg" label="+"/>
+    <attributes xmi:id="_TLcd8MLSEeiZVM1MBJjpRg" name="time">
+      <modelElement href="WebService-backend.uml#_TLb24MLSEeiZVM1MBJjpRg"/>
+      <stereotypes xmi:id="_39IcoMNMEeinNIpPra4tyg" name="StyledElement">
+        <modelElement href="WebService-backend.uml#_32DkQMNMEeinNIpPra4tyg"/>
+      </stereotypes>
+      <visibility xmi:id="_TLcd8cLSEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_TLcd8sLSEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_38F60MNMEeinNIpPra4tyg" name="Time">
+        <modelElement href="WebService-backend.uml#_32fpIMNMEeinNIpPra4tyg"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_NjK78MLUEeiZVM1MBJjpRg" name="trip">
+      <modelElement href="WebService-backend.uml#_NjEOQsLUEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_NjK78cLUEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_NjK78sLUEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_NjK788LUEeiZVM1MBJjpRg" name="Trip">
+        <modelElement href="WebService-backend.uml#_hHRccMLOEeiZVM1MBJjpRg"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_QRibsMNNEeinNIpPra4tyg" name="position">
+      <modelElement href="WebService-backend.uml#_QReKQsNNEeinNIpPra4tyg"/>
+      <visibility xmi:id="_QRibscNNEeinNIpPra4tyg" label="+"/>
+      <cardinality xmi:id="_QRibssNNEeinNIpPra4tyg" label="1" max="1" min="1"/>
+      <type xmi:id="_QRibs8NNEeinNIpPra4tyg" name="Position">
+        <modelElement href="WebService-backend.uml#_MUGVwMNNEeinNIpPra4tyg"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_Vi4N8MNXEeinNIpPra4tyg" name="pointType">
+      <modelElement href="WebService-backend.uml#_Vi3m4MNXEeinNIpPra4tyg"/>
+      <visibility xmi:id="_Vi4N8cNXEeinNIpPra4tyg" label="+"/>
+      <cardinality xmi:id="_Vi4N8sNXEeinNIpPra4tyg" label="1" max="1" min="1"/>
+      <type xmi:id="_Vi4N88NXEeinNIpPra4tyg" name="PointType">
+        <modelElement href="WebService-backend.uml#_mMtIYMLSEeiZVM1MBJjpRg"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:PackageVisual" xmi:id="_VSQFUMLFEeiZVM1MBJjpRg" containments="_XStM0MNXEeinNIpPra4tyg _XpnQ8MNXEeinNIpPra4tyg _YPeXEMNXEeinNIpPra4tyg _YnUPUMNXEeinNIpPra4tyg _i3gswMNXEeinNIpPra4tyg _jPyC0MNXEeinNIpPra4tyg _jqJDkMNXEeinNIpPra4tyg _7j5G8MNXEeinNIpPra4tyg _8Oh_YMNXEeinNIpPra4tyg" classes="_hHSDgMLOEeiZVM1MBJjpRg _GOGuQMNVEeinNIpPra4tyg _CVJFoMLGEeiZVM1MBJjpRg _pLsDAMLHEeiZVM1MBJjpRg _OmcBsMLSEeiZVM1MBJjpRg _MUIK8MNNEeinNIpPra4tyg _xqZBwMLUEeiZVM1MBJjpRg _Do2o4MLJEeiZVM1MBJjpRg _mMuWgMLSEeiZVM1MBJjpRg" name="model">
+    <modelElement href="WebService-backend.uml#_VSPeQMLFEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_VSQFUcLFEeiZVM1MBJjpRg" position="114.0,30.0" size="-1.0,-1.0"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_hHSDgMLOEeiZVM1MBJjpRg" containment="_XStM0MNXEeinNIpPra4tyg" name="Trip" package="_VSQFUMLFEeiZVM1MBJjpRg" associationsIn="_NjIfsMLUEeiZVM1MBJjpRg _7mLVcMLUEeiZVM1MBJjpRg" associationsOut="_zl-hgMLQEeiZVM1MBJjpRg">
+    <modelElement href="WebService-backend.uml#_hHRccMLOEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_hHSDgcLOEeiZVM1MBJjpRg" position="199.0,241.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_hHSDgsLOEeiZVM1MBJjpRg" label="+"/>
+    <attributes xmi:id="_r55RgMLOEeiZVM1MBJjpRg" name="startpoint">
+      <modelElement href="WebService-backend.uml#_r54qcMLOEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_r55RgcLOEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_r55RgsLOEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_r55Rg8LOEeiZVM1MBJjpRg" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_uHtM4MLOEeiZVM1MBJjpRg" name="endpoint">
+      <modelElement href="WebService-backend.uml#_uHqwoMLOEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_uHtM4cLOEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_uHtM4sLOEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_uHtM48LOEeiZVM1MBJjpRg" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_vmHroMLOEeiZVM1MBJjpRg" name="distance">
+      <modelElement href="WebService-backend.uml#_vmHEkMLOEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_vmHrocLOEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_vmHrosLOEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_vmHro8LOEeiZVM1MBJjpRg" name="int">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_yDyn8MLOEeiZVM1MBJjpRg" name="active">
+      <modelElement href="WebService-backend.uml#_yDyA4MLOEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_yDyn8cLOEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_yDyn8sLOEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_yDyn88LOEeiZVM1MBJjpRg" name="boolean">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_5WD7sMLOEeiZVM1MBJjpRg" name="start_time">
+      <modelElement href="WebService-backend.uml#_5WCtkMLOEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_5WD7scLOEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_5WD7ssLOEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_aS2uoMNYEeinNIpPra4tyg" name="Time">
+        <modelElement href="WebService-backend.uml#_32fpIMNMEeinNIpPra4tyg"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_oxfrQMLQEeiZVM1MBJjpRg" name="end_time">
+      <modelElement href="WebService-backend.uml#_oxfEMMLQEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_oxfrQcLQEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_oxfrQsLQEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_fmB4cMNYEeinNIpPra4tyg" name="Time">
+        <modelElement href="WebService-backend.uml#_32fpIMNMEeinNIpPra4tyg"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_st0W4MLQEeiZVM1MBJjpRg" name="est_Trip_time">
+      <modelElement href="WebService-backend.uml#_stzv0MLQEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_st0W4cLQEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_st0W4sLQEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_st0W48LQEeiZVM1MBJjpRg" name="int">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_vPkh8MLQEeiZVM1MBJjpRg" name="seats_available">
+      <modelElement href="WebService-backend.uml#_vPj64MLQEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_vPkh8cLQEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_vPkh8sLQEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_vPkh88LQEeiZVM1MBJjpRg" name="int">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_xf17cMLQEeiZVM1MBJjpRg" name="compleated">
+      <modelElement href="WebService-backend.uml#_xf1UYMLQEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_xf17ccLQEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_xf17csLQEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_xf17c8LQEeiZVM1MBJjpRg" name="boolean">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_zl_voMLQEeiZVM1MBJjpRg" name="registration">
+      <modelElement href="WebService-backend.uml#_zl8FRMLQEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_zl_vocLQEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_zl_vosLQEeiZVM1MBJjpRg" label="*" max="-1"/>
+      <type xmi:id="_zl_vo8LQEeiZVM1MBJjpRg" name="Registration">
+        <modelElement href="WebService-backend.uml#_pLrb8MLHEeiZVM1MBJjpRg"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_NjJt0MLUEeiZVM1MBJjpRg" name="tripNode">
+      <modelElement href="WebService-backend.uml#_NjDnMMLUEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_NjJt0cLUEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_NjJt0sLUEeiZVM1MBJjpRg" label="2..*" max="-1" min="2"/>
+      <type xmi:id="_NjJt08LUEeiZVM1MBJjpRg" name="TripNode">
+        <modelElement href="WebService-backend.uml#_OmazkMLSEeiZVM1MBJjpRg"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_7mL8gMLUEeiZVM1MBJjpRg" name="vehicle">
+      <modelElement href="WebService-backend.uml#_7mISIcLUEeiZVM1MBJjpRg"/>
+      <visibility xmi:id="_7mL8gcLUEeiZVM1MBJjpRg" label="+"/>
+      <cardinality xmi:id="_7mL8gsLUEeiZVM1MBJjpRg" label="1" max="1" min="1"/>
+      <type xmi:id="_7mL8g8LUEeiZVM1MBJjpRg" name="Vehicle">
+        <modelElement href="WebService-backend.uml#_xqYasMLUEeiZVM1MBJjpRg"/>
+      </type>
+    </attributes>
+  </nodes>
+</com.yattasolutions.uml.diagrams.classifier:ClassDiagram>
