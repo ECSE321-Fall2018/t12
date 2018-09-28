@@ -1,4 +1,4 @@
-package webservice.model;
+package ca.mcgill.ecse321.webservice.model;
 
 import java.sql.Time;
 

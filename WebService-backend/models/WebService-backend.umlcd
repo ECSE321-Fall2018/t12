@@ -391,6 +391,10 @@
       </type>
     </attributes>
   </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:PackageVisual" xmi:id="_VSQFUMLFEeiZVM1MBJjpRg" containments="_XStM0MNXEeinNIpPra4tyg _XpnQ8MNXEeinNIpPra4tyg _YPeXEMNXEeinNIpPra4tyg _YnUPUMNXEeinNIpPra4tyg _i3gswMNXEeinNIpPra4tyg _jPyC0MNXEeinNIpPra4tyg _jqJDkMNXEeinNIpPra4tyg _7j5G8MNXEeinNIpPra4tyg _8Oh_YMNXEeinNIpPra4tyg" classes="_hHSDgMLOEeiZVM1MBJjpRg _GOGuQMNVEeinNIpPra4tyg _CVJFoMLGEeiZVM1MBJjpRg _pLsDAMLHEeiZVM1MBJjpRg _OmcBsMLSEeiZVM1MBJjpRg _MUIK8MNNEeinNIpPra4tyg _xqZBwMLUEeiZVM1MBJjpRg _Do2o4MLJEeiZVM1MBJjpRg _mMuWgMLSEeiZVM1MBJjpRg" name="model">
+    <modelElement href="WebService-backend.uml#_VSPeQMLFEeiZVM1MBJjpRg"/>
+    <visualProperties xmi:id="_VSQFUcLFEeiZVM1MBJjpRg" position="114.0,30.0" size="-1.0,-1.0"/>
+  </nodes>
   <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_hHSDgMLOEeiZVM1MBJjpRg" containment="_XStM0MNXEeinNIpPra4tyg" name="Trip" package="_VSQFUMLFEeiZVM1MBJjpRg" associationsIn="_NjIfsMLUEeiZVM1MBJjpRg _7mLVcMLUEeiZVM1MBJjpRg" associationsOut="_zl-hgMLQEeiZVM1MBJjpRg">
     <modelElement href="WebService-backend.uml#_hHRccMLOEeiZVM1MBJjpRg"/>
     <visualProperties xmi:id="_hHSDgcLOEeiZVM1MBJjpRg" position="199.0,241.0" size="-1.0,-1.0"/>
@@ -491,9 +495,5 @@
         <modelElement href="WebService-backend.uml#_xqYasMLUEeiZVM1MBJjpRg"/>
       </type>
     </attributes>
-  </nodes>
-  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:PackageVisual" xmi:id="_VSQFUMLFEeiZVM1MBJjpRg" containments="_XStM0MNXEeinNIpPra4tyg _XpnQ8MNXEeinNIpPra4tyg _YPeXEMNXEeinNIpPra4tyg _YnUPUMNXEeinNIpPra4tyg _i3gswMNXEeinNIpPra4tyg _jPyC0MNXEeinNIpPra4tyg _jqJDkMNXEeinNIpPra4tyg _7j5G8MNXEeinNIpPra4tyg _8Oh_YMNXEeinNIpPra4tyg" classes="_hHSDgMLOEeiZVM1MBJjpRg _GOGuQMNVEeinNIpPra4tyg _CVJFoMLGEeiZVM1MBJjpRg _pLsDAMLHEeiZVM1MBJjpRg _OmcBsMLSEeiZVM1MBJjpRg _MUIK8MNNEeinNIpPra4tyg _xqZBwMLUEeiZVM1MBJjpRg _Do2o4MLJEeiZVM1MBJjpRg _mMuWgMLSEeiZVM1MBJjpRg" name="model">
-    <modelElement href="WebService-backend.uml#_VSPeQMLFEeiZVM1MBJjpRg"/>
-    <visualProperties xmi:id="_VSQFUcLFEeiZVM1MBJjpRg" position="114.0,30.0" size="-1.0,-1.0"/>
   </nodes>
 </com.yattasolutions.uml.diagrams.classifier:ClassDiagram>

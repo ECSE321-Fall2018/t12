@@ -1,4 +1,4 @@
-package webservice.model;
+package ca.mcgill.ecse321.webservice.model;
 
 import javax.persistence.Entity;
 import java.sql.Time;
