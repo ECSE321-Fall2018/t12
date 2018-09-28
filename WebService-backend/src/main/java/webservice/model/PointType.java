@@ -1,3 +1,5 @@
+package webservice.model;
+
 import javax.persistence.Entity;
 
 @Entity

@@ -1,8 +1,8 @@
+package webservice.model;
+
 import javax.persistence.Entity;
 import java.util.Set;
 import javax.persistence.OneToMany;
-import model.RegistrationManager;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class User{
@@ -54,14 +54,6 @@ this.passRate = value;
 public int getPassRate() {
 return this.passRate;
     }
-private String previousModel;
-
-public void setPreviousModel(String value) {
-this.previousModel = value;
-    }
-public String getPreviousModel() {
-return this.previousModel;
-    }
 private Set<Registration> registration;
 
 @OneToMany(mappedBy="user")
@@ -73,26 +65,15 @@ public void setRegistration(Set<Registration> registrations) {
    this.registration = registrations;
 }
 
-private Set<RegistrationManager> registrationManager;
+private Set<Vehicle> vehicle;
 
-@ManyToMany
-public Set<RegistrationManager> getRegistrationManager() {
-   return this.registrationManager;
+@OneToMany(mappedBy="user")
+public Set<Vehicle> getVehicle() {
+   return this.vehicle;
 }
 
-public void setRegistrationManager(Set<RegistrationManager> registrationManagers) {
-   this.registrationManager = registrationManagers;
-}
-
-private Set<Car> car;
-
-@ManyToMany
-public Set<Car> getCar() {
-   return this.car;
-}
-
-public void setCar(Set<Car> cars) {
-   this.car = cars;
+public void setVehicle(Set<Vehicle> vehicles) {
+   this.vehicle = vehicles;
 }
 
 }

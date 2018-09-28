@@ -1,8 +1,7 @@
+package webservice.model;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import model.RegistrationManager;
-import java.util.Set;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Registration{
@@ -34,17 +33,6 @@ public Trip getTrip() {
 
 public void setTrip(Trip trip) {
    this.trip = trip;
-}
-
-private Set<RegistrationManager> registrationManager;
-
-@ManyToMany
-public Set<RegistrationManager> getRegistrationManager() {
-   return this.registrationManager;
-}
-
-public void setRegistrationManager(Set<RegistrationManager> registrationManagers) {
-   this.registrationManager = registrationManagers;
 }
 
 }

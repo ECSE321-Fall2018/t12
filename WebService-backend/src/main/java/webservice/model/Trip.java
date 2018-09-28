@@ -1,8 +1,9 @@
+package webservice.model;
+
 import javax.persistence.Entity;
+import java.sql.Time;
 import java.util.Set;
 import javax.persistence.OneToMany;
-import model.RegistrationManager;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -39,20 +40,20 @@ this.active = value;
 public boolean isActive() {
 return this.active;
     }
-private String start_time;
+private Time start_time;
 
-public void setStart_time(String value) {
+public void setStart_time(Time value) {
 this.start_time = value;
     }
-public String getStart_time() {
+public Time getStart_time() {
 return this.start_time;
     }
-private String end_time;
+private Time end_time;
 
-public void setEnd_time(String value) {
+public void setEnd_time(Time value) {
 this.end_time = value;
     }
-public String getEnd_time() {
+public Time getEnd_time() {
 return this.end_time;
     }
 private int est_Trip_time;
@@ -101,26 +102,15 @@ public void setTripNode(Set<TripNode> tripNodes) {
    this.tripNode = tripNodes;
 }
 
-private Set<RegistrationManager> registrationManager;
-
-@ManyToMany
-public Set<RegistrationManager> getRegistrationManager() {
-   return this.registrationManager;
-}
-
-public void setRegistrationManager(Set<RegistrationManager> registrationManagers) {
-   this.registrationManager = registrationManagers;
-}
-
-private Car car;
+private Vehicle vehicle;
 
 @ManyToOne(optional=false)
-public Car getCar() {
-   return this.car;
+public Vehicle getVehicle() {
+   return this.vehicle;
 }
 
-public void setCar(Car car) {
-   this.car = car;
+public void setVehicle(Vehicle vehicle) {
+   this.vehicle = vehicle;
 }
 
 }
