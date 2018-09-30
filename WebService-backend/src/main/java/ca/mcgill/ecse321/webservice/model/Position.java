@@ -37,11 +37,11 @@ public class Position{
 	}
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="position")
-	public Set<TripNode> getTripNode() {
+	public Set<TripNode> getTripNodes() {
 		return this.tripNodes;
 	}
 
-	public void setTripNode(Set<TripNode> tripNodes) {
+	public void setTripNodes(Set<TripNode> tripNodes) {
 		this.tripNodes = tripNodes;
 	}
 

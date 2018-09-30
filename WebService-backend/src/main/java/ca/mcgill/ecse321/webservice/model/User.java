@@ -96,21 +96,21 @@ public class User{
 	}
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
-	public Set<Registration> getRegistration() {
+	public Set<Registration> getRegistrations() {
 		return this.registrations;
 	}
 
-	public void setRegistration(Set<Registration> registrations) {
+	public void setRegistrations(Set<Registration> registrations) {
 		this.registrations = registrations;
 	}
 
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
-	public Set<Vehicle> getVehicle() {
+	public Set<Vehicle> getVehicles() {
 		return this.vehicles;
 	}
 
-	public void setVehicle(Set<Vehicle> vehicles) {
+	public void setVehicles(Set<Vehicle> vehicles) {
 		this.vehicles = vehicles;
 	}
 	
