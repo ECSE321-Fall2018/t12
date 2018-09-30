@@ -1,116 +1,173 @@
 package ca.mcgill.ecse321.webservice.model;
 
 import javax.persistence.Entity;
+
 import java.sql.Time;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Trip{
-private String startpoint;
-   
-   public void setStartpoint(String value) {
-this.startpoint = value;
-    }
-public String getStartpoint() {
-return this.startpoint;
-    }
-private String endpoint;
 
-public void setEndpoint(String value) {
-this.endpoint = value;
-    }
-public String getEndpoint() {
-return this.endpoint;
-    }
-private int distance;
+	private Long id; 
+	private String startpoint;
+	private String endpoint;
+	private int distance;
+	private boolean active;
+	private Time start_time;
+	private Time end_time;
+	private int est_Trip_time;
+	private int seats_available;
+	private boolean compleated;
+	private Set<Registration> registrations;
+	private Set<TripNode> tripNodes;
+	private Vehicle vehicle;
+	
+	
+	public Trip() {
+		
+	}
+	
+	public Trip(
+			String startpoint, 
+			String endpoint, 
+			int distance,
+			boolean active, 
+			Time start_time, 
+			Time end_time, 
+			int est_Trip_time,
+			int seats_available, 
+			boolean compleated,
+			Set<Registration> registrations, 
+			Set<TripNode> tripNodes,
+			Vehicle vehicle) {
+		this.startpoint = startpoint;
+		this.endpoint = endpoint;
+		this.distance = distance;
+		this.active = active;
+		this.start_time = start_time;
+		this.end_time = end_time;
+		this.est_Trip_time = est_Trip_time;
+		this.seats_available = seats_available;
+		this.compleated = compleated;
+		this.registrations = registrations;
+		this.tripNodes = tripNodes;
+		this.vehicle = vehicle;
+	}
 
-public void setDistance(int value) {
-this.distance = value;
-    }
-public int getDistance() {
-return this.distance;
-    }
-private boolean active;
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 
-public void setActive(boolean value) {
-this.active = value;
-    }
-public boolean isActive() {
-return this.active;
-    }
-private Time start_time;
+	public String getStartpoint() {
+		return startpoint;
+	}
 
-public void setStart_time(Time value) {
-this.start_time = value;
-    }
-public Time getStart_time() {
-return this.start_time;
-    }
-private Time end_time;
+	public void setStartpoint(String startpoint) {
+		this.startpoint = startpoint;
+	}
 
-public void setEnd_time(Time value) {
-this.end_time = value;
-    }
-public Time getEnd_time() {
-return this.end_time;
-    }
-private int est_Trip_time;
+	public String getEndpoint() {
+		return endpoint;
+	}
 
-public void setEst_Trip_time(int value) {
-this.est_Trip_time = value;
-    }
-public int getEst_Trip_time() {
-return this.est_Trip_time;
-    }
-private int seats_available;
+	public void setEndpoint(String endpoint) {
+		this.endpoint = endpoint;
+	}
 
-public void setSeats_available(int value) {
-this.seats_available = value;
-    }
-public int getSeats_available() {
-return this.seats_available;
-    }
-private boolean compleated;
+	public int getDistance() {
+		return distance;
+	}
 
-public void setCompleated(boolean value) {
-this.compleated = value;
-    }
-public boolean isCompleated() {
-return this.compleated;
-    }
-private Set<Registration> registration;
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
 
-@OneToMany(mappedBy="trip")
-public Set<Registration> getRegistration() {
-   return this.registration;
-}
+	public boolean isActive() {
+		return active;
+	}
 
-public void setRegistration(Set<Registration> registrations) {
-   this.registration = registrations;
-}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
-private Set<TripNode> tripNode;
+	public Time getStart_time() {
+		return start_time;
+	}
 
-@OneToMany(mappedBy="trip")
-public Set<TripNode> getTripNode() {
-   return this.tripNode;
-}
+	public void setStart_time(Time start_time) {
+		this.start_time = start_time;
+	}
 
-public void setTripNode(Set<TripNode> tripNodes) {
-   this.tripNode = tripNodes;
-}
+	public Time getEnd_time() {
+		return end_time;
+	}
 
-private Vehicle vehicle;
+	public void setEnd_time(Time end_time) {
+		this.end_time = end_time;
+	}
 
-@ManyToOne(optional=false)
-public Vehicle getVehicle() {
-   return this.vehicle;
-}
+	public int getEst_Trip_time() {
+		return est_Trip_time;
+	}
 
-public void setVehicle(Vehicle vehicle) {
-   this.vehicle = vehicle;
-}
+	public void setEst_Trip_time(int est_Trip_time) {
+		this.est_Trip_time = est_Trip_time;
+	}
+
+	public int getSeats_available() {
+		return seats_available;
+	}
+
+	public void setSeats_available(int seats_available) {
+		this.seats_available = seats_available;
+	}
+
+	public boolean isCompleated() {
+		return compleated;
+	}
+
+	public void setCompleated(boolean compleated) {
+		this.compleated = compleated;
+	}
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="trip")
+	public Set<Registration> getRegistration() {
+		return this.registrations;
+	}
+	
+	public void setRegistration(Set<Registration> registrations) {
+		this.registrations = registrations;
+	}
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="trip")
+	public Set<TripNode> getTripNode() {
+		return this.tripNodes;
+	}
+	
+	public void setTripNode(Set<TripNode> tripNodes) {
+		this.tripNodes = tripNodes;
+	}
+	
+	@ManyToOne(cascade=CascadeType.ALL,optional=false)
+	public Vehicle getVehicle() {
+		return this.vehicle;
+	}
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
 
 }

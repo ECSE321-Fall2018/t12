@@ -1,38 +1,68 @@
 package ca.mcgill.ecse321.webservice.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Registration{
-private Role role;
-   
-   public void setRole(Role value) {
-this.role = value;
-    }
-public Role getRole() {
-return this.role;
-    }
-private User user;
+	
+	private Long id; 
+	private Role role;
+	private User user;
+	private Trip trip;
+	
+	public Registration() {
+	}
+	
+	public Registration(Role role,
+						User user,
+						Trip trip) {
+		setRole(role);
+		setUser(user);
+		setTrip(trip);
+	}
+	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public void setRole(Role value) {
+		this.role = value;
+	}
 
-@ManyToOne(optional=false)
-public User getUser() {
-   return this.user;
-}
+	@Enumerated(EnumType.STRING)
+	public Role getRole() {
+		return this.role;
+	}
 
-public void setUser(User user) {
-   this.user = user;
-}
+	@ManyToOne(cascade=CascadeType.ALL, optional=false)
+	public User getUser() {
+		return this.user;
+	}
 
-private Trip trip;
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-@ManyToOne(optional=false)
-public Trip getTrip() {
-   return this.trip;
-}
-
-public void setTrip(Trip trip) {
-   this.trip = trip;
-}
+	@ManyToOne(cascade=CascadeType.ALL, optional=false)
+	public Trip getTrip() {
+		return this.trip;
+	}
+	
+	public void setTrip(Trip trip) {
+		this.trip = trip;
+	}
 
 }
