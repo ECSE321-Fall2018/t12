@@ -1,79 +1,117 @@
 package ca.mcgill.ecse321.webservice.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import java.util.Set;
+
 import javax.persistence.OneToMany;
 
 @Entity
+@Table(name = "Usr")
 public class User{
-private String name;
-   
-   public void setName(String value) {
-this.name = value;
-    }
-public String getName() {
-return this.name;
-    }
-private String iDNumber;
+	
+	
+	private Long id; 
+	private String name;
+	private String username;
+	private String password;
+	private int drivingRate;
+	private int passRate;
+	private Set<Registration> registrations;
+	private Set<Vehicle> vehicles;
+	
+	// Default empty constructor
+	public User() { 
+	}
+	
+	public User(String name,
+				String username, 
+				String password,
+				int drivingRate,
+				int passRate,
+				Set<Registration> registrations,
+				Set<Vehicle> vehicles) {
+		this.name = name;
+		this.username = username;
+		this.password = password;
+		this.drivingRate = drivingRate;
+		this.passRate = passRate;
+		this.registrations = registrations;
+		this.vehicles = vehicles;
+	}
+	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 
-public void setIDNumber(String value) {
-this.iDNumber = value;
-    }
-public String getIDNumber() {
-return this.iDNumber;
-    }
-private String password;
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
 
-public void setPassword(String value) {
-this.password = value;
-    }
-public String getPassword() {
-return this.password;
-    }
-private String username;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
 
-public void setUsername(String value) {
-this.username = value;
-    }
-public String getUsername() {
-return this.username;
-    }
-private int drivingRate;
+	public void setDrivingRate(int value) {
+		this.drivingRate = value;
+	}
 
-public void setDrivingRate(int value) {
-this.drivingRate = value;
-    }
-public int getDrivingRate() {
-return this.drivingRate;
-    }
-private int passRate;
+	public int getDrivingRate() {
+		return this.drivingRate;
+	}
 
-public void setPassRate(int value) {
-this.passRate = value;
-    }
-public int getPassRate() {
-return this.passRate;
-    }
-private Set<Registration> registration;
+	public void setPassRate(int value) {
+		this.passRate = value;
+	}
 
-@OneToMany(mappedBy="user")
-public Set<Registration> getRegistration() {
-   return this.registration;
-}
+	public int getPassRate() {
+		return this.passRate;
+	}
 
-public void setRegistration(Set<Registration> registrations) {
-   this.registration = registrations;
-}
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
+	public Set<Registration> getRegistration() {
+		return this.registrations;
+	}
 
-private Set<Vehicle> vehicle;
+	public void setRegistration(Set<Registration> registrations) {
+		this.registrations = registrations;
+	}
 
-@OneToMany(mappedBy="user")
-public Set<Vehicle> getVehicle() {
-   return this.vehicle;
-}
 
-public void setVehicle(Set<Vehicle> vehicles) {
-   this.vehicle = vehicles;
-}
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
+	public Set<Vehicle> getVehicle() {
+		return this.vehicles;
+	}
 
+	public void setVehicle(Set<Vehicle> vehicles) {
+		this.vehicles = vehicles;
+	}
+	
 }
