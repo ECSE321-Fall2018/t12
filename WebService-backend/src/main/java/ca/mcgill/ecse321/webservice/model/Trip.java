@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.webservice.model;
 import javax.persistence.Entity;
 
 import java.sql.Time;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -25,8 +26,8 @@ public class Trip{
 	private int est_Trip_time;
 	private int seats_available;
 	private boolean compleated;
-	private Set<Registration> registrations;
-	private Set<TripNode> tripNodes;
+	private Set<Registration> registrations = new HashSet<>();
+	private Set<TripNode> tripNodes = new HashSet<>();
 	private Vehicle vehicle;
 	
 	
@@ -44,8 +45,6 @@ public class Trip{
 			int est_Trip_time,
 			int seats_available, 
 			boolean compleated,
-			Set<Registration> registrations, 
-			Set<TripNode> tripNodes,
 			Vehicle vehicle) {
 		this.startpoint = startpoint;
 		this.endpoint = endpoint;
@@ -56,8 +55,6 @@ public class Trip{
 		this.est_Trip_time = est_Trip_time;
 		this.seats_available = seats_available;
 		this.compleated = compleated;
-		this.registrations = registrations;
-		this.tripNodes = tripNodes;
 		this.vehicle = vehicle;
 	}
 
@@ -145,21 +142,31 @@ public class Trip{
 	}
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="trip")
-	public Set<Registration> getRegistration() {
+	public Set<Registration> getRegistrations() {
 		return this.registrations;
 	}
 	
-	public void setRegistration(Set<Registration> registrations) {
+	public void setRegistrations(Set<Registration> registrations) {
 		this.registrations = registrations;
 	}
 	
+	public void addRegistration(Registration registration) {
+		this.registrations.add(registration);
+		registration.setTrip(this);
+	}
+	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="trip")
-	public Set<TripNode> getTripNode() {
+	public Set<TripNode> getTripNodes() {
 		return this.tripNodes;
 	}
 	
-	public void setTripNode(Set<TripNode> tripNodes) {
+	public void setTripNodes(Set<TripNode> tripNodes) {
 		this.tripNodes = tripNodes;
+	}
+	
+	public void addTripNode(TripNode tripNode) {
+		this.tripNodes.add(tripNode);
+		tripNode.setTrip(this);
 	}
 	
 	@ManyToOne(cascade=CascadeType.ALL,optional=false)

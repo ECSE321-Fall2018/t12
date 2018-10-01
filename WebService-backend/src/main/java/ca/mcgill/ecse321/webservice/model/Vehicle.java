@@ -32,7 +32,7 @@ public class Vehicle{
 		setModel(model);
 		setMake(make);
 		setColor(color);
-		setTrip(trips);
+		setTrips(trips);
 		setUser(user);
 	}
 	
@@ -72,11 +72,11 @@ public class Vehicle{
 		  
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="vehicle")
-	public Set<Trip> getTrip() {
+	public Set<Trip> getTrips() {
 		return this.trips;
 	}
 
-	public void setTrip(Set<Trip> trips) {
+	public void setTrips(Set<Trip> trips) {
 		this.trips = trips;
 	}
 
