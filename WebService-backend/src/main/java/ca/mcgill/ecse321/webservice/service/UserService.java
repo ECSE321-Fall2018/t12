@@ -25,8 +25,8 @@ public class UserService {
 			user.setName("Test case");
 			user.setUsername("UsernameTest");
 			user.setPassword("PasswordTest");
-			user.setDrivingRate(3.0);
-			user.setPassRate(3.0);
+			user.setDrivingRate(3);
+			user.setPassRate(3);
 
 
 			userRepository.save(user);
@@ -35,10 +35,10 @@ public class UserService {
 	}
 	
 	public Optional<User> getUser(long userId) {
-		return userRepository.findById(userid);
+		return userRepository.findById(userId);
 	}
 
-	public User updateCustomer( long userId,User user){
+	public User updateUser( long userId,User user){
 		return userRepository.save(user);
 	}
 
@@ -46,6 +46,11 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	public void deleteUser(User user){
+		UserRepository.delete(user);
+	}
+
+	public void deleteUser(Optional<User> user) {
+		// TODO Auto-generated method stub
 		UserRepository.delete(user);
 	}
 

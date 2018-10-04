@@ -19,8 +19,8 @@ public class User{
 	private Long id; 
 	private String name;
 	private String username;
-	private float Dweight = 5.0;
-	private float Pweight = 5.0; 
+	private float Dweight = 5;
+	private float Pweight = 5; 
 	private String password;
 	private float drivingRate;
 	private float passRate;
@@ -116,23 +116,23 @@ public class User{
 		this.vehicles = vehicles;
 	}
 	
-	public static void updatePassRating(int score){
+	public void updatePassRating(int score){
 		Pweight++; 
-		if (score > pass_rating){
-			pass_rating = pass_rating + (score/Pweight);
+		if (score > this.passRate){
+			this.passRate = passRate + (score/Pweight);
 		}
-		else if(score < pass_rating){
-			pass_rating = pass_rating - (score/Pweight);
+		else if(score < this.passRate){
+			this.passRate = passRate - (score/Pweight);
 		}
 	}
 
-	public static void updateDriverRating(int score){
+	public void updateDriverRating(int score){
 		Dweight++;
-		if (score > drive_rating){
-			drive_rating = drive_rating + (score/Dweight);
+		if (score > this.drivingRate){
+			this.drivingRate = drivingRate + (score/Dweight);
 		}
-		else if(score < drive_rating){
-			drive_rating = drive_rating - (score/Dweight);
+		else if(score < this.drivingRate){
+			this.drivingRate = drivingRate - (score/Dweight);
 		}
 	}
 
