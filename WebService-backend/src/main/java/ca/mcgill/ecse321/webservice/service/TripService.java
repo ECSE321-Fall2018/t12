@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.webservice.service;
 
 import java.sql.Time;
-import java.util.HashSet;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +39,7 @@ public class TripService {
 			trip.setVehicle(v);
 			
 			tripRepository.save(trip);
-		}
-		
+		}		
 		return tripRepository.findAll();	
 	}
 	
@@ -49,4 +47,15 @@ public class TripService {
 		return tripRepository.findById(id);
 	}
 	
+	public Trip updateTrip(long id, Trip trip) {
+		return tripRepository.save(trip);
+	}
+	
+	public Trip addTrip(Trip trip) {
+		return tripRepository.save(trip);
+	}
+	
+	public void deleteTrip(Trip trip) {
+		tripRepository.delete(trip);
+	}
 }
