@@ -1,18 +1,30 @@
 package ca.mcgill.ecse321.webservice.controller;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
+import org.json.JSONException;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ca.mcgill.ecse321.webservice.model.User;
 import ca.mcgill.ecse321.webservice.service.UserService;
 
 @RunWith(SpringRunner.class)
@@ -33,12 +45,19 @@ public class UserControllerTests {
 	
 	@Before
 	public void setMockOutput(){
-		
-		/*when(userDAO.getUser(ArgumentMatchers.anyLong())).thenAnswer( (InvocationOnMock invocation) -> {
-			User user = new User("Karlo", "Karlo", "pass", 3, 3, null, null);
-		    return user;
+		when(userDAO.getUser(ArgumentMatchers.anyLong())).thenAnswer( (InvocationOnMock invocation) -> {
+			Long arg = invocation.getArgument(0);
 			
-		  });*/
+			
+			if(arg == -1){
+				return null;
+			} else if (arg == 0) {
+				Optional<User> user = Optional.of(new User("Karlo", "Karlo", "pass", 3, 3, null, null));
+				return user;
+			} else {
+				return null;
+			}
+		  });
 	}
 	
 	@Test
@@ -46,25 +65,12 @@ public class UserControllerTests {
 		assertTrue(true);
 	}
 	
-	/*@Test
+	@Test
 	public void getUsers() throws JSONException {
-		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
-
-		ResponseEntity<String> response = restTemplate.exchange(
-				"http://localhost:"+port+"/api/users",
-				HttpMethod.GET, entity, String.class);
-
+		Optional<User> resp = (Optional<User>) controller.getUser(0).getBody();
 		
+		Optional<User> expected = Optional.of(new User("Karlo", "Karlo", "pass", 3, 3, null, null));
 		
-		JSONAssert.assertEquals("{id:0,name:Karl,username:Karlo,password:pass,drivingRate:3,passRate:3,registrations:null,vehicles:null}", response.getBody(), false);
-		
-	}*/
-	
-	/*@Test
-	public void TestAddUser() {
-		User user = new User("Karl", "karlo", "pass", 5, 5, null, null);
-		controller.addUser(user);
-		assertNotNull("temp");
-	}*/
-	
+		Assert.assertEquals(resp.get().getName(), expected.get().getName());
+	}	
 }
