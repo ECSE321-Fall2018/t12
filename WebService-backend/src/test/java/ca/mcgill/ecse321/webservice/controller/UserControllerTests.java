@@ -20,6 +20,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,6 +45,8 @@ public class UserControllerTests {
 	
 	HttpHeaders headers = new HttpHeaders();
 	
+	private static double ratingTolerance = 0.05;
+	
 	@Before
 	public void setMockOutput(){
 		when(userDAO.getUser(ArgumentMatchers.anyLong())).thenAnswer( (InvocationOnMock invocation) -> {
@@ -58,6 +62,12 @@ public class UserControllerTests {
 				return null;
 			}
 		  });
+		
+		when(userDAO.getUsers()).thenAnswer((InvocationOnMock invocation)->{
+			
+			
+			return null;
+		});
 	}
 	
 	@Test
@@ -66,11 +76,33 @@ public class UserControllerTests {
 	}
 	
 	@Test
-	public void getUsers() throws JSONException {
+	public void getExistingUser() {
 		Optional<User> resp = (Optional<User>) controller.getUser(0).getBody();
-		
+
 		Optional<User> expected = Optional.of(new User("Karlo", "Karlo", "pass", 3, 3, null, null));
 		
-		Assert.assertEquals(resp.get().getName(), expected.get().getName());
-	}	
+		assertUserEquals(expected.get(), resp.get());
+	}
+	
+	@Test
+	public void getNonExistingUser() {
+		ResponseEntity<?> resp = controller.getUser(3);
+		
+		Assert.assertEquals(HttpStatus.NOT_FOUND, resp.getStatusCode());
+	}
+	
+	@Test
+	public void getInvalidUser() {
+		ResponseEntity<?> resp = controller.getUser(-1);
+		
+		Assert.assertEquals(HttpStatus.BAD_REQUEST, resp.getStatusCode());
+	}
+	
+	public static void assertUserEquals(User expected, User actual) {
+		Assert.assertEquals(expected.getName(), actual.getName());
+		Assert.assertEquals(expected.getUsername(), actual.getUsername());
+		Assert.assertEquals(expected.getPassword(), actual.getPassword());
+		Assert.assertEquals(expected.getPassRate(), actual.getPassRate(), ratingTolerance);
+		Assert.assertEquals(expected.getDrivingRate(), actual.getDrivingRate(), ratingTolerance);
+	}
 }
