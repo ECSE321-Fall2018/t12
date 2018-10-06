@@ -13,8 +13,6 @@ import ca.mcgill.ecse321.webservice.model.Role;
 import ca.mcgill.ecse321.webservice.model.Trip;
 import ca.mcgill.ecse321.webservice.model.User;
 import ca.mcgill.ecse321.webservice.model.Vehicle;
-import ca.mcgill.ecse321.webservice.repository.TripRepository;
-import ca.mcgill.ecse321.webservice.repository.UserRepository;
 import ca.mcgill.ecse321.webservice.repository.RegistrationRepository;
 
 @Service
@@ -23,11 +21,11 @@ public class RegistrationService {
 
 	@Autowired
 	private RegistrationRepository registrationRepository;
-	private UserRepository userRepository;
-	private TripRepository tripRepository; 
+
+	
 	public Iterable<Registration> getAllRegistrations() {
 		
-		if (registrationRepository.count() < 2) {
+		if (registrationRepository.count() ==0) {
 			
 			Trip trip = new Trip();
 			trip.setStartpoint("Toronto");
@@ -59,17 +57,14 @@ public class RegistrationService {
 		return registrationRepository.findById(id);
 	}
 	
-	public Registration addRegistration(long userID, long tripID) {
+	public Registration addRegistration(User user, Trip trip, Role role) {
 		//private UserRepository userRepository;
-		Optional<User> user = userRepository.findById(userID);
-		Optional<Trip> trip = tripRepository.findById(tripID);
-		Role role = Role.PASSENGER;
-		Registration newRegistration = new Registration(role, user.get(), trip.get());
+		//Optional<User> user = userRepository.findById(userID);
+		//Optional<Trip> trip = tripRepository.findById(tripID);
+		//Role role = Role.PASSENGER;
+		Registration newRegistration = new Registration(role, user, trip);
 		registrationRepository.save(newRegistration);
-		return newRegistration;
-		
-			
-		
+		return newRegistration;	
 	}
 	public Registration deleteRegistration (long registrationID) {
 		Optional<Registration> registrationO = registrationRepository.findById(registrationID);

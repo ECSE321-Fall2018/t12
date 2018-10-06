@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.webservice.model.Registration;
+import ca.mcgill.ecse321.webservice.model.Role;
 import ca.mcgill.ecse321.webservice.service.RegistrationService;
+import ca.mcgill.ecse321.webservice.service.TripService;
+import ca.mcgill.ecse321.webservice.service.UserService;
 import ca.mcgill.ecse321.webservice.model.User;
 import ca.mcgill.ecse321.webservice.model.Trip;
 
@@ -22,11 +25,10 @@ public class RegistrationController {
 
 	@Autowired
 	private RegistrationService registrationService;
-	//may have to delete these and replace with service classes
 	@Autowired
-	private ca.mcgill.ecse321.webservice.repository.UserRepository userRepository;
+	private UserService userService; 
 	@Autowired
-	private ca.mcgill.ecse321.webservice.repository.TripRepository tripRepository;
+	private TripService tripService;
 	
 	@RequestMapping(value="/registrations", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllRegistrations() {
@@ -38,7 +40,7 @@ public class RegistrationController {
 	
 	@RequestMapping(value="/registrationsByUser/{userID}", method = RequestMethod.GET)   
 	public ResponseEntity<?> getRegistrationsByUserID(@PathVariable long userID) {
-		Optional<User> userO = userRepository.findById(userID);
+		Optional<User> userO = userService.getUser(userID);;
 		User user = userO.get();
 		
 		
@@ -48,7 +50,8 @@ public class RegistrationController {
 	
 	@RequestMapping(value="/registrationsByTrip/{tripID}", method = RequestMethod.GET)   
 	public ResponseEntity<?> getRegistrationsByTripID(@PathVariable long tripID) {
-		Optional<Trip> tripO = tripRepository.findById(tripID);
+		Optional<Trip> tripO = tripService.getTrip(tripID);
+		
 		Trip trip = tripO.get();
 		
 		
@@ -71,19 +74,17 @@ public class RegistrationController {
 	public ResponseEntity<?> addRegistration(@PathVariable long userID,@PathVariable long tripID) {
 		System.out.println("the");
 		System.out.println(userID);
-		if (userRepository==null) {
-			System.out.println("repository null");
-		}
-		Optional<User> user= userRepository.findById(userID);
+		
+		Optional<User> user= userService.getUser(userID);
 		if (user.get()==null) {
 			return new ResponseEntity<>("user of that id does not exist", HttpStatus.BAD_REQUEST);
 		}
-		Optional<Trip> trip = tripRepository.findById(tripID);
+		Optional<Trip> trip = tripService.getTrip(tripID);
 		if (trip.get()==null) {
 			return new ResponseEntity<>("trip of that id does not exist", HttpStatus.BAD_REQUEST);
 		}
-		
-		Registration newRegistration= registrationService.addRegistration(userID, tripID);
+		Role role= Role.PASSENGER;
+		Registration newRegistration= registrationService.addRegistration(user.get(), trip.get(), role);
 		return new ResponseEntity<>(newRegistration, HttpStatus.CREATED);
 	}
 	
