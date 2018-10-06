@@ -55,7 +55,7 @@ public class RegistrationService {
 		
 	}
 	
-	public Optional<Registration> getRegistration(long id) {
+	public Optional<Registration> getRegistrationByID(long id) {
 		return registrationRepository.findById(id);
 	}
 	
@@ -78,6 +78,11 @@ public class RegistrationService {
 		return registration; 
 		
 	}
+	
+	public Registration updateRegistration (long registrationID, Registration registration) {
+		return registrationRepository.save(registration);
+	}
+	
 	
 
 }
