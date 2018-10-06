@@ -22,7 +22,10 @@ public class RegistrationController {
 
 	@Autowired
 	private RegistrationService registrationService;
+	//may have to delete these and replace with service classes
+	@Autowired
 	private ca.mcgill.ecse321.webservice.repository.UserRepository userRepository;
+	@Autowired
 	private ca.mcgill.ecse321.webservice.repository.TripRepository tripRepository;
 	
 	@RequestMapping(value="/registrations", method = RequestMethod.GET)
@@ -66,6 +69,11 @@ public class RegistrationController {
 	
 	@RequestMapping(value="/users/{userID}/trips/{tripID}/registrations", method = RequestMethod.POST)
 	public ResponseEntity<?> addRegistration(@PathVariable long userID,@PathVariable long tripID) {
+		System.out.println("the");
+		System.out.println(userID);
+		if (userRepository==null) {
+			System.out.println("repository null");
+		}
 		Optional<User> user= userRepository.findById(userID);
 		if (user.get()==null) {
 			return new ResponseEntity<>("user of that id does not exist", HttpStatus.BAD_REQUEST);
