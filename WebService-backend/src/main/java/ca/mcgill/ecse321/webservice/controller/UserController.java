@@ -50,14 +50,9 @@ public class UserController {
 	//Delete
 		
 	@RequestMapping(value = "/users/{userId}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteCustomer(@PathVariable long userId){
+	public ResponseEntity<?> deleteUser(@PathVariable long userId){
 		Optional<User> user = userService.getUser(userId);
 		userService.deleteUser(user);
 		return new ResponseEntity<>(HttpStatus.OK);
-	}
-
-	@RequestMapping(value = "/", method= RequestMethod.GET)
-	public ResponseEntity<?> home(){
-		return new ResponseEntity<>("CRM REST API, JPA, Spring Security, and OAuth2", HttpStatus.OK);
 	}
 }
