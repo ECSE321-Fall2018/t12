@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.webservice.model;
 
 import javax.persistence.Entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -22,7 +23,7 @@ public class Vehicle{
 	private String model;
 	private String make;
 	private String color;
-	private Set<Trip> trips;
+	private Set<Trip> trips = new HashSet<>();
 	private User user;
    
 	public Vehicle() {
@@ -31,12 +32,10 @@ public class Vehicle{
 	public Vehicle(String model,
 				   String make,
 				   String color,
-				   Set<Trip> trips,
 				   User user) {
 		setModel(model);
 		setMake(make);
 		setColor(color);
-		setTrips(trips);
 		setUser(user);
 	}
 	

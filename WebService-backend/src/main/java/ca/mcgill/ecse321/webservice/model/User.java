@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.OneToMany;
@@ -28,8 +29,8 @@ public class User{
 	private String password;
 	private float drivingRate;
 	private float passRate;
-	private Set<Registration> registrations;
-	private Set<Vehicle> vehicles;
+	private Set<Registration> registrations = new HashSet<>();
+	private Set<Vehicle> vehicles = new HashSet<>();
 	
 	// Default empty constructor
 	public User() { 
@@ -39,16 +40,12 @@ public class User{
 				String username, 
 				String password,
 				float drivingRate,
-				float passRate,
-				Set<Registration> registrations,
-				Set<Vehicle> vehicles) {
+				float passRate) {
 		this.name = name;
 		this.username = username;
 		this.password = password;
 		this.drivingRate = drivingRate;
 		this.passRate = passRate;
-		this.registrations = registrations;
-		this.vehicles = vehicles;
 	}
 	
 	@Id 
