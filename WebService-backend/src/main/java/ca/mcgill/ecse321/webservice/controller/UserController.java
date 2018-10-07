@@ -29,7 +29,7 @@ public class UserController {
 		return new ResponseEntity<>(userList, HttpStatus.OK);
 	}
 
-	@RequestMapping(value="/user/{userID}", method = RequestMethod.GET)
+	@RequestMapping(value="/users/{userID}", method = RequestMethod.GET)
 	public ResponseEntity<?> getUser(@PathVariable long userID){
 		Optional<User> user = userService.getUser(userID);
 		return new ResponseEntity<>(user, HttpStatus.OK);
@@ -52,7 +52,7 @@ public class UserController {
 	@RequestMapping(value = "/users/{userId}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteUser(@PathVariable long userId){
 		Optional<User> user = userService.getUser(userId);
-		userService.deleteUser(user);
+		userService.deleteUser(user.get());
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
