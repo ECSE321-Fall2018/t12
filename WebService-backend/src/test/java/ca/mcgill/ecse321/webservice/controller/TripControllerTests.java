@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.webservice.controller.TripController;
+package ca.mcgill.ecse321.webservice.controller;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -42,7 +42,9 @@ public class TripControllerTests {
 	
 	@Mock
 	private TripService tripDAO;
+	
 	@InjectMocks
+	
 	private TripController trcontroller = new TripController();
 	
 	TestRestTemplate restTemplate = new TestRestTemplate();
@@ -79,14 +81,11 @@ public class TripControllerTests {
 	
 	
 	@Test
-<<<<<<< HEAD
-	public void getExistingTrip() {
-		Optional<Trip> body = (Optional<Trip>)trcontroller.getTrip(0).getBody();
-		Optional<Trip> resp = body;
-=======
-	public void getExistingTrip() {		
+	
+		public void getExistingTrip() {		
+		
 		Optional<Trip> resp = (Optional<Trip>) trcontroller.getTrip(0).getBody();
->>>>>>> 541f684cdf48732d531e42be647cae8d8c7114d8
+
 		Optional<Trip> expected = Optional.of(new Trip("foo", "foo", 0, true, null, null, 0, 0, false, null));
 		assertTripEquals(expected.get(), resp.get());
 	}
@@ -140,12 +139,3 @@ public class TripControllerTests {
 		
 	}
 }
-	
-	
-<<<<<<< HEAD
-	
-	
-	
-=======
-}
->>>>>>> 541f684cdf48732d531e42be647cae8d8c7114d8
