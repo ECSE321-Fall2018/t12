@@ -13,8 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
-public class Trip{
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
+public class Trip {
 
 	private Long id; 
 	private String startpoint;

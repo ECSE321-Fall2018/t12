@@ -6,23 +6,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
 public class Position{
 
 	private Long id;
-	private Set<TripNode> tripNodes;
+	private Set<TripNode> tripNodes = new HashSet<>();
 	private String position;
 	
 	public Position() {
 		
 	}
 	
-	public Position(Set<TripNode> tripNodes, String position) {
-		this.tripNodes = tripNodes;
+	public Position(String position) {
 		this.position = position;
 	}
 
@@ -45,6 +49,10 @@ public class Position{
 		this.tripNodes = tripNodes;
 	}
 
+	public void addTripNode(TripNode tripNode) {
+		this.tripNodes.add(tripNode);
+		tripNode.setPosition(this);
+	}
 
 	public void setPosition(String value) {
 		this.position = value;

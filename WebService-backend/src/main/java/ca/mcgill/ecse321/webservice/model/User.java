@@ -2,17 +2,23 @@ package ca.mcgill.ecse321.webservice.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "Usr")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
 public class User{
 	
 	
@@ -24,8 +30,9 @@ public class User{
 	private String password;
 	private float drivingRate;
 	private float passRate;
-	private Set<Registration> registrations;
-	private Set<Vehicle> vehicles;
+	private Set<Registration> registrations = new HashSet<>();
+	private Set<Vehicle> vehicles = new HashSet<>();
+	private Set<UserRole> roles = new HashSet<>();
 	
 	// Default empty constructor
 	public User() { 
@@ -35,16 +42,12 @@ public class User{
 				String username, 
 				String password,
 				float drivingRate,
-				float passRate,
-				Set<Registration> registrations,
-				Set<Vehicle> vehicles) {
+				float passRate) {
 		this.name = name;
 		this.username = username;
 		this.password = password;
 		this.drivingRate = drivingRate;
 		this.passRate = passRate;
-		this.registrations = registrations;
-		this.vehicles = vehicles;
 	}
 	
 	@Id 
@@ -106,6 +109,10 @@ public class User{
 		this.registrations = registrations;
 	}
 
+	public void addRegistration(Registration registration) {
+		this.registrations.add(registration);
+		registration.setUser(this);
+	}
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
 	public Set<Vehicle> getVehicles() {
@@ -114,6 +121,24 @@ public class User{
 
 	public void setVehicles(Set<Vehicle> vehicles) {
 		this.vehicles = vehicles;
+	}
+	
+	public void addVehicle(Vehicle vehicle) {
+		this.vehicles.add(vehicle);
+		vehicle.setUser(this);
+	}
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	public Set<UserRole> getRoles() {
+		return this.roles;
+	}
+
+	public void setRoles(Set<UserRole> roles) {
+		this.roles = roles;
+	}
+	
+	public void addRole(UserRole role) {
+		roles.add(role);
 	}
 	
 	public void updatePassRating(int score){
