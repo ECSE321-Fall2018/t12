@@ -107,7 +107,7 @@ public class User{
 	public void setRegistrations(Set<Registration> registrations) {
 		this.registrations = registrations;
 	}
-	
+
 	public void addRegistration(Registration registration) {
 		this.registrations.add(registration);
 		registration.setUser(this);
@@ -122,6 +122,11 @@ public class User{
 		this.vehicles = vehicles;
 	}
 	
+	public void addVehicle(Vehicle vehicle) {
+		this.vehicles.add(vehicle);
+		vehicle.setUser(this);
+	}
+	
 	@OneToMany(cascade=CascadeType.ALL)
 	public Set<UserRole> getRoles() {
 		return this.roles;
@@ -129,6 +134,10 @@ public class User{
 
 	public void setRoles(Set<UserRole> roles) {
 		this.roles = roles;
+	}
+	
+	public void addRole(UserRole role) {
+		roles.add(role);
 	}
 	
 	public void updatePassRating(int score){
