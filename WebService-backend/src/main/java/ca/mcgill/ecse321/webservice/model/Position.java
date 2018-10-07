@@ -49,6 +49,10 @@ public class Position{
 		this.tripNodes = tripNodes;
 	}
 
+	public void addTripNode(TripNode tripNode) {
+		this.tripNodes.add(tripNode);
+		tripNode.setPosition(this);
+	}
 
 	public void setPosition(String value) {
 		this.position = value;
