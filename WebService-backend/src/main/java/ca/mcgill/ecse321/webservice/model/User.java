@@ -106,7 +106,11 @@ public class User{
 	public void setRegistrations(Set<Registration> registrations) {
 		this.registrations = registrations;
 	}
-
+	
+	public void addRegistration(Registration registration) {
+		this.registrations.add(registration);
+		registration.setUser(this);
+	}
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
 	public Set<Vehicle> getVehicles() {
