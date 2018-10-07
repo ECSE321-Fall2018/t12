@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.webservice.controller;
 
-<<<<<<< HEAD
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -53,14 +52,15 @@ public class TripControllerTests {
 	@Before
 	public void setMockOutput(){
 		when(tripDAO.getTrip(ArgumentMatchers.anyLong())).thenAnswer( (InvocationOnMock invocation) -> {
-			String arg = invocation.getArgument(0);
 			
-			switch (arg) {
+			Long arg = invocation.getArgument(0);
 			
-			case "" :
+			if (arg == -1) {
+				return null;
+			} else if (arg == 0) {
 				Optional<Trip> trip = Optional.of(new Trip("foo", "foo", 0, true, null, null, 0, 0, false, null));
 				return trip;
-			default :
+			} else {
 				return null;
 			}
 		});
@@ -69,6 +69,7 @@ public class TripControllerTests {
 			
 			return null;
 		});
+		
 	}
 
 	@Test
@@ -78,8 +79,8 @@ public class TripControllerTests {
 	
 	
 	@Test
-	public void getExistingTrip() {
-		Optional<Trip> resp = (Optional<Trip>)trcontroller.getTrip(0).getBody();
+	public void getExistingTrip() {		
+		Optional<Trip> resp = (Optional<Trip>) trcontroller.getTrip(0).getBody();
 		Optional<Trip> expected = Optional.of(new Trip("foo", "foo", 0, true, null, null, 0, 0, false, null));
 		assertTripEquals(expected.get(), resp.get());
 	}
@@ -134,16 +135,4 @@ public class TripControllerTests {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-=======
-public class TripControllerTests {
-
->>>>>>> 01f2aec71616300da2120328093758ec60dd178a
 }
