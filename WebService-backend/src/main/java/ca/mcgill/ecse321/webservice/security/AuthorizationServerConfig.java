@@ -1,10 +1,7 @@
 package ca.mcgill.ecse321.webservice.security;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -14,7 +11,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 /**
  * Desc: The server hosting the protected resources, capable of accepting and responding to 
@@ -41,8 +37,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 	    clients.inMemory()
-	    .withClient("crmClient1")
-            .secret("crmSuperSecret")
+	    .withClient("12Client1")
+            .secret("12SuperSecret")
             .authorizedGrantTypes("password", "refresh_token")	// Authorized grant types
             .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")  // Authorities
             .scopes("read", "write", "trust")					// Scope to which the client is limited
@@ -62,10 +58,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
 		oauthServer.realm(REALM);
 	}
-	
-	public static String getRealm() {
-		return REALM;
-	}
+
 }
 
 

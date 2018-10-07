@@ -13,7 +13,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
@@ -21,6 +24,7 @@ import org.springframework.security.oauth2.provider.approval.TokenStoreUserAppro
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
  * Configures OATH2
@@ -36,13 +40,39 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	/**
 	 * Sets up an in-memory user store with two users and their roles
 	 */
+	
 	@Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {	
 				
         auth.inMemoryAuthentication()
-        .withUser("admin").password("{noop}pass").roles("ADMIN","USER").and()
-        .withUser("user").password("{noop}pass123").roles("USER");
+        .withUser("admin").password("pass").roles("ADMIN","USER").and()
+        .withUser("user").password("pass123").roles("USER");
+        
+        
     }
+	
+//	@Bean
+//	@Override
+//	public UserDetailsService userDetailsService() {
+//		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//
+//		final User.UserBuilder userBuilder = User.builder().passwordEncoder(encoder::encode);
+//		UserDetails user = userBuilder
+//		.username("user")
+//		.password("password")
+//		.roles("USER")
+//		.build();
+//
+//		UserDetails admin = userBuilder
+//		.username("admin")
+//		.password("password")
+//		.roles("USER","ADMIN")
+//		.build();
+//		
+//		System.out.println("USER_PASS: " + user.getPassword() + " | ADMIN_PASS: " + admin.getPassword());
+//
+//		return new InMemoryUserDetailsManager(user, admin);
+//	}
 	
  
 	/**
@@ -64,7 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .anyRequest().authenticated()				// All other end-points shall be authenticated
 	  	.and()
 	  	.httpBasic()
-	  	.realmName(AuthorizationServerConfig.getRealm());
+	  	.realmName("12_REALM");
     }
  
 	
