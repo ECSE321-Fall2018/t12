@@ -56,6 +56,20 @@ public class User{
 		return id;
 	}
 	
+	public float getDweight() {
+		return Dweight;
+		
+	}
+	public float getPweight() {
+		return Pweight;
+	}
+	public void setPweight(float Pweight) {
+		this.Pweight = Pweight;
+	}
+	public void setDweight(float Dweight) {
+		this.Dweight = Dweight;
+	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
