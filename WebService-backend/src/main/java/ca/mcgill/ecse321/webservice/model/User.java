@@ -31,6 +31,7 @@ public class User{
 	private float passRate;
 	private Set<Registration> registrations = new HashSet<>();
 	private Set<Vehicle> vehicles = new HashSet<>();
+	private Set<UserRole> roles = new HashSet<>();
 	
 	// Default empty constructor
 	public User() { 
@@ -119,6 +120,15 @@ public class User{
 
 	public void setVehicles(Set<Vehicle> vehicles) {
 		this.vehicles = vehicles;
+	}
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	public Set<UserRole> getRoles() {
+		return this.roles;
+	}
+
+	public void setRoles(Set<UserRole> roles) {
+		this.roles = roles;
 	}
 	
 	public void updatePassRating(int score){
