@@ -34,11 +34,10 @@ public class UserControllerTests {
 	@Before
 	public void setMockOutput(){
 		
-		/*when(userDAO.getUser(ArgumentMatchers.anyLong())).thenAnswer( (InvocationOnMock invocation) -> {
+		when(userDAO.getUser(ArgumentMatchers.anyLong())).thenAnswer( (InvocationOnMock invocation) -> {
 			User user = new User("Karlo", "Karlo", "pass", 3, 3, null, null);
-		    return user;
-			
-		  });*/
+		    return user;	
+		  });
 	}
 	
 	@Test
@@ -46,7 +45,7 @@ public class UserControllerTests {
 		assertTrue(true);
 	}
 	
-	/*@Test
+	@Test
 	public void getUsers() throws JSONException {
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
@@ -58,13 +57,13 @@ public class UserControllerTests {
 		
 		JSONAssert.assertEquals("{id:0,name:Karl,username:Karlo,password:pass,drivingRate:3,passRate:3,registrations:null,vehicles:null}", response.getBody(), false);
 		
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void TestAddUser() {
 		User user = new User("Karl", "karlo", "pass", 5, 5, null, null);
 		controller.addUser(user);
 		assertNotNull("temp");
-	}*/
+	}
 	
 }

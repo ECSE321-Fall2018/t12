@@ -1,11 +1,9 @@
-package ca.mcgill.ecse321.webservice.controller;
+package ca.mcgill.ecse321.webservice.controller.TripController;
 
-<<<<<<< HEAD
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
-
 import java.util.Optional;
 
 import org.json.JSONException;
@@ -19,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
@@ -79,13 +78,14 @@ public class TripControllerTests {
 	
 	@Test
 	public void getExistingTrip() {
-		Optional<Trip> resp = (Optional<Trip>)trcontroller.getTrip(0).getBody();
+		Optional<Trip> body = (Optional<Trip>)trcontroller.getTrip(0).getBody();
+		Optional<Trip> resp = body;
 		Optional<Trip> expected = Optional.of(new Trip("foo", "foo", 0, true, null, null, 0, 0, false, null));
 		assertTripEquals(expected.get(), resp.get());
 	}
 	
 	
-	/*@Test
+	@Test
 	public void getTrips() throws JSONException {
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
@@ -95,7 +95,7 @@ public class TripControllerTests {
 
 		JSONAssert.assertEquals("{startpoint:foo,endpoint:foo,distance:80,active:true,start_time:02:31:03,end_time:04:19:03,est_Trip_time:108,seats_available:4,compleated:false,vehicle:null}", response.getBody(), false);	
 	}
-	*/
+	
 	
 	@Test
 	public void TestAddTrip() {
@@ -132,18 +132,9 @@ public class TripControllerTests {
 		Assert.assertEquals(expected.getVehicle(), actual.getVehicle());
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-=======
-public class TripControllerTests {
-
->>>>>>> 01f2aec71616300da2120328093758ec60dd178a
 }
+	
+	
+	
+	
+	
