@@ -82,6 +82,11 @@ public class Vehicle{
 	public void setTrips(Set<Trip> trips) {
 		this.trips = trips;
 	}
+	
+	public void addTrip(Trip trip) {
+		this.trips.add(trip);
+		trip.setVehicle(this);
+	}
 
 
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
