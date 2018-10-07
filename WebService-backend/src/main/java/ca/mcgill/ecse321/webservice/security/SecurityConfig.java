@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
@@ -34,10 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * Sets up an in-memory user store with two users and their roles
 	 */
 	@Autowired
-    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {		
         auth.inMemoryAuthentication()
-        .withUser("admin").password("pass").roles("ADMIN","USER").and()
-        .withUser("user").password("pass123").roles("USER");
+        .withUser("admin").password("{noop}pass").roles("ADMIN","USER").and()
+        .withUser("user").password("{noop}pass123").roles("USER");
     }
 	
  
