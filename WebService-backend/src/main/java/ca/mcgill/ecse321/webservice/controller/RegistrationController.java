@@ -98,7 +98,7 @@ public class RegistrationController {
 		return new ResponseEntity<>(deletedRegistration,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/registrations/{registraionID}", method = RequestMethod.GET)
+	@RequestMapping(value="/registrations/{registrationID}", method = RequestMethod.GET)
 	public ResponseEntity<?> getRegistrationByID(@PathVariable long registrationID) {
 		Optional <Registration> registration= registrationService.getRegistrationByID(registrationID);
 		Registration r = registration.get();
