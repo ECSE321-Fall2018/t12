@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.webservice.model.Registration;
+import ca.mcgill.ecse321.webservice.model.Role;
 import ca.mcgill.ecse321.webservice.model.Trip;
 import ca.mcgill.ecse321.webservice.model.User;
 import ca.mcgill.ecse321.webservice.service.TripService;
@@ -104,6 +105,15 @@ public class TripController {
 	@RequestMapping(value="/users/{userId}/trips", method = RequestMethod.POST)
 	public ResponseEntity<?> addUsersTrip(@PathVariable long userId, @RequestBody Trip trip) {
 		Trip newTrip = tripService.addTrip(trip);
+		
+		Optional<User> optionalUser =  userService.getUser(userId);
+		if (!optionalUser.isPresent()) {
+			return new ResponseEntity<String>("User with id " + userId + " not found", HttpStatus.NOT_FOUND);
+		}
+		User user = optionalUser.get();
+		Registration registration = new Registration(Role.DRIVER, user, newTrip);
+		user.addRegistration(registration);
+		trip.addRegistration(registration);
 		
 		return new ResponseEntity<>(newTrip, HttpStatus.CREATED);
 	}
