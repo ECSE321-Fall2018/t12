@@ -14,8 +14,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
@@ -36,20 +36,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private ClientDetailsService clientDetailsService;
+	
+	@Autowired
+	private UsrDetailsService usrDetailsService;
  
 	/**
 	 * Sets up an in-memory user store with two users and their roles
 	 */
 	
-	@Autowired
-    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {	
-				
-        auth.inMemoryAuthentication()
-        .withUser("admin").password("pass").roles("ADMIN","USER").and()
-        .withUser("user").password("pass123").roles("USER");
-        
-        
-    }
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// Allows spring security to access our User models (via UsrDetailsService)
+		PasswordEncoder encoder = passwordEncoder();
+		auth.userDetailsService(usrDetailsService).passwordEncoder(encoder);
+	}
+	
+	
+//	@Autowired
+//    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {	
+//				
+//        auth.inMemoryAuthentication()
+//        .withUser("admin").password("pass").roles("ADMIN","USER").and()
+//        .withUser("user").password("pass123").roles("USER");
+//        
+//        
+//    }
 	
 //	@Bean
 //	@Override
@@ -138,5 +149,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		store.setTokenStore(tokenStore);
 		return store;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+	    return new BCryptPasswordEncoder();
+	}	
 	
 }
