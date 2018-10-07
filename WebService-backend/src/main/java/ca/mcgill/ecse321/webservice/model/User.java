@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.webservice.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,6 +32,7 @@ public class User{
 	private float passRate;
 	private Set<Registration> registrations = new HashSet<>();
 	private Set<Vehicle> vehicles = new HashSet<>();
+	private Set<UserRole> roles = new HashSet<>();
 	
 	// Default empty constructor
 	public User() { 
@@ -106,7 +108,7 @@ public class User{
 	public void setRegistrations(Set<Registration> registrations) {
 		this.registrations = registrations;
 	}
-	
+
 	public void addRegistration(Registration registration) {
 		this.registrations.add(registration);
 		registration.setUser(this);
@@ -119,6 +121,24 @@ public class User{
 
 	public void setVehicles(Set<Vehicle> vehicles) {
 		this.vehicles = vehicles;
+	}
+	
+	public void addVehicle(Vehicle vehicle) {
+		this.vehicles.add(vehicle);
+		vehicle.setUser(this);
+	}
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	public Set<UserRole> getRoles() {
+		return this.roles;
+	}
+
+	public void setRoles(Set<UserRole> roles) {
+		this.roles = roles;
+	}
+	
+	public void addRole(UserRole role) {
+		roles.add(role);
 	}
 	
 	public void updatePassRating(int score){

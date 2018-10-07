@@ -6,5 +6,6 @@ import ca.mcgill.ecse321.webservice.model.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
+	User findByUsername(String username);
 
 }
