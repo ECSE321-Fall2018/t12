@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.webservice.controller;
 
+<<<<<<< HEAD
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -141,4 +142,8 @@ public class TripControllerTests {
 	
 	
 	
+=======
+public class TripControllerTests {
+
+>>>>>>> 01f2aec71616300da2120328093758ec60dd178a
 }
