@@ -46,13 +46,9 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	public void deleteUser(User user){
-		UserRepository.delete(user);
+		userRepository.delete(user);
 	}
 
-	public void deleteUser(Optional<User> user) {
-		// TODO Auto-generated method stub
-		UserRepository.delete(user);
-	}
 
 	
 }
