@@ -30,7 +30,7 @@ public class SignupController {
     public ResponseEntity<?> signup(@RequestBody User user) {
    		user.addRole(new UserRole("USER"));
     	User newUser = signupService.addUser(user);
-    	return new ResponseEntity<>(HttpStatus.CREATED);
+    	return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 	
 }

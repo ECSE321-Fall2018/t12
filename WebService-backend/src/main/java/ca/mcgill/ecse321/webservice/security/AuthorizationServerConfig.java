@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -34,11 +35,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Qualifier("authenticationManagerBean")
 	private AuthenticationManager authenticationManager;
 	
+	@Autowired
+	private UsrDetailsService userDetailsService;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 	    clients.inMemory()
 	    .withClient("12Client1")
-            .secret("12SuperSecret")
+            .secret(passwordEncoder.encode("12SuperSecret"))
             .authorizedGrantTypes("password", "refresh_token")	// Authorized grant types
             .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")  // Authorities
             .scopes("read", "write", "trust")					// Scope to which the client is limited
@@ -50,8 +57,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(tokenStore)
+				 .userApprovalHandler(userApprovalHandler)
 			     .userApprovalHandler(userApprovalHandler)
-			     .authenticationManager(authenticationManager);
+			     .authenticationManager(authenticationManager)
+			     .userDetailsService(userDetailsService);
 	}
  
 	@Override

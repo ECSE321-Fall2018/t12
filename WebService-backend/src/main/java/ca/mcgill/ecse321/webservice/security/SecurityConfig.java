@@ -47,8 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// Allows spring security to access our User models (via UsrDetailsService)
-		PasswordEncoder encoder = passwordEncoder();
-		auth.userDetailsService(usrDetailsService).passwordEncoder(encoder);
+		auth.userDetailsService(usrDetailsService).passwordEncoder(passwordEncoder());
 	}
 	
 	

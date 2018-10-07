@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.webservice.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -127,7 +128,7 @@ public class User{
 		vehicle.setUser(this);
 	}
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	public Set<UserRole> getRoles() {
 		return this.roles;
 	}
