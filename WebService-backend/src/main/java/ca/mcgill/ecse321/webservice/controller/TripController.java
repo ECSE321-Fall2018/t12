@@ -95,15 +95,16 @@ public class TripController {
 	
 	/**
      * 
-     * Creates a new trip
+     * Creates a new trip associated with a given user
      * 
-     * URL: http://hostname:port/api/trips/
+     * URL: http://hostname:port/api/uesrs/{userId}/trips/
      * HTTP method: POST
      * 
      */	
-	@RequestMapping(value="/trips", method = RequestMethod.POST)
-	public ResponseEntity<?> addTrip(@RequestBody Trip trip) {
+	@RequestMapping(value="/users/{userId}/trips", method = RequestMethod.POST)
+	public ResponseEntity<?> addUsersTrip(@PathVariable long userId, @RequestBody Trip trip) {
 		Trip newTrip = tripService.addTrip(trip);
+		
 		return new ResponseEntity<>(newTrip, HttpStatus.CREATED);
 	}
 
