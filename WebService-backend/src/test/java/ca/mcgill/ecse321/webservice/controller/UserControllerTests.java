@@ -56,7 +56,7 @@ public class UserControllerTests {
 			if(arg == -1){
 				return null;
 			} else if (arg == 0) {
-				Optional<User> user = Optional.of(new User("Karlo", "Karlo", "pass", 3, 3, null, null));
+				Optional<User> user = Optional.of(new User("Karlo", "Karlo", "pass", 3, 3));
 				return user;
 			} else {
 				return null;
@@ -79,7 +79,7 @@ public class UserControllerTests {
 	public void getExistingUser() {
 		Optional<User> resp = (Optional<User>) controller.getUser(0).getBody();
 
-		Optional<User> expected = Optional.of(new User("Karlo", "Karlo", "pass", 3, 3, null, null));
+		Optional<User> expected = Optional.of(new User("Karlo", "Karlo", "pass", 3, 3));
 		
 		assertUserEquals(expected.get(), resp.get());
 	}
