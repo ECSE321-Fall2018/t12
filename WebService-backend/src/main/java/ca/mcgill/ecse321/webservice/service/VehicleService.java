@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ca.mcgill.ecse321.webservice.model.Trip;
 import ca.mcgill.ecse321.webservice.model.User;
 import ca.mcgill.ecse321.webservice.model.Vehicle;
 import ca.mcgill.ecse321.webservice.repository.VehicleRepository;
@@ -18,15 +19,6 @@ public class VehicleService {
 	private VehicleRepository vehicleRepository;
 	
 	public Iterable<Vehicle> getVehicles(){
-		/*if(vehicleRepository.count() ==0){
-			Vehicle vehicle = new Vehicle();
-			vehicle.setColor("Blue");
-			vehicle.setMake("Toyota");
-			vehicle.setModel("Camry");
-			vehicle.setUser(new User());
-			
-			vehicleRepository.save(vehicle);
-		}*/
 		return vehicleRepository.findAll();
 	}
 	
@@ -42,7 +34,20 @@ public class VehicleService {
 		return vehicleRepository.save(vehicle);
 	}
 	
+	public boolean associatedWithActiveTrip(Vehicle vehicle) {
+		for (Trip trip : vehicle.getTrips()) {
+			if (trip.isActive()) return true;
+		}
+		return false;
+	}
+	
 	public void deleteVehicle(Vehicle vehicle) {
+		
+		// Remove all trip references
+		for (Trip trip : vehicle.getTrips()) {
+			trip.setVehicle(null);
+		}	
+		
 		vehicleRepository.delete(vehicle);
 	}
 }

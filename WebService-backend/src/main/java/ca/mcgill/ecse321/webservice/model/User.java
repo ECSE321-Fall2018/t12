@@ -14,11 +14,12 @@ import java.util.Set;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "Usr")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
 public class User{
 	
 	
@@ -54,6 +55,20 @@ public class User{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
 		return id;
+	}
+	
+	public float getDweight() {
+		return Dweight;
+		
+	}
+	public float getPweight() {
+		return Pweight;
+	}
+	public void setPweight(float Pweight) {
+		this.Pweight = Pweight;
+	}
+	public void setDweight(float Dweight) {
+		this.Dweight = Dweight;
 	}
 	
 	public void setId(Long id) {
@@ -115,6 +130,7 @@ public class User{
 	}
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
+	@JsonManagedReference
 	public Set<Vehicle> getVehicles() {
 		return this.vehicles;
 	}
@@ -126,6 +142,11 @@ public class User{
 	public void addVehicle(Vehicle vehicle) {
 		this.vehicles.add(vehicle);
 		vehicle.setUser(this);
+	}
+	
+	public void removeVehicle(Vehicle vehicle) {
+		this.vehicles.remove(vehicle);
+		vehicle.setUser(null);
 	}
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
