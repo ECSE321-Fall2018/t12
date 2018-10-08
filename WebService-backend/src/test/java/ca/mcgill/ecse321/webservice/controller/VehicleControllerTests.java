@@ -117,14 +117,14 @@ public class VehicleControllerTests {
 	
 	@Test
 	public void getExistingVehicle() {
-		Optional<Vehicle> resp = (Optional<Vehicle>) controller.getVehicleById(0).getBody();
+		Vehicle resp = (Vehicle) controller.getVehicleById(0).getBody();
 		
 		User user = new User("karl", "karl", "pass", 3, 3);
 		Vehicle expected = new Vehicle("Camry","Toyota", "Blue", user);
 		expected.setId(0L);
 		
-		assertNotNull(resp.get().getUser());
-		assertVehicleEquals(expected, resp.get());
+		assertNotNull(resp.getUser());
+		assertVehicleEquals(expected, resp);
 	}
 	
 	@Test
@@ -153,7 +153,7 @@ public class VehicleControllerTests {
 	public void getInvalidVehicle() {
 		ResponseEntity<?> resp = controller.getVehicleById(-1);
 		
-		Assert.assertEquals(HttpStatus.BAD_REQUEST, resp.getStatusCode());
+		Assert.assertEquals(HttpStatus.NOT_FOUND, resp.getStatusCode());
 	
 	}
 	
@@ -174,12 +174,6 @@ public class VehicleControllerTests {
 		assertVehicleEquals(expected, response);
 	}
 	
-	@Test
-	public void addNullVehicle() {
-		ResponseEntity response = controller.addVehicle(0, null);
-		
-		Assert.assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
-	}
 	
 	//updateVehicle
 	

@@ -120,6 +120,7 @@ public class UserControllerTests {
 		Optional<User> resp = (Optional<User>) controller.getUser(0).getBody();
 
 		Optional<User> expected = Optional.of(new User("Karlo", "Karlo", "pass", 3, 3));
+		expected.get().setId(0L);
 		
 		assertUserEquals(expected.get(), resp.get());
 	}
@@ -172,17 +173,6 @@ public class UserControllerTests {
 		user.updatePassRating(3);
 		Assert.assertEquals(3, user.getPassRate(), 0);
 	}
-	/**
-	 * Send an invalid user and checks for a NOT_ACCEPTABLE status message
-	 */
-	@Test
-	public void addInvalidUser() {
-		User user = new User();
-		
-		ResponseEntity response = controller.addUser(user);
-		
-		Assert.assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
-	}
 	
 	/**
 	 * Sends a null user and checks for a NOT_ACCEPTABLE status message
@@ -204,19 +194,6 @@ public class UserControllerTests {
 		User response = (User)controller.updateUser(0, user).getBody();
 		
 		assertUserEquals(user, response);
-	}
-	
-	/**
-	 * Updates with a user ID different from the user ID of the user to be updated and checks for a NOT_ACCEPTABLE message.
-	 */
-	@Test
-	public void updateWithInvalidId() {
-		User user = new User("Karlo", "Karlo", "pass", 3, 3);
-		user.setId(0L);
-		
-		ResponseEntity response = controller.updateUser(1, user);
-		
-		Assert.assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
 	}
 	
 	
