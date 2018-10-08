@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.webservice.service;
 
 import java.sql.Time;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -39,7 +40,8 @@ public class UserService {
 		return userRepository.findById(userId);
 	}
 
-	public User updateUser( long userId,User user){
+	public User updateUser(long userId, User user) throws NoSuchElementException {
+		
 		return userRepository.save(user);
 	}
 	

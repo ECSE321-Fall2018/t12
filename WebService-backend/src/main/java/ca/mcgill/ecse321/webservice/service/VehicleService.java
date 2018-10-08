@@ -18,15 +18,6 @@ public class VehicleService {
 	private VehicleRepository vehicleRepository;
 	
 	public Iterable<Vehicle> getVehicles(){
-		/*if(vehicleRepository.count() ==0){
-			Vehicle vehicle = new Vehicle();
-			vehicle.setColor("Blue");
-			vehicle.setMake("Toyota");
-			vehicle.setModel("Camry");
-			vehicle.setUser(new User());
-			
-			vehicleRepository.save(vehicle);
-		}*/
 		return vehicleRepository.findAll();
 	}
 	
