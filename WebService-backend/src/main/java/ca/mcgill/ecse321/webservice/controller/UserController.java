@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.webservice.controller;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,14 @@ public class UserController {
 
 	@RequestMapping(value="/users/{userID}", method = RequestMethod.GET)
 	public ResponseEntity<?> getUser(@PathVariable long userID){
-		Optional<User> user = userService.getUser(userID);
+		
+		User user;
+		try {
+			user = userService.getUser(userID).get();
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<String>("User with id " + userID + " not found", HttpStatus.NOT_FOUND);
+		}
+		
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
@@ -43,6 +51,12 @@ public class UserController {
 	//Put
 	@RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateUser(@PathVariable long userId, @RequestBody User user){
+		try {
+			userService.getUser(userId).get();
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<String>("Vehicle with id " + userId + " not found", HttpStatus.NOT_FOUND);
+		}
+		
 		User updatedUser = userService.updateUser(userId, user);
 		return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 	}
