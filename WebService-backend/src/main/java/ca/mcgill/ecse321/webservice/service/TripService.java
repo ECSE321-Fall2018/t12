@@ -23,7 +23,7 @@ public class TripService {
 	
 	public Iterable<Trip> getTrips() {
 		
-		if (tripRepository.count() == 0) {
+		/*if (tripRepository.count() == 0) {
 			Trip trip = new Trip();
 			trip.setStartpoint("Toronto");
 			trip.setEndpoint("Montreal");
@@ -41,7 +41,8 @@ public class TripService {
 			trip.setVehicle(v);
 			
 			tripRepository.save(trip);
-		}		
+		}		*/
+		
 		return tripRepository.findAll();	
 	}
 	

@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.webservice.controller;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,16 @@ public class VehicleController {
 	 */
 	@RequestMapping(value="/users/{userId}/vehicles", method = RequestMethod.GET)
 	public ResponseEntity<?> getVehiclesByUserId(@PathVariable long userId){
-		Optional<User> user = userService.getUser(userId);
-		Iterable<Vehicle> vehicleList = user.get().getVehicles();
+		
+		Iterable<Vehicle> vehicleList;
+		try {
+			User user = userService.getUser(userId).get();
+			vehicleList = user.getVehicles();
+			
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<String>("User with id " + userId + " not found", HttpStatus.NOT_FOUND);
+		}
+
 		return new ResponseEntity<>(vehicleList, HttpStatus.OK);
 	}
 	
@@ -64,7 +73,14 @@ public class VehicleController {
 	 */
 	@RequestMapping(value="/vehicles/{v_id}", method=RequestMethod.GET)
 	public ResponseEntity<?> getVehicleById(@PathVariable long v_id){
-		Optional<Vehicle> vehicle = vehicleService.getVehicle(v_id);
+		
+		Vehicle vehicle;
+		try {
+			vehicle = vehicleService.getVehicle(v_id).get();
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<String>("Vehicle with id " + v_id + " not found", HttpStatus.NOT_FOUND);
+		}
+		
 		return new ResponseEntity<>(vehicle, HttpStatus.OK);
 	}
 	
@@ -77,14 +93,20 @@ public class VehicleController {
 	 * 
 	 */
 	@RequestMapping(value="/users/{user_id}/vehicles", method = RequestMethod.POST)
-	public ResponseEntity<?> addVehicle(@PathVariable long user_id, @RequestBody Vehicle vehicle){
-		Optional<User> user = userService.getUser(user_id);
-		user.get().getVehicles().add(vehicle);
-		vehicle.setUser(user.get());
-		userService.updateUser(user.get().getId(), user.get());
-		Vehicle newVehicle = vehicleService.addVehicle(vehicle);
-		return new ResponseEntity<>(newVehicle, HttpStatus.OK);
+	public ResponseEntity<?> addVehicle(@PathVariable long user_id, @RequestBody Vehicle vehicle){		
+		
+		try {	
+			User user = userService.getUser(user_id).get();
+			user.addVehicle(vehicle);
+			userService.updateUser(user.getId(), user);
+			
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<String>("User with id " + user_id + " not found", HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
+	
 	
 	/**
 	 * 
@@ -96,6 +118,13 @@ public class VehicleController {
 	 */
 	@RequestMapping(value="vehicles/{v_id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateVehicle(@PathVariable long v_id, @RequestBody Vehicle vehicle){
+		
+		try {
+			vehicleService.getVehicle(v_id).get();
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<String>("Vehicle with id " + v_id + " not found", HttpStatus.NOT_FOUND);
+		}
+		
 		Vehicle updatedVehicle = vehicleService.updateVehicle(vehicle);
 		return new ResponseEntity<>(updatedVehicle, HttpStatus.OK);
 	}
@@ -108,10 +137,25 @@ public class VehicleController {
 	 * HTTP method: DELETE
 	 * 
 	 */
-	@RequestMapping(value="vehicles/{v_id}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteVehicle(@PathVariable long v_id){
-		Optional<Vehicle> vehicle = vehicleService.getVehicle(v_id);
-		vehicleService.deleteVehicle(vehicle.get());
+	@RequestMapping(value="/users/{u_id}/vehicles/{v_id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteVehicle(@PathVariable long u_id, @PathVariable long v_id){
+		
+		Vehicle vehicle;
+		try {
+			vehicle = vehicleService.getVehicle(v_id).get();
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<String>("Vehicle with id " + v_id + " not found", HttpStatus.NOT_FOUND);
+		}
+		
+		User user;
+		try {
+			user = userService.getUser(u_id).get();
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<String>("User with id " + u_id + " not found", HttpStatus.NOT_FOUND);
+		}
+		
+		user.removeVehicle(vehicle);
+		vehicleService.deleteVehicle(vehicle);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

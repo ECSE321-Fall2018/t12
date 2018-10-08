@@ -49,8 +49,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             .authorizedGrantTypes("password", "refresh_token")	// Authorized grant types
             .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")  // Authorities
             .scopes("read", "write", "trust")					// Scope to which the client is limited
-            //.accessTokenValiditySeconds(ONE_DAY)
-            .accessTokenValiditySeconds(300)
+            .accessTokenValiditySeconds(ONE_DAY)
+            //.accessTokenValiditySeconds(300)
             .refreshTokenValiditySeconds(THIRTY_DAYS);
 	}
  
