@@ -190,11 +190,10 @@ public class UserControllerTests {
 	@Test
 	public void addNullUser() {
 		ResponseEntity response = controller.addUser(null);
-		
+
 		Assert.assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
 	}
-	
-	
+		
 	/**
 	 * Updates with a valid user
 	 */
