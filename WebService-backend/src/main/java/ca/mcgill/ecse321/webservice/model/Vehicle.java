@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.webservice.model;
 
 import javax.persistence.Entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,18 +12,20 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
 public class Vehicle{
 	
 	private Long id; 
 	private String model;
 	private String make;
 	private String color;
-	private Set<Trip> trips;
+	private Set<Trip> trips = new HashSet<>();
 	private User user;
    
 	public Vehicle() {
@@ -31,12 +34,10 @@ public class Vehicle{
 	public Vehicle(String model,
 				   String make,
 				   String color,
-				   Set<Trip> trips,
 				   User user) {
 		setModel(model);
 		setMake(make);
 		setColor(color);
-		setTrips(trips);
 		setUser(user);
 	}
 	
@@ -76,6 +77,7 @@ public class Vehicle{
 		  
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="vehicle")
+	@JsonManagedReference
 	public Set<Trip> getTrips() {
 		return this.trips;
 	}
@@ -83,9 +85,15 @@ public class Vehicle{
 	public void setTrips(Set<Trip> trips) {
 		this.trips = trips;
 	}
+	
+	public void addTrip(Trip trip) {
+		this.trips.add(trip);
+		trip.setVehicle(this);
+	}
 
 
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
+	@JsonBackReference
 	public User getUser() {
 		return this.user;
 	}

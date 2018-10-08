@@ -3,11 +3,13 @@ package ca.mcgill.ecse321.webservice.service;
 import java.sql.Time;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ca.mcgill.ecse321.webservice.model.Registration;
 import ca.mcgill.ecse321.webservice.model.Trip;
 import ca.mcgill.ecse321.webservice.model.User;
 import ca.mcgill.ecse321.webservice.model.Vehicle;
@@ -23,26 +25,6 @@ public class TripService {
 	
 	public Iterable<Trip> getTrips() {
 		
-		if (tripRepository.count() == 0) {
-			Trip trip = new Trip();
-			trip.setStartpoint("Toronto");
-			trip.setEndpoint("Montreal");
-			trip.setDistance(1000);
-			trip.setActive(true);
-			trip.setStart_time(Time.valueOf("01:40:02"));
-			trip.setEnd_time(Time.valueOf("15:00:00"));
-			trip.setEst_Trip_time(100);
-			trip.setSeats_available(4);
-			trip.setCompleated(false);
-			
-			
-			Vehicle v = new Vehicle();
-			v.setUser(new User());
-			trip.setVehicle(v);
-			
-			tripRepository.save(trip);
-		}
-		
 		return tripRepository.findAll();	
 	}
 	
@@ -50,4 +32,20 @@ public class TripService {
 		return tripRepository.findById(id);
 	}
 	
+	public Trip updateTrip(long id, Trip trip) {
+		return tripRepository.save(trip);
+	}
+	
+	public Trip addTrip(Trip trip) {
+		return tripRepository.save(trip);
+	}
+	
+	public boolean seatsAvailable(Trip trip) {
+		return trip.getSeats_available() > 0; 
+	}
+	
+	public void deleteTrip(Trip trip) {
+		tripRepository.delete(trip);
+	}
+
 }

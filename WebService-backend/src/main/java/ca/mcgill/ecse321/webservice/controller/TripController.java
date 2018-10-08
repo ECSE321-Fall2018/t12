@@ -1,7 +1,12 @@
 package ca.mcgill.ecse321.webservice.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,15 +16,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import ca.mcgill.ecse321.webservice.model.Registration;
+import ca.mcgill.ecse321.webservice.model.Role;
 import ca.mcgill.ecse321.webservice.model.Trip;
+import ca.mcgill.ecse321.webservice.model.User;
+import ca.mcgill.ecse321.webservice.model.Vehicle;
 import ca.mcgill.ecse321.webservice.service.TripService;
+import ca.mcgill.ecse321.webservice.service.UserService;
+import ca.mcgill.ecse321.webservice.service.VehicleService;
 
 @RestController
 @RequestMapping("/api/")
 public class TripController {
+	
+	public static final Logger logger = LoggerFactory.getLogger(TripController.class);
 
 	@Autowired
 	private TripService tripService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private VehicleService vehicleService;
 	
 	/**
 	 * 
@@ -31,8 +50,39 @@ public class TripController {
 	 */
 	@RequestMapping(value="/trips", method = RequestMethod.GET)
 	public ResponseEntity<?> getTrips() {
+		logger.info("GET * TRIPS");
 		Iterable<Trip> tripList = tripService.getTrips();
 		return new ResponseEntity<>(tripList, HttpStatus.OK);
+	}
+	
+	/**
+	 * 
+	 * Returns all trip associated with a given user
+	 * 
+	 * URL: http://hostname:port/api/users/{userId}/trips
+	 * HTTP method: GET
+	 *
+	 */
+	@RequestMapping(value="/users/{userId}/trips", method = RequestMethod.GET)
+	public ResponseEntity<?> getTripsByUser(@PathVariable long userId) {		
+		
+		Set<Registration> registrations;
+		
+		try {
+			registrations = userService.getRegistrations(userId);
+		} catch(IllegalArgumentException e)
+		{
+			logger.error(e.getMessage());
+			return new ResponseEntity<String>("User with id " + userId + " not found", HttpStatus.NOT_FOUND);
+		}
+		
+		List<Trip> trips = new ArrayList<>();
+		for (Registration registration : registrations)
+		{
+			trips.add(registration.getTrip());
+		}
+		
+		return new ResponseEntity<>(trips, HttpStatus.OK);
 	}
 	
 	/**
@@ -51,15 +101,42 @@ public class TripController {
 	
 	/**
      * 
-     * Creates a new trip
+     * Creates a new trip associated with a given user
      * 
-     * URL: http://hostname:port/api/trips/
+     * URL: http://hostname:port/api/uesrs/{userId}/trips/
      * HTTP method: POST
      * 
      */	
-	@RequestMapping(value="/trips", method = RequestMethod.POST)
-	public ResponseEntity<?> addTrip(@RequestBody Trip trip) {
+	@RequestMapping(value="/users/{userId}/vehicles/{vehicleId}/trips", method = RequestMethod.POST)
+	public ResponseEntity<?> addUsersTrip(@PathVariable long userId, @PathVariable long vehicleId, @RequestBody Trip trip) {
+		
+		// If user is not found
+		Optional<User> optionalUser =  userService.getUser(userId);
+		if (!optionalUser.isPresent()) {
+			return new ResponseEntity<String>("User with id " + userId + " not found", HttpStatus.NOT_FOUND);
+		}
+		
+		// if vehicle is not found
+		Optional<Vehicle> optionalVehicle = vehicleService.getVehicle(vehicleId);
+		if (!optionalVehicle.isPresent()) {
+			return new ResponseEntity<String>("Vehicle with id " + vehicleId + " not found", HttpStatus.NOT_FOUND);
+		}
+		
+		User user = optionalUser.get();
+		Vehicle vehicle = optionalVehicle.get();
+		
+		// If the user does not own the vehicle
+		if (!user.getVehicles().contains(vehicle)) {
+			return new ResponseEntity<String>("Vehicle with id " + vehicleId + " does not belong to user with id " + userId, HttpStatus.BAD_REQUEST);
+		}
+		
+		Registration registration = new Registration(Role.DRIVER, user, trip);
+		user.addRegistration(registration);
+		trip.addRegistration(registration);
+		vehicle.addTrip(trip);
+		
 		Trip newTrip = tripService.addTrip(trip);
+		
 		return new ResponseEntity<>(newTrip, HttpStatus.CREATED);
 	}
 
