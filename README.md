@@ -34,3 +34,45 @@ October 5th: Original Sprint 1 dealine, Group meeting 4: Set goals for the last 
 October 6th: More controller methods added, more repositiories added, OATH2 servers created 
 
 October 7th: Sprint 1 deadline, finalized project for submission 
+
+## Sample requests:
+A set of sample requests
+
+### Signup - localhost:8080/signup
+- Authorization: None
+- Headers: 
+  - Content-Type = application/json
+- Body:
+`{
+	"name": "Brendan",
+    "username": "User",
+    "password": "Pass",
+    "drivingRate": 5,
+    "passRate": 2
+}`
+- Status: `201 Created`
+- Result:
+`
+{
+    "id": 4,
+    "name": "Brendan",
+    "username": "User",
+    "password": "$2a$10$i0.ltBYigSyYb7QGs16qkebQHygqGwyQRMo4pKdm9n7zmSyB4kBkK",
+    "drivingRate": 5,
+    "passRate": 2,
+    "registrations": [],
+    "vehicles": [],
+    "roles": [
+        {
+            "id": 5,
+            "name": "USER"
+        }
+    ],
+    "dweight": 5,
+    "pweight": 5
+}
+`
+
+The rest of the API requests can be found here:
+https://documenter.getpostman.com/view/5488695/RWgnZ1Mz#8b18a371-0fd9-4b03-a9e6-5a30e78aa67b
+
