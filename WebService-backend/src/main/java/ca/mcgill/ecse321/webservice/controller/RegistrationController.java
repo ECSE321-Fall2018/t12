@@ -40,9 +40,12 @@ public class RegistrationController {
 	
 	@RequestMapping(value="/registrationsByUser/{userID}", method = RequestMethod.GET)   
 	public ResponseEntity<?> getRegistrationsByUserID(@PathVariable long userID) {
-		Optional<User> userO = userService.getUser(userID);;
-		User user = userO.get();
+		Optional<User> userO = userService.getUser(userID);
 		
+		if (!(userO.isPresent())){
+			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+		}
+		User user = userO.get();
 		
 		Iterable<Registration> registrationList = user.getRegistrations();
 		return new ResponseEntity<>(registrationList, HttpStatus.OK);
@@ -52,9 +55,11 @@ public class RegistrationController {
 	public ResponseEntity<?> getRegistrationsByTripID(@PathVariable long tripID) {
 		Optional<Trip> tripO = tripService.getTrip(tripID);
 		
+		
+		if (!(tripO.isPresent())) {
+			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+		}
 		Trip trip = tripO.get();
-		
-		
 		Iterable<Registration> registrationList = trip.getRegistrations();
 		return new ResponseEntity<>(registrationList, HttpStatus.OK);
 	}
@@ -62,7 +67,9 @@ public class RegistrationController {
 	
 	@RequestMapping(value="/registrations/{registrationID}", method = RequestMethod.PUT)   
 	public ResponseEntity<?> updateRegistration(@PathVariable long registrationID, @RequestBody Registration registration) {
-		
+		if (!(registrationService.getRegistrationByID(registrationID).isPresent())) {
+			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+		}
 		Registration newRegistration = registrationService.updateRegistration(registrationID, registration);
 		
 		
@@ -76,21 +83,29 @@ public class RegistrationController {
 		System.out.println(userID);
 		
 		Optional<User> user= userService.getUser(userID);
-		if (user.get()==null) {
-			return new ResponseEntity<>("user of that id does not exist", HttpStatus.BAD_REQUEST);
+		if (!(user.isPresent())) {
+			return new ResponseEntity<>("user of that id does not exist", HttpStatus.NOT_FOUND);
 		}
 		Optional<Trip> trip = tripService.getTrip(tripID);
-		if (trip.get()==null) {
-			return new ResponseEntity<>("trip of that id does not exist", HttpStatus.BAD_REQUEST);
+		if (!(trip.isPresent())) {
+			return new ResponseEntity<>("trip of that id does not exist", HttpStatus.NOT_FOUND);
 		}
+		
+		if (!tripService.seatsAvailable(trip.get())) {
+			return new ResponseEntity<>("No more seats remaining in trip!", HttpStatus.BAD_REQUEST);
+		}
+		
 		Role role= Role.PASSENGER;
-		Registration newRegistration= registrationService.addRegistration(user.get(), trip.get(), role);
+		Registration newRegistration = registrationService.addRegistration(user.get(), trip.get(), role);
 		return new ResponseEntity<>(newRegistration, HttpStatus.CREATED);
 	}
 	
 	
 	@RequestMapping(value="/registrations/{registrationID}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteRegistration(@PathVariable long registrationID) {
+		if (registrationService.getRegistrationByID(registrationID).get()==null) {
+			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+		}
 		
 		Registration deletedRegistration= registrationService.deleteRegistration(registrationID);
 				
@@ -101,7 +116,11 @@ public class RegistrationController {
 	@RequestMapping(value="/registrations/{registrationID}", method = RequestMethod.GET)
 	public ResponseEntity<?> getRegistrationByID(@PathVariable long registrationID) {
 		Optional <Registration> registration= registrationService.getRegistrationByID(registrationID);
+		if (!(registration.isPresent())) {
+			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+		}
 		Registration r = registration.get();
+		
 		return new ResponseEntity<>(r, HttpStatus.OK);
 	}
 	

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import ca.mcgill.ecse321.webservice.model.Trip;
 import ca.mcgill.ecse321.webservice.model.User;
 import ca.mcgill.ecse321.webservice.model.Vehicle;
 import ca.mcgill.ecse321.webservice.service.UserService;
@@ -154,7 +155,17 @@ public class VehicleController {
 			return new ResponseEntity<String>("User with id " + u_id + " not found", HttpStatus.NOT_FOUND);
 		}
 		
+		if (!userService.containsVehicle(user, vehicle)) {
+			return new ResponseEntity<String>("Vehicle with id " + v_id + " does not belong to user with id " + u_id, HttpStatus.BAD_REQUEST);
+		}
+		
+		if (vehicleService.associatedWithActiveTrip(vehicle)) {
+			return new ResponseEntity<String>("Vehicle with id " + v_id + " is associated with one or more active trips! Remove vehicle from trip before deleting.", HttpStatus.BAD_REQUEST);
+		}
+		
+		// Remove the vehicle from the user 
 		user.removeVehicle(vehicle);
+
 		vehicleService.deleteVehicle(vehicle);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
