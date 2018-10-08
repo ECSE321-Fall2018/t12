@@ -67,9 +67,7 @@ public class SignupControllerTest {
 	@Test
 	public void signupInvalidUser() {
 		User user = new User();
-		
 		ResponseEntity response = controller.signup(user);
-		
 		Assert.assertEquals(HttpStatus.NOT_ACCEPTABLE, response.getStatusCode());
 	}
 
