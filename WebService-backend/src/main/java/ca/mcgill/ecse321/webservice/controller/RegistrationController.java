@@ -90,8 +90,13 @@ public class RegistrationController {
 		if (!(trip.isPresent())) {
 			return new ResponseEntity<>("trip of that id does not exist", HttpStatus.NOT_FOUND);
 		}
+		
+		if (!tripService.seatsAvailable(trip.get())) {
+			return new ResponseEntity<>("No more seats remaining in trip!", HttpStatus.BAD_REQUEST);
+		}
+		
 		Role role= Role.PASSENGER;
-		Registration newRegistration= registrationService.addRegistration(user.get(), trip.get(), role);
+		Registration newRegistration = registrationService.addRegistration(user.get(), trip.get(), role);
 		return new ResponseEntity<>(newRegistration, HttpStatus.CREATED);
 	}
 	

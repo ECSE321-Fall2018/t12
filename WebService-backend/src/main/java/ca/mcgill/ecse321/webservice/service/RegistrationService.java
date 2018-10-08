@@ -58,12 +58,13 @@ public class RegistrationService {
 	}
 	
 	public Registration addRegistration(User user, Trip trip, Role role) {
-		//private UserRepository userRepository;
-		//Optional<User> user = userRepository.findById(userID);
-		//Optional<Trip> trip = tripRepository.findById(tripID);
-		//Role role = Role.PASSENGER;
 		Registration newRegistration = new Registration(role, user, trip);
 		registrationRepository.save(newRegistration);
+		
+		trip.decrementAvailableSeats();
+		
+		user.addRegistration(newRegistration);
+		trip.addRegistration(newRegistration);
 		return newRegistration;	
 	}
 	public Registration deleteRegistration (long registrationID) {

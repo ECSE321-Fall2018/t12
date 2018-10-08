@@ -13,11 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
 public class Trip {
 
 	private Long id; 
@@ -136,6 +137,10 @@ public class Trip {
 	public void setSeats_available(int seats_available) {
 		this.seats_available = seats_available;
 	}
+	
+	public void decrementAvailableSeats() {
+		if (this.seats_available > 0) this.seats_available--;
+	}
 
 	public boolean isCompleated() {
 		return compleated;
@@ -174,6 +179,7 @@ public class Trip {
 	}
 	
 	@ManyToOne(cascade=CascadeType.ALL,optional=false)
+	@JsonBackReference
 	public Vehicle getVehicle() {
 		return this.vehicle;
 	}
