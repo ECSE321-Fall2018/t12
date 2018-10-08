@@ -20,8 +20,10 @@ import ca.mcgill.ecse321.webservice.model.Registration;
 import ca.mcgill.ecse321.webservice.model.Role;
 import ca.mcgill.ecse321.webservice.model.Trip;
 import ca.mcgill.ecse321.webservice.model.User;
+import ca.mcgill.ecse321.webservice.model.Vehicle;
 import ca.mcgill.ecse321.webservice.service.TripService;
 import ca.mcgill.ecse321.webservice.service.UserService;
+import ca.mcgill.ecse321.webservice.service.VehicleService;
 
 @RestController
 @RequestMapping("/api/")
@@ -34,6 +36,9 @@ public class TripController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private VehicleService vehicleService;
 	
 	/**
 	 * 
@@ -102,18 +107,35 @@ public class TripController {
      * HTTP method: POST
      * 
      */	
-	@RequestMapping(value="/users/{userId}/trips", method = RequestMethod.POST)
-	public ResponseEntity<?> addUsersTrip(@PathVariable long userId, @RequestBody Trip trip) {
-		Trip newTrip = tripService.addTrip(trip);
+	@RequestMapping(value="/users/{userId}/vehicles/{vehicleId}/trips", method = RequestMethod.POST)
+	public ResponseEntity<?> addUsersTrip(@PathVariable long userId, @PathVariable long vehicleId, @RequestBody Trip trip) {
 		
+		// If user is not found
 		Optional<User> optionalUser =  userService.getUser(userId);
 		if (!optionalUser.isPresent()) {
 			return new ResponseEntity<String>("User with id " + userId + " not found", HttpStatus.NOT_FOUND);
 		}
+		
+		// if vehicle is not found
+		Optional<Vehicle> optionalVehicle = vehicleService.getVehicle(vehicleId);
+		if (!optionalVehicle.isPresent()) {
+			return new ResponseEntity<String>("Vehicle with id " + vehicleId + " not found", HttpStatus.NOT_FOUND);
+		}
+		
 		User user = optionalUser.get();
-		Registration registration = new Registration(Role.DRIVER, user, newTrip);
+		Vehicle vehicle = optionalVehicle.get();
+		
+		// If the user does not own the vehicle
+		if (!user.getVehicles().contains(vehicle)) {
+			return new ResponseEntity<String>("Vehicle with id " + vehicleId + " does not belong to user with id " + userId, HttpStatus.BAD_REQUEST);
+		}
+		
+		Registration registration = new Registration(Role.DRIVER, user, trip);
 		user.addRegistration(registration);
 		trip.addRegistration(registration);
+		vehicle.addTrip(trip);
+		
+		Trip newTrip = tripService.addTrip(trip);
 		
 		return new ResponseEntity<>(newTrip, HttpStatus.CREATED);
 	}

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.webservice.model.Registration;
 import ca.mcgill.ecse321.webservice.model.User;
+import ca.mcgill.ecse321.webservice.model.Vehicle;
 import ca.mcgill.ecse321.webservice.repository.UserRepository;
 
 @Service
@@ -55,6 +56,11 @@ public class UserService {
 		return user.getRegistrations();
 	}
 
+	public boolean containsVehicle(User user, Vehicle vehicle)
+	{
+		return user.getVehicles().contains(vehicle);
+	}
+	
 	public User addUser(User user){
 		return userRepository.save(user);
 	}

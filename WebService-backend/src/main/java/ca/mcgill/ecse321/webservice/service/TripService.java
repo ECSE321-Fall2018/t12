@@ -58,6 +58,10 @@ public class TripService {
 		return tripRepository.save(trip);
 	}
 	
+	public boolean seatsAvailable(Trip trip) {
+		return trip.getSeats_available() > 0; 
+	}
+	
 	public void deleteTrip(Trip trip) {
 		tripRepository.delete(trip);
 	}
