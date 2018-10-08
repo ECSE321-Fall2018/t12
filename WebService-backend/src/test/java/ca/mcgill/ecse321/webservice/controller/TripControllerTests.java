@@ -106,7 +106,7 @@ public class TripControllerTests {
 	@Test
 	public void TestAddTrip() {
 		Trip trip = new Trip("Toronto", "Montreal", 0, true, null, null, 0, 0, false, null);
-		trcontroller.addTrip(trip);
+		trcontroller.addUsersTrip(0, 0, trip);
 		assertNotNull("temp");
 	}
 	
