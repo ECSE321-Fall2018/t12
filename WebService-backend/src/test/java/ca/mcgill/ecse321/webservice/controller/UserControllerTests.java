@@ -162,7 +162,9 @@ public class UserControllerTests {
 		
 		assertUserEquals(user, response);
 	}
-	
+	/**
+	 *  Check the mathematics of the update rating methods
+	 */
 	@Test
 	public void checkDriverUpdateRating() {
 		User user = new User("Karlo", "Karlo", "pass", 3, 3);
