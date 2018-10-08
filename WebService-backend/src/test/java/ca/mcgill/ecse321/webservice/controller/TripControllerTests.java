@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 import java.util.Optional;
-
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,6 +66,7 @@ public class TripControllerTests {
 			}
 		});
 		
+	
 		when(tripDAO.getTrips()).thenAnswer( (InvocationOnMock invocation) -> {
 			
 			return null;
