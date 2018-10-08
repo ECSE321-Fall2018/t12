@@ -163,6 +163,18 @@ public class UserControllerTests {
 		assertUserEquals(user, response);
 	}
 	
+	@Test
+	public void checkDriverUpdateRating() {
+		User user = new User("Karlo", "Karlo", "pass", 3, 3);
+		user.updateDriverRating(3);
+		Assert.assertEquals(3, user.getDrivingRate(), 0);
+	}
+	@Test
+	public void checkPassengerUpdateRating() {
+		User user = new User("Karlo", "Karlo", "pass", 3, 3);
+		user.updatePassRating(3);
+		Assert.assertEquals(3, user.getPassRate(), 0);
+	}
 	/**
 	 * Send an invalid user and checks for a NOT_ACCEPTABLE status message
 	 */
