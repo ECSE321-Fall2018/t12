@@ -76,3 +76,28 @@ A set of sample requests
 The rest of the API requests can be found here:
 https://documenter.getpostman.com/view/5488695/RWgnZ1Mz#8b18a371-0fd9-4b03-a9e6-5a30e78aa67b
 
+
+
+## SPRINT 2: Mobile App front end
+
+October 17th: Sprint 2 begins 
+
+October 22nd : Group Meeting, Created issues, discussed requirements within the Sprint 2 document, Created mock UI, Listed neccessary chnages/ updates to backend, Laid a timeline for sprint 2 and split up tasks,  
+
+October 23rd
+
+October 24th
+
+October 25th
+
+October 26th
+
+October 27th
+
+October 28th
+
+October 29th: 
+
+October 30th
+
+October 31st: Sprint 2 ends 
