@@ -37,6 +37,7 @@ public class RegistrationService {
 			trip.setEst_Trip_time(100);
 			trip.setSeats_available(4);
 			trip.setCompleated(false);
+			trip.setCost_per_customer(10);
 			
 			
 			Vehicle v = new Vehicle();

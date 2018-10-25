@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.webservice.model.Registration;
 import ca.mcgill.ecse321.webservice.model.Trip;
+import ca.mcgill.ecse321.webservice.model.TripNode;
 import ca.mcgill.ecse321.webservice.model.User;
 import ca.mcgill.ecse321.webservice.model.Vehicle;
 import ca.mcgill.ecse321.webservice.repository.TripRepository;
@@ -48,4 +49,15 @@ public class TripService {
 		tripRepository.delete(trip);
 	}
 
+	//ahahhhahhahahhah
+	public Trip addTripNode(Trip trip, TripNode tripNode) {
+		trip.addTripNode(tripNode);
+		tripRepository.save(trip);
+		return trip;
+	}
+	
+	public Trip removeTripNode(Trip trip, TripNode tripNode) {
+		trip.getTripNodes().remove(tripNode);
+		return trip;
+	}
 }

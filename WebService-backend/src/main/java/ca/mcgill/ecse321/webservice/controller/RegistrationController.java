@@ -79,8 +79,8 @@ public class RegistrationController {
 	
 	@RequestMapping(value="/users/{userID}/trips/{tripID}/registrations", method = RequestMethod.POST)
 	public ResponseEntity<?> addRegistration(@PathVariable long userID,@PathVariable long tripID) {
-		System.out.println("the");
-		System.out.println(userID);
+		//System.out.println("the");
+		//System.out.println(userID);
 		
 		Optional<User> user= userService.getUser(userID);
 		if (!(user.isPresent())) {

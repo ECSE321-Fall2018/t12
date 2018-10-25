@@ -32,6 +32,7 @@ public class Trip {
 	private int est_Trip_time;
 	private Date date;
 	private int seats_available;
+	private int cost_per_customer;
 	private boolean compleated;
 	private Set<Registration> registrations = new HashSet<>();
 	private Set<TripNode> tripNodes = new HashSet<>();
@@ -53,7 +54,8 @@ public class Trip {
 			int seats_available,
 			Date date,
 			boolean compleated,
-			Vehicle vehicle) {
+			Vehicle vehicle
+			, int cost_per_customer) {
 		this.startpoint = startpoint;
 		this.endpoint = endpoint;
 		this.distance = distance;
@@ -65,6 +67,7 @@ public class Trip {
 		this.seats_available = seats_available;
 		this.compleated = compleated;
 		this.vehicle = vehicle;
+		this.cost_per_customer= cost_per_customer;
 	}
 
 	@Id 
@@ -77,7 +80,12 @@ public class Trip {
 		this.id = id;
 	}
 	
-
+	public void setCost_per_customer(int i) {
+		this.cost_per_customer= i; 
+	}
+	public int getCost_per_customer() {
+		return this.cost_per_customer;
+	}
 	public String getStartpoint() {
 		return startpoint;
 	}
