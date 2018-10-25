@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.mcgill.ecse321.webservice.model.Registration;
 import ca.mcgill.ecse321.webservice.model.Role;
 import ca.mcgill.ecse321.webservice.model.Trip;
+import ca.mcgill.ecse321.webservice.model.TripNode;
 import ca.mcgill.ecse321.webservice.model.User;
 import ca.mcgill.ecse321.webservice.model.Vehicle;
+import ca.mcgill.ecse321.webservice.service.TripNodeService;
 import ca.mcgill.ecse321.webservice.service.TripService;
 import ca.mcgill.ecse321.webservice.service.UserService;
 import ca.mcgill.ecse321.webservice.service.VehicleService;
@@ -36,6 +38,9 @@ public class TripController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private TripNodeService tripNodeService;
 	
 	@Autowired
 	private VehicleService vehicleService;
@@ -169,6 +174,56 @@ public class TripController {
 		
 	}
 	
+	
+	@RequestMapping(value="/trips/{tripID}/tripNode/{tripNodeID}", method= RequestMethod.PUT)
+	public ResponseEntity<?> addTripNode(@PathVariable long tripID, @PathVariable long tripNodeID){
+		Optional<Trip> trip = tripService.getTrip(tripID);
+		Trip trip1;
+		if (trip.isPresent()) {
+			trip1 = trip.get();
+		} else {
+			return new ResponseEntity<String>("Trip with id " + tripID + " not found", HttpStatus.NOT_FOUND);
+		}
+		Optional<TripNode> tripNode = tripNodeService.getTripNode(tripNodeID);
+		//getTripNode(tripNodeID);
+		TripNode tripNode1;
+		if (tripNode.isPresent()) {
+			tripNode1 = tripNode.get();
+		} else {
+			return new ResponseEntity<String>("Trip Node with id " + tripNodeID + " not found", HttpStatus.NOT_FOUND);
+		}
+		
+		//trip1.addTripNode(tripNode1);
+		tripService.addTripNode(trip1, tripNode1);
+		
+		return new ResponseEntity<>(trip1, HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value="/trips/{tripID}/tripNodeToRemove/{tripNodeID}", method= RequestMethod.PUT)
+	public ResponseEntity<?> removeTripNode(@PathVariable long tripID, @PathVariable long tripNodeID){
+		Optional<Trip> trip = tripService.getTrip(tripID);
+		Trip trip1;
+		if (trip.isPresent()) {
+			trip1 = trip.get();
+		} else {
+			return new ResponseEntity<String>("Trip with id " + tripID + " not found", HttpStatus.NOT_FOUND);
+		}
+		Optional<TripNode> tripNode = tripNodeService.getTripNode(tripNodeID);
+		//getTripNode(tripNodeID);
+		TripNode tripNode1;
+		if (tripNode.isPresent()) {
+			tripNode1 = tripNode.get();
+		} else {
+			return new ResponseEntity<String>("Trip Node with id " + tripNodeID + " not found", HttpStatus.NOT_FOUND);
+		}
+		
+		//trip1.addTripNode(tripNode1);
+		tripService.removeTripNode(trip1, tripNode1);
+		
+		return new ResponseEntity<>(trip1, HttpStatus.OK);
+		
+	}
 	
 	
 	
