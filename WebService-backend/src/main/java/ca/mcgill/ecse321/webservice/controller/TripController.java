@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.webservice.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -95,7 +96,16 @@ public class TripController {
      */		
 	@RequestMapping(value="/trips/{tripId}", method = RequestMethod.GET)
 	public ResponseEntity<?> getTrip(@PathVariable long tripId) {
-		Optional<Trip> trip = tripService.getTrip(tripId);
+		Trip trip;
+		
+		try {
+			trip = tripService.getTrip(tripId).get();
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<String>("User with id " + tripId + " not found", HttpStatus.NOT_FOUND);
+		} catch (NullPointerException exception) {
+			return new ResponseEntity<String>("User with id " + tripId + " not found", HttpStatus.NOT_FOUND);
+		}
+		
 		return new ResponseEntity<>(trip, HttpStatus.OK);
 	}	
 	
@@ -103,7 +113,7 @@ public class TripController {
      * 
      * Creates a new trip associated with a given user
      * 
-     * URL: http://hostname:port/api/uesrs/{userId}/trips/
+     * URL: http://hostname:port/api/users/{userId}/trips/
      * HTTP method: POST
      * 
      */	

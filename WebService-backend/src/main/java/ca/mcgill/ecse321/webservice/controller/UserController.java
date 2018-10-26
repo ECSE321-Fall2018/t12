@@ -37,6 +37,8 @@ public class UserController {
 			user = userService.getUser(userID).get();
 		} catch(NoSuchElementException e) {
 			return new ResponseEntity<String>("User with id " + userID + " not found", HttpStatus.NOT_FOUND);
+		} catch (NullPointerException exception) {
+			return new ResponseEntity<String>("User with id " + userID + " not found", HttpStatus.NOT_FOUND);
 		}
 		
 		return new ResponseEntity<>(user, HttpStatus.OK);
@@ -45,8 +47,13 @@ public class UserController {
 	//Post 
 	@RequestMapping(value ="/users", method = RequestMethod.POST)
 	public ResponseEntity<?> addUser(@RequestBody User user){
-		User newUser = userService.addUser(user);
-		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+		if(user != null) {
+			User newUser = userService.addUser(user);
+			return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<String>("User cannot be null", HttpStatus.NOT_ACCEPTABLE);
+		}
+		
 	}
 	//Put
 	@RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT)

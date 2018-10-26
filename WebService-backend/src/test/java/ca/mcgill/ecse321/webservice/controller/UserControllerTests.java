@@ -117,12 +117,12 @@ public class UserControllerTests {
 	 */
 	@Test
 	public void getExistingUser() {
-		Optional<User> resp = (Optional<User>) controller.getUser(0).getBody();
+		User resp = (User) controller.getUser(0).getBody();
 
 		Optional<User> expected = Optional.of(new User("Karlo", "Karlo", "pass", 3, 3));
 		expected.get().setId(0L);
 		
-		assertUserEquals(expected.get(), resp.get());
+		assertUserEquals(expected.get(), resp);
 	}
 	
 	/**
@@ -142,7 +142,7 @@ public class UserControllerTests {
 	public void getInvalidUser() {
 		ResponseEntity<?> resp = controller.getUser(-1);
 		
-		Assert.assertEquals(HttpStatus.BAD_REQUEST, resp.getStatusCode());
+		Assert.assertEquals(HttpStatus.NOT_FOUND, resp.getStatusCode());
 	}
 	
 	//addUser tests
