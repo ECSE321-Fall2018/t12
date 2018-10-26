@@ -4,6 +4,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
 import org.json.JSONException;
 import org.junit.Before;
@@ -29,7 +32,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ca.mcgill.ecse321.webservice.model.Trip;
+import ca.mcgill.ecse321.webservice.model.User;
+import ca.mcgill.ecse321.webservice.model.Vehicle;
 import ca.mcgill.ecse321.webservice.service.TripService;
+import ca.mcgill.ecse321.webservice.service.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -41,6 +47,9 @@ public class TripControllerTests {
 	
 	@Mock
 	private TripService tripDAO;
+	
+	@Mock
+	private UserService userDAO;
 	
 	@InjectMocks
 	
@@ -66,12 +75,18 @@ public class TripControllerTests {
 			}
 		});
 		
+		
 	
 		when(tripDAO.getTrips()).thenAnswer( (InvocationOnMock invocation) -> {
 			
 			return null;
 		});
 		
+		when(userDAO.getUser(ArgumentMatchers.anyLong())).thenAnswer((InvocationOnMock invocation) ->{
+			Optional<User> user = Optional.empty();
+			user.get().setId(0L);
+			return user;
+		});
 	}
 
 	@Test
@@ -82,34 +97,13 @@ public class TripControllerTests {
 	
 	@Test
 	
-		public void getExistingTrip() {		
+	public void getExistingTrip() {		
 		
-		Optional<Trip> resp = (Optional<Trip>) trcontroller.getTrip(0).getBody();
+		Trip resp = (Trip) trcontroller.getTrip(0).getBody();
 
 		Optional<Trip> expected = Optional.of(new Trip("foo", "foo", 0, true, null, null, 0, 0, false, null));
-		assertTripEquals(expected.get(), resp.get());
+		assertTripEquals(expected.get(), resp);
 	}
-	
-	
-	@Test
-	public void getTrips() throws JSONException {
-		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
-
-		ResponseEntity<String> response = restTemplate.exchange(
-				"http://localhost:"+port+"/api/trips",
-				HttpMethod.GET, entity, String.class);
-
-		JSONAssert.assertEquals("{startpoint:foo,endpoint:foo,distance:80,active:true,start_time:02:31:03,end_time:04:19:03,est_Trip_time:108,seats_available:4,compleated:false,vehicle:null}", response.getBody(), false);	
-	}
-	
-	
-	@Test
-	public void TestAddTrip() {
-		Trip trip = new Trip("Toronto", "Montreal", 0, true, null, null, 0, 0, false, null);
-		trcontroller.addUsersTrip(0, 0, trip);
-		assertNotNull("temp");
-	}
-	
 	
 	@Test
 	public void getNonExistingTrip() {
@@ -122,7 +116,7 @@ public class TripControllerTests {
 	@Test
 	public void getInvalidTrip() {
 		ResponseEntity<?> resp = trcontroller.getTrip(-1);
-		Assert.assertEquals(HttpStatus.BAD_REQUEST, resp.getStatusCode());
+		Assert.assertEquals(HttpStatus.NOT_FOUND, resp.getStatusCode());
 	}
 	
 	public static void assertTripEquals(Trip expected, Trip actual) {

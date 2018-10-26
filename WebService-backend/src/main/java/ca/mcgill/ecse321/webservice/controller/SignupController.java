@@ -28,9 +28,14 @@ public class SignupController {
      */
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseEntity<?> signup(@RequestBody User user) {
-   		user.addRole(new UserRole("USER"));
-    	User newUser = signupService.addUser(user);
-    	return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+   		if(user != null) {
+   			user.addRole(new UserRole("USER"));
+   	    	User newUser = signupService.addUser(user);
+   	    	return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+   		} else {
+   			return new ResponseEntity<String>("User cannot be null", HttpStatus.NOT_ACCEPTABLE);
+   		}
+    	
     }
 	
 }
