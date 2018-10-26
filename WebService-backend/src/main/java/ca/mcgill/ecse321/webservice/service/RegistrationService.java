@@ -24,33 +24,7 @@ public class RegistrationService {
 
 	
 	public Iterable<Registration> getAllRegistrations() {
-		
-		if (registrationRepository.count() ==0) {
-			
-			Trip trip = new Trip();
-			trip.setStartpoint("Toronto");
-			trip.setEndpoint("Montreal");
-			trip.setDistance(1000);
-			trip.setActive(true);
-			trip.setStart_time(Time.valueOf("01:40:02"));
-			trip.setEnd_time(Time.valueOf("15:00:00"));
-			trip.setEst_Trip_time(100);
-			trip.setSeats_available(4);
-			trip.setCompleated(false);
-			
-			
-			Vehicle v = new Vehicle();
-			v.setUser(new User());
-			trip.setVehicle(v);
-			User user = new User();
-			
-			Registration r = new Registration(Role.DRIVER, user, trip);
-			registrationRepository.save(r);
-		}
-	
-		
 		return registrationRepository.findAll();	
-		
 	}
 	
 	public Optional<Registration> getRegistrationByID(long id) {

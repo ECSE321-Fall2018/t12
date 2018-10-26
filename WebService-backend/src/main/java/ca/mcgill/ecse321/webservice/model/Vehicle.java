@@ -25,20 +25,19 @@ public class Vehicle{
 	private String model;
 	private String make;
 	private String color;
-	private Set<Trip> trips = new HashSet<>();
-	private User user;
+	//private Set<Trip> trips = new HashSet<>();
+	//private User user;
    
 	public Vehicle() {
 	}
 	
 	public Vehicle(String model,
 				   String make,
-				   String color,
-				   User user) {
+				   String color) {
 		setModel(model);
 		setMake(make);
 		setColor(color);
-		setUser(user);
+		//setUser(user);
 	}
 	
 	@Id 
@@ -75,7 +74,7 @@ public class Vehicle{
 		return this.color;
 	}
 		  
-
+	/*
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="vehicle")
 	@JsonManagedReference
 	public Set<Trip> getTrips() {
@@ -90,8 +89,9 @@ public class Vehicle{
 		this.trips.add(trip);
 		trip.setVehicle(this);
 	}
+	*/
 
-
+	/*
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
 	@JsonBackReference
 	public User getUser() {
@@ -101,5 +101,5 @@ public class Vehicle{
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	*/
 }

@@ -23,10 +23,13 @@ public class TripService {
 	private TripRepository tripRepository;
 	public Object getTrip;
 	
+	/*
+	 * Return all trips
+	 */
 	public Iterable<Trip> getTrips() {
-		
 		return tripRepository.findAll();	
 	}
+	
 	
 	public Optional<Trip> getTrip(long id) {
 		return tripRepository.findById(id);

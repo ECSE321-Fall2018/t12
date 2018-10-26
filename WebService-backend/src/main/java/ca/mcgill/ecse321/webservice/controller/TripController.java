@@ -133,7 +133,7 @@ public class TripController {
 		Registration registration = new Registration(Role.DRIVER, user, trip);
 		user.addRegistration(registration);
 		trip.addRegistration(registration);
-		vehicle.addTrip(trip);
+		trip.setVehicle(vehicle);
 		
 		Trip newTrip = tripService.addTrip(trip);
 		

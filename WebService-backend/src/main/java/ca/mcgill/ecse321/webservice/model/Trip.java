@@ -15,10 +15,12 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
 public class Trip {
 
 	private Long id; 
@@ -150,7 +152,8 @@ public class Trip {
 		this.compleated = compleated;
 	}
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="trip")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="trip", orphanRemoval=true)
+	//@JsonManagedReference
 	public Set<Registration> getRegistrations() {
 		return this.registrations;
 	}
@@ -179,7 +182,6 @@ public class Trip {
 	}
 	
 	@ManyToOne(cascade=CascadeType.ALL,optional=false)
-	@JsonBackReference
 	public Vehicle getVehicle() {
 		return this.vehicle;
 	}

@@ -9,9 +9,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+/**
+ * A User and Trip joining table.
+ * Registration allows for the Many to Many relationship between Users and Trips.
+ * 
+ * A registration also Role state. A registration may either be of state:
+ * 1. PASSENGER
+ * 2. DRIVER
+ * 
+ */
 @Entity
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
 public class Registration {
@@ -52,6 +63,7 @@ public class Registration {
 	}
 
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
+	//@JsonBackReference
 	public User getUser() {
 		return this.user;
 	}
@@ -61,6 +73,7 @@ public class Registration {
 	}
 
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
+	//@JsonBackReference
 	public Trip getTrip() {
 		return this.trip;
 	}

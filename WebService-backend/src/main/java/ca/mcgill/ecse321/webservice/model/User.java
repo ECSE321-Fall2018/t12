@@ -17,9 +17,16 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+/**
+ * Represents a User in our application.
+ * 
+ */
+
 @Entity
+
+// Required as "User" is a reserved table name
 @Table(name = "Usr")
-//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
 public class User{
 	
 	
@@ -115,7 +122,8 @@ public class User{
 		return this.passRate;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user", orphanRemoval=true)
+	//@JsonManagedReference
 	public Set<Registration> getRegistrations() {
 		return this.registrations;
 	}
@@ -129,8 +137,8 @@ public class User{
 		registration.setUser(this);
 	}
 
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
-	@JsonManagedReference
+	@OneToMany(cascade=CascadeType.ALL)
+	//@JsonManagedReference
 	public Set<Vehicle> getVehicles() {
 		return this.vehicles;
 	}
@@ -141,12 +149,12 @@ public class User{
 	
 	public void addVehicle(Vehicle vehicle) {
 		this.vehicles.add(vehicle);
-		vehicle.setUser(this);
+		//vehicle.setUser(this);
 	}
 	
 	public void removeVehicle(Vehicle vehicle) {
 		this.vehicles.remove(vehicle);
-		vehicle.setUser(null);
+		//vehicle.setUser(null);
 	}
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)

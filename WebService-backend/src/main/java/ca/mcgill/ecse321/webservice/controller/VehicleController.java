@@ -97,6 +97,7 @@ public class VehicleController {
 	 */
 	@RequestMapping(value="/users/{user_id}/vehicles", method = RequestMethod.POST)
 	public ResponseEntity<?> addVehicle(@PathVariable long user_id, @RequestBody Vehicle vehicle){		
+		
 		try {	
 			User user = userService.getUser(user_id).get();
 			user.addVehicle(vehicle);

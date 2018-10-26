@@ -35,18 +35,11 @@ public class VehicleService {
 	}
 	
 	public boolean associatedWithActiveTrip(Vehicle vehicle) {
-		for (Trip trip : vehicle.getTrips()) {
-			if (trip.isActive()) return true;
-		}
+		
 		return false;
 	}
 	
 	public void deleteVehicle(Vehicle vehicle) {
-		
-		// Remove all trip references
-		for (Trip trip : vehicle.getTrips()) {
-			trip.setVehicle(null);
-		}	
 		
 		vehicleRepository.delete(vehicle);
 	}
