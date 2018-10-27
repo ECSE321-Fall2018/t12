@@ -184,7 +184,7 @@ public class TripController {
 		
 	}
 	
-	
+	// there will generally be no reason to use this one! because making a trip node puts it into a trip
 	@RequestMapping(value="/trips/{tripID}/tripNode/{tripNodeID}", method= RequestMethod.PUT)
 	public ResponseEntity<?> addTripNode(@PathVariable long tripID, @PathVariable long tripNodeID){
 		Optional<Trip> trip = tripService.getTrip(tripID);
