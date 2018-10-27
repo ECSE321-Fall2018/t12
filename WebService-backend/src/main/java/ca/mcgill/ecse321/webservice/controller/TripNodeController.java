@@ -106,8 +106,9 @@ public class TripNodeController {
 	}
 	
 	//Post 
-		@RequestMapping(value ="/addTripNode", method = RequestMethod.POST)
-		public ResponseEntity<?> addUser(@RequestBody TripNode tripNode){
+		@RequestMapping(value ="/addTripNode/{tripID}", method = RequestMethod.POST)
+		public ResponseEntity<?> addUser(@PathVariable long tripID, @RequestBody TripNode tripNode){
+			tripNode.setTrip(tripService.getTrip(tripID).get());
 			TripNode newTripNode = tripNodeService.addTripNode(tripNode);
 			return new ResponseEntity<>(newTripNode, HttpStatus.CREATED);
 		}

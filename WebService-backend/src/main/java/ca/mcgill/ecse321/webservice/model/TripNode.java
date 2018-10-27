@@ -19,21 +19,24 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class TripNode{
 
 	private Long id; 
-	private Position position;
+	//private Position position;
 	private PointType pointType;
+	private String name;
 	private Time time;
 	private Trip trip;
+	// maybe in the future have an x and y position to put on a map 
 	
 	public TripNode() {
 		
 	}
 	
-	public TripNode(Position position, PointType pointType, Time time, Trip trip) {
+	public TripNode(String name, PointType pointType, long time) {
 		super();
-		this.position = position;
+		this.name= name;
+		//this.position = position;
 		this.pointType = pointType;
-		this.time = time;
-		this.trip = trip;
+		this.time = new Time(time);
+		//this.trip = trip;
 	}
 
 	@Id 
@@ -45,7 +48,7 @@ public class TripNode{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+	/*
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
 	public Position getPosition() {
 		return this.position;
@@ -54,6 +57,7 @@ public class TripNode{
 	public void setPosition(Position position) {
 		this.position = position;
 	}
+	*/
 
 
 	public void setPointType(PointType value) {

@@ -52,7 +52,18 @@ public class TripService {
 	}
 	
 	public Trip updateTrip(long id, Trip trip) {
-		return tripRepository.save(trip);
+		Trip original =this.getTrip(id).get();
+		original.setActive(trip.isActive());
+		original.setCompleated(trip.isCompleated());
+		original.setCost_per_customer(trip.getCost_per_customer());
+		original.setDistance(trip.getDistance());
+		original.setEnd_time(trip.getEnd_time());
+		original.setStart_time(trip.getStart_time());
+		original.setSeats_available(trip.getSeats_available());
+		original.setEndpoint(trip.getEndpoint());
+		original.setStartpoint(trip.getStartpoint());
+		original.setEst_Trip_time(trip.getEst_Trip_time());
+		return tripRepository.save(original);
 	}
 	
 	public Trip addTrip(Trip trip) {

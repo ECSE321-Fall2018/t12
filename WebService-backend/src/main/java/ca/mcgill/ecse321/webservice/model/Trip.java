@@ -65,6 +65,29 @@ public class Trip {
 		this.vehicle = vehicle;
 		this.cost_per_customer= cost_per_customer;
 	}
+	
+	public Trip(
+			String startpoint, 
+			String endpoint, 
+			int distance,
+			boolean active, 
+			Time start_time, 
+			Time end_time, 
+			int est_Trip_time,
+			int seats_available, 
+			boolean compleated
+		 , int cost_per_customer) {
+		this.startpoint = startpoint;
+		this.endpoint = endpoint;
+		this.distance = distance;
+		this.active = active;
+		this.start_time = start_time;
+		this.end_time = end_time;
+		this.est_Trip_time = est_Trip_time;
+		this.seats_available = seats_available;
+		this.compleated = compleated;
+		this.cost_per_customer= cost_per_customer;
+	}
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
