@@ -30,14 +30,15 @@ public class TripNode{
 		
 	}
 	
-	public TripNode(String name, PointType pointType, Time time) {
+	public TripNode(String name, PointType pointType,Time time) {
 		super();
 		this.name= name;
 		//this.position = position;
 		this.pointType = pointType;
 		this.time = time;
 				//new Time(time);
-		this.position= new Position("ontario");
+		//this.position= new Position("ontario");
+		this.setPosition(new Position("ontario"));
 		//this.trip = trip;
 	}
 
