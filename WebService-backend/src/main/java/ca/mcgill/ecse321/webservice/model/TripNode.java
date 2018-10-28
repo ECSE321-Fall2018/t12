@@ -27,7 +27,7 @@ public class TripNode{
 	// maybe in the future have an x and y position to put on a map 
 	
 	public TripNode() {
-		
+		this.setPosition(new Position("ontario"));
 	}
 	
 	public TripNode(String name, PointType pointType,Time time) {
