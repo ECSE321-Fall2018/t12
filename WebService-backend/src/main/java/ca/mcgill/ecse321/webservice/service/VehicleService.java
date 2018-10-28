@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.webservice.model.Trip;
+import ca.mcgill.ecse321.webservice.model.User;
 import ca.mcgill.ecse321.webservice.model.Vehicle;
 import ca.mcgill.ecse321.webservice.repository.VehicleRepository;
 
@@ -40,13 +41,17 @@ public class VehicleService {
 	}
 	
 	/**
-	 * Persists a vehicle in the DB. <br/><b>NOTE:</b> "Use the returned instance for further operations 
+	 * Persists a user's vehicle in the DB. <br/><b>NOTE:</b> "Use the returned instance for further operations 
 	 * as the save operation might have changed the entity instance completely."
 	 * 
+	 * @param user
 	 * @param vehicle
 	 * @return New vehicle object persisted in DB
 	 */
-	public Vehicle addVehicle(Vehicle vehicle) {
+	public Vehicle addVehicle(User user, Vehicle vehicle) {
+		
+		user.addVehicle(vehicle);
+		
 		return vehicleRepository.save(vehicle);
 	}
 	
@@ -65,6 +70,14 @@ public class VehicleService {
 		return vehicleRepository.save(original);
 	}
 	
+	/**
+	 * Determines if this vehicle is associated with an active trip. </br>
+	 * <b>See: </b> Trip.java
+	 * 
+	 * @param vehicle
+	 * @return <code>true</code> if <code>vehicle</code> is associated with an active trip. </br>
+	 * <code>false otherwise.</code>
+	 */
 	public boolean associatedWithActiveTrip(Vehicle vehicle) {
 		for (Trip trip : vehicle.getTrips()) {
 			if (trip.isActive()) return true;
@@ -72,6 +85,10 @@ public class VehicleService {
 		return false;
 	}
 	
+	/**
+	 * Deletes a vehicle from the DB
+	 * @param vehicle
+	 */
 	public void deleteVehicle(Vehicle vehicle) {
 		
 		// Remove all trip references

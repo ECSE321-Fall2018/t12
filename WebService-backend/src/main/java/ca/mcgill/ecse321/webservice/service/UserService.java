@@ -56,10 +56,18 @@ public class UserService {
 		return user.getRegistrations();
 	}
 
-	public boolean containsVehicle(User user, Vehicle vehicle)
+	/**
+	 * Returns true if the User param <code>user</code> has <code>trip</code> contained within its entity
+	 * 
+	 * @param user
+	 * @param vehicle
+	 * @return True if <code>user</code> has <code>vehicle</code>
+	 */
+	public boolean hasVehicle(User user, Vehicle vehicle)
 	{
 		return user.getVehicles().contains(vehicle);
 	}
+	
 	
 	public User addUser(User user){
 		return userRepository.save(user);
