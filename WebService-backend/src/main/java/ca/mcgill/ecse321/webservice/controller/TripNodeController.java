@@ -108,7 +108,14 @@ public class TripNodeController {
 	//Post 
 		@RequestMapping(value ="/addTripNode/{tripID}", method = RequestMethod.POST)
 		public ResponseEntity<?> addTripNode(@PathVariable long tripID, @RequestBody TripNode tripNode){
-			tripNode.setTrip(tripService.getTrip(tripID).get());
+			Optional<Trip> trip = tripService.getTrip(tripID);
+			Trip trip1;
+			if (trip.isPresent()) {
+				trip1 = trip.get();
+			} else {
+				return new ResponseEntity<String>("Trip with id " + tripID + " not found", HttpStatus.NOT_FOUND);
+			}
+			tripNode.setTrip(trip1);
 			TripNode newTripNode = tripNodeService.addTripNode(tripNode);
 			return new ResponseEntity<>(newTripNode, HttpStatus.CREATED);
 		}
