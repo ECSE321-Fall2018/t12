@@ -39,6 +39,7 @@ public class TripNode{
 				//new Time(time);
 		//this.position= new Position("ontario");
 		this.setPosition(new Position("ontario"));
+		System.out.println(this.position.getId());
 		//this.trip = trip;
 	}
 
