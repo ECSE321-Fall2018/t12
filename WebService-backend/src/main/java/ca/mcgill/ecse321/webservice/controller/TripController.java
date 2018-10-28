@@ -132,13 +132,15 @@ public class TripController {
 		}
 		
 		// if vehicle is not found
-		Optional<Vehicle> optionalVehicle = vehicleService.getVehicle(vehicleId);
-		if (!optionalVehicle.isPresent()) {
+		Vehicle vehicle;
+		try{
+			vehicle = vehicleService.getVehicle(vehicleId);
+		} catch(NoSuchElementException e)
+		{
 			return new ResponseEntity<String>("Vehicle with id " + vehicleId + " not found", HttpStatus.NOT_FOUND);
 		}
 		
 		User user = optionalUser.get();
-		Vehicle vehicle = optionalVehicle.get();
 		
 		// If the user does not own the vehicle
 		if (!user.getVehicles().contains(vehicle)) {
