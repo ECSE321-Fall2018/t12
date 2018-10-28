@@ -97,16 +97,17 @@ public class VehicleController {
 	 */
 	@RequestMapping(value="/users/{user_id}/vehicles", method = RequestMethod.POST)
 	public ResponseEntity<?> addVehicle(@PathVariable long user_id, @RequestBody Vehicle vehicle){		
+
+		Vehicle newVehicle;
 		try {	
 			User user = userService.getUser(user_id).get();
-			user.addVehicle(vehicle);
-			userService.updateUser(user.getId(), user);
+			newVehicle = vehicleService.addVehicle(user, vehicle);
 			
 		} catch(NoSuchElementException e) {
 			return new ResponseEntity<String>("User with id " + user_id + " not found", HttpStatus.NOT_FOUND);
 		}
 		
-		return new ResponseEntity<>(vehicle, HttpStatus.CREATED);
+		return new ResponseEntity<>(newVehicle, HttpStatus.CREATED);
 	}
 	
 	
@@ -156,7 +157,7 @@ public class VehicleController {
 			return new ResponseEntity<String>("User with id " + u_id + " not found", HttpStatus.NOT_FOUND);
 		}
 		
-		if (!userService.containsVehicle(user, vehicle)) {
+		if (!userService.hasVehicle(user, vehicle)) {
 			return new ResponseEntity<String>("Vehicle with id " + v_id + " does not belong to user with id " + u_id, HttpStatus.BAD_REQUEST);
 		}
 		
