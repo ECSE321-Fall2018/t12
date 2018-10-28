@@ -87,6 +87,7 @@ public class TripNode{
    }
 
    public void setTrip(Trip trip) {
+	   //trip.addTripNode(this);
 	   this.trip = trip;
    }
 

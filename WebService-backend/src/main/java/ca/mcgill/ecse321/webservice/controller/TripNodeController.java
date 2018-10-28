@@ -115,7 +115,8 @@ public class TripNodeController {
 			} else {
 				return new ResponseEntity<String>("Trip with id " + tripID + " not found", HttpStatus.NOT_FOUND);
 			}
-			tripNode.setTrip(trip1);
+			//tripNode.setTrip(trip1);
+			trip1.addTripNode(tripNode);
 			TripNode newTripNode = tripNodeService.addTripNode(tripNode);
 			return new ResponseEntity<>(newTripNode, HttpStatus.CREATED);
 		}

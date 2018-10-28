@@ -159,10 +159,10 @@ public class TripController {
 		
 		TripNode endTripNode = new TripNode(name, PointType.END ,time);
 		TripNode startTripNode= new TripNode(trip.getStartpoint(), PointType.START, trip.getStart_time());
-		endTripNode.setTrip(trip);
-		startTripNode.setTrip(trip);
-		//trip.addTripNode(endTripNode);
-		//trip.addTripNode(startTripNode);
+		//endTripNode.setTrip(trip);
+		//startTripNode.setTrip(trip);
+		trip.addTripNode(endTripNode);
+		trip.addTripNode(startTripNode);
 		
 		
 		
