@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ca.mcgill.ecse321.webservice.model.PointType;
 import ca.mcgill.ecse321.webservice.model.Registration;
 import ca.mcgill.ecse321.webservice.model.Trip;
 import ca.mcgill.ecse321.webservice.model.TripNode;
@@ -28,6 +29,28 @@ public class TripService {
 		
 		return tripRepository.findAll();	
 	}
+	public TripNode getStartTripNode(Trip trip) {
+		Iterable<TripNode> tripNodes= trip.getTripNodes();
+		for (TripNode tripNode :tripNodes) {
+			if (tripNode.getPointType()==PointType.START) {
+				return tripNode;
+				
+			}
+		}
+		return null;
+		
+	}
+	public TripNode getEndTripNode(Trip trip) {
+		Iterable<TripNode> tripNodes= trip.getTripNodes();
+		for (TripNode tripNode :tripNodes) {
+			if (tripNode.getPointType()==PointType.END) {
+				return tripNode;
+				
+			}
+		}
+		
+		return null;
+	}
 	
 	public Optional<Trip> getTrip(long id) {
 		return tripRepository.findById(id);
@@ -45,6 +68,12 @@ public class TripService {
 		original.setEndpoint(trip.getEndpoint());
 		original.setStartpoint(trip.getStartpoint());
 		original.setEst_Trip_time(trip.getEst_Trip_time());
+		TripNode endTripNode= getEndTripNode(original);
+		TripNode startTripNode= getStartTripNode(original);
+		endTripNode.setTime(trip.getEnd_time());
+		endTripNode.setName(trip.getEndpoint());
+		startTripNode.setTime(trip.getStart_time());
+		startTripNode.setName(trip.getStartpoint());
 		return tripRepository.save(original);
 	}
 	

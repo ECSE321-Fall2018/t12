@@ -80,6 +80,14 @@ public class TripNode{
    public Time getTime() {
 	   return this.time;
    }
+   
+   public void setName(String name) {
+	   this.name = name;
+   }
+
+   public String getName() {
+	   return this.name;
+   }
 
    @ManyToOne(cascade=CascadeType.ALL, optional=false)
    public Trip getTrip() {

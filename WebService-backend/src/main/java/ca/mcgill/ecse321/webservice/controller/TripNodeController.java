@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import ca.mcgill.ecse321.webservice.model.PointType;
 import ca.mcgill.ecse321.webservice.model.Registration;
 import ca.mcgill.ecse321.webservice.model.Role;
 import ca.mcgill.ecse321.webservice.model.Trip;
@@ -94,12 +95,16 @@ public class TripNodeController {
 	@RequestMapping(value="/tripNodes/{tripNodeID}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteTripNodeByID(@PathVariable long tripNodeID) {
 		//logger.info("GET * TRIPS");
+		
 		Optional<TripNode> tripNode = tripNodeService.getTripNode(tripNodeID);
 		TripNode tripNode1;
 		if (tripNode.isPresent()) {
 			tripNode1 = tripNode.get();
 		} else {
 			return new ResponseEntity<String>("Trip Node with id " + tripNodeID + " not found", HttpStatus.NOT_FOUND);
+		}
+		if (tripNode1.getPointType()!=PointType.MIDDLE) {
+			return new ResponseEntity<String>("Can only dealete middle point types", HttpStatus.NOT_FOUND);
 		}
 		Iterable<TripNode> tripNodeList=tripNodeService.deleteTripNode(tripNode1);
 		return new ResponseEntity<>(tripNodeList, HttpStatus.OK);
@@ -114,6 +119,9 @@ public class TripNodeController {
 				trip1 = trip.get();
 			} else {
 				return new ResponseEntity<String>("Trip with id " + tripID + " not found", HttpStatus.NOT_FOUND);
+			}
+			if (tripNode.getPointType()!=PointType.MIDDLE) {
+				return new ResponseEntity<String>("Can only create middle point types", HttpStatus.NOT_FOUND);
 			}
 			//tripNode.setTrip(trip1);
 			trip1.addTripNode(tripNode);
