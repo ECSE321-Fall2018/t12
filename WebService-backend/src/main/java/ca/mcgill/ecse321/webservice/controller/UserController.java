@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.webservice.controller;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,37 +23,74 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	/**
+	 * Get all users
+	 */
 	@RequestMapping(value="/users", method = RequestMethod.GET)
 	public ResponseEntity<?> getUsers() {
 		Iterable<User> userList = userService.getUsers();
 		return new ResponseEntity<>(userList, HttpStatus.OK);
 	}
 
-	@RequestMapping(value="/users/{userID}", method = RequestMethod.GET)
-	public ResponseEntity<?> getUser(@PathVariable long userID){
-		Optional<User> user = userService.getUser(userID);
+	/**
+	 * Get specific user
+	 * 
+	 * @param userId
+	 */
+	@RequestMapping(value="/users/{userId}", method = RequestMethod.GET)
+	public ResponseEntity<?> getUser(@PathVariable long userId){
+		
+		User user;
+		try {
+			user = userService.getUser(userId);
+		} catch(NoSuchElementException e)
+		{
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
-	//Post 
+	
+	/**
+	 * Adds new user
+	 * @param user
+	 */
 	@RequestMapping(value ="/users", method = RequestMethod.POST)
 	public ResponseEntity<?> addUser(@RequestBody User user){
 		User newUser = userService.addUser(user);
 		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 	}
-	//Put
+	
+	/**
+	 * Update existing user
+	 * @param userId
+	 * @param user
+	 */
 	@RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateUser(@PathVariable long userId, @RequestBody User user){
 		User updatedUser = userService.updateUser(userId, user);
 		return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 	}
-	//Delete
-		
+	
+	/**
+	 * Delete specific user </br>
+	 * <b>NOTE:</b> This method requires <b>ADMIN</b> authority to access
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping(value = "/users/{userId}", method = RequestMethod.DELETE)
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<?> deleteUser(@PathVariable long userId){
-		Optional<User> user = userService.getUser(userId);
-		userService.deleteUser(user.get());
+		User user;
+		try {
+			user = userService.getUser(userId);
+		} catch(NoSuchElementException e)
+		{
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		
+		userService.deleteUser(user);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
