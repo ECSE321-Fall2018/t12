@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.webservice.service;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +23,7 @@ public class VehicleService {
 	
 	/**
 	 * Returns all vehicles
+	 * @return Iterable<Vehicle>
 	 */
 	public Iterable<Vehicle> getVehicles(){
 		return vehicleRepository.findAll();
@@ -37,7 +37,11 @@ public class VehicleService {
 	 * @throws NoSuchElementException
 	 */
 	public Vehicle getVehicle(long id) throws NoSuchElementException {
-		return vehicleRepository.findById(id).get();
+		
+		Vehicle vehicle = vehicleRepository.findById(id).orElseThrow(
+				() -> new NoSuchElementException("No vehicle with id {" + id + "} was found."));
+		
+		return vehicle;
 	}
 	
 	/**
@@ -49,14 +53,12 @@ public class VehicleService {
 	 * @return New vehicle object persisted in DB
 	 */
 	public Vehicle addVehicle(User user, Vehicle vehicle) {
-		
 		user.addVehicle(vehicle);
-		
 		return vehicleRepository.save(vehicle);
 	}
 	
 	/**
-	 * Updates a vehicle given
+	 * Updates a vehicle given an id and temporary Vehicle object. 
 	 * @param id
 	 * @param vehicle
 	 * @return 

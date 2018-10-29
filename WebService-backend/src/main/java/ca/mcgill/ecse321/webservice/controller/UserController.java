@@ -23,28 +23,40 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	/**
+	 * Get all users
+	 */
 	@RequestMapping(value="/users", method = RequestMethod.GET)
 	public ResponseEntity<?> getUsers() {
 		Iterable<User> userList = userService.getUsers();
 		return new ResponseEntity<>(userList, HttpStatus.OK);
 	}
 
-	@RequestMapping(value="/users/{userID}", method = RequestMethod.GET)
-	public ResponseEntity<?> getUser(@PathVariable long userID){
+
+	/**
+	 * Get specific user
+	 * 
+	 * @param userId
+	 */
+	@RequestMapping(value="/users/{userId}", method = RequestMethod.GET)
+	public ResponseEntity<?> getUser(@PathVariable long userId){
 		
 		User user;
 		try {
-			user = userService.getUser(userID).get();
-		} catch(NoSuchElementException e) {
-			return new ResponseEntity<String>("User with id " + userID + " not found", HttpStatus.NOT_FOUND);
-		} catch (NullPointerException exception) {
-			return new ResponseEntity<String>("User with id " + userID + " not found", HttpStatus.NOT_FOUND);
+			user = userService.getUser(userId);
+		} catch(NoSuchElementException | NullPointerException e)
+		{
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 		
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
-	//Post 
+	
+	/**
+	 * Adds new user
+	 * @param user
+	 */
 	@RequestMapping(value ="/users", method = RequestMethod.POST)
 	public ResponseEntity<?> addUser(@RequestBody User user){
 		if(user != null) {
@@ -55,7 +67,12 @@ public class UserController {
 		}
 		
 	}
-	//Put
+	
+	/**
+	 * Update existing user
+	 * @param userId
+	 * @param user
+	 */
 	@RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateUser(@PathVariable long userId, @RequestBody User user){
 		try {
@@ -67,13 +84,25 @@ public class UserController {
 		User updatedUser = userService.updateUser(userId, user);
 		return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 	}
-	//Delete
-		
+	
+	/**
+	 * Delete specific user </br>
+	 * <b>NOTE:</b> This method requires <b>ADMIN</b> authority to access
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping(value = "/users/{userId}", method = RequestMethod.DELETE)
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<?> deleteUser(@PathVariable long userId){
-		Optional<User> user = userService.getUser(userId);
-		userService.deleteUser(user.get());
+		User user;
+		try {
+			user = userService.getUser(userId);
+		} catch(NoSuchElementException e)
+		{
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		
+		userService.deleteUser(user);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

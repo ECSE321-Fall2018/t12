@@ -81,7 +81,7 @@ public class TripController {
 		} catch(IllegalArgumentException e)
 		{
 			logger.error(e.getMessage());
-			return new ResponseEntity<String>("User with id " + userId + " not found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 		
 		List<Trip> trips = new ArrayList<>();
@@ -127,23 +127,23 @@ public class TripController {
 	@RequestMapping(value="/users/{userId}/vehicles/{vehicleId}/trips", method = RequestMethod.POST)
 	public ResponseEntity<?> addUsersTrip(@PathVariable long userId, @PathVariable long vehicleId, @RequestBody Trip trip) {
 		
-		// If user is not found
-		Optional<User> optionalUser =  userService.getUser(userId);
-		if (!optionalUser.isPresent()) {
-			return new ResponseEntity<String>("User with id " + userId + " not found", HttpStatus.NOT_FOUND);
+		User user;
+		Vehicle vehicle;
+		
+		// Get User
+		try {
+			user = userService.getUser(userId);
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 		
-		// if vehicle is not found
-		Vehicle vehicle;
+		// Get Trip
 		try{
 			vehicle = vehicleService.getVehicle(vehicleId);
-		} catch(NoSuchElementException e)
-		{
-			return new ResponseEntity<String>("Vehicle with id " + vehicleId + " not found", HttpStatus.NOT_FOUND);
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
-		
-		User user = optionalUser.get();
-		
+				
 		// If the user does not own the vehicle
 		if (!user.getVehicles().contains(vehicle)) {
 			return new ResponseEntity<String>("Vehicle with id " + vehicleId + " does not belong to user with id " + userId, HttpStatus.BAD_REQUEST);
