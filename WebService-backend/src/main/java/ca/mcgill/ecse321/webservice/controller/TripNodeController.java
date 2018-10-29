@@ -107,7 +107,7 @@ public class TripNodeController {
 			return new ResponseEntity<String>("Can only dealete middle point types", HttpStatus.NOT_FOUND);
 		}
 		Iterable<TripNode> tripNodeList=tripNodeService.deleteTripNode(tripNode1);
-		return new ResponseEntity<>(tripNodeList, HttpStatus.OK);
+		return new ResponseEntity<>( HttpStatus.OK);
 	}
 	
 	//Post 
