@@ -22,8 +22,18 @@ public class SignupService {
 	PasswordEncoder passwordEncoder;
 	
 	public User addUser(User user) {
+		
+		// if the username is taken, return null
+		if (isUsernameTaken(user.getUsername())) {
+			return null;
+		}
+		
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
+	}
+	
+	private boolean isUsernameTaken(String username) {
+		return userRepository.findByUsername(username) != null;
 	}
 	
 	/**
