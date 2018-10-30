@@ -75,13 +75,14 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateUser(@PathVariable long userId, @RequestBody User user){
+		
+		User updatedUser;
 		try {
-			userService.getUser(userId).get();
+			updatedUser = userService.updateUser(userId, user);
 		} catch(NoSuchElementException e) {
-			return new ResponseEntity<String>("Vehicle with id " + userId + " not found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 		
-		User updatedUser = userService.updateUser(userId, user);
 		return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 	}
 	
