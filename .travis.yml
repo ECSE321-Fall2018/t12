@@ -12,6 +12,9 @@ matrix:
           - android-27
           - build-tools-27.1.1
           - android-async-http-1.4.9
+        licenses:
+          - android-sdk-preview-license-.+
+          - android-sdk-license-.+
       script:
         - ./gradlew build
       before_install:
