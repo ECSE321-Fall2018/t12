@@ -5,7 +5,6 @@ matrix:
         - cd WebService-backend
         - mvn clean install
     - language: android
-      jdk: oraclejdk8
       android:
         components:
           - tools
