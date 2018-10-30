@@ -69,7 +69,7 @@ public class VehicleControllerTests {
 		});
 		
 		when(vehicleDAO.addVehicle(ArgumentMatchers.any(), ArgumentMatchers.any())).then((InvocationOnMock invocation)->{
-			Vehicle arg = invocation.getArgument(0);
+			Vehicle arg = invocation.getArgument(1);
 			
 			if(arg == null) {
 				return null;
@@ -83,7 +83,7 @@ public class VehicleControllerTests {
 		});
 		
 		when(vehicleDAO.updateVehicle(ArgumentMatchers.any(), ArgumentMatchers.any())).then((InvocationOnMock invocation)->{
-			Vehicle arg = invocation.getArgument(0);
+			Vehicle arg = invocation.getArgument(1);
 			
 			if(arg == null) {
 				return null;
