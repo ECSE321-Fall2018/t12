@@ -1,4 +1,18 @@
-language: java
-script:
-- cd WebService-backend
-- mvn clean install
+matrix:
+  include:
+    - language: java
+      script:
+        - cd WebService-backend
+        - mvn clean install
+    - language: android
+      jdk: oraclejdk8
+      android:
+        components:
+          - tools
+          - android-27
+          - build-tools-27.1.1
+          - android-async-http-1.4.9
+      before_script:
+        - cd Driver-app
+      script:
+        - ./gradlew build
