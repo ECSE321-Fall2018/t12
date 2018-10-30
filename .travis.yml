@@ -17,4 +17,5 @@ matrix:
       script:
         - ./gradlew build
       before_install:
+        - cd Driver-app
         - chmod +x gradlew
