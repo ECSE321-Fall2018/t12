@@ -118,10 +118,6 @@ public class LoginActivity extends AppCompatActivity {
          * }
          */
 
-        RequestParams params = new RequestParams();
-        params.add("name", "test");
-        System.out.println("HERHEHRHEHRE ----------" + params.toString());
-
         JSONObject jsonParams = new JSONObject();
         jsonParams.put("name", "test");
         jsonParams.put("username", username);
