@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.passengerapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -128,11 +129,8 @@ public class LoginActivity extends AppCompatActivity {
 
         System.out.println(jsonParams.toString());
 
-        StringEntity entity = new StringEntity(jsonParams.toString());
-        //entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-
-        HttpUtils.post(this.getBaseContext(), getString(R.string.signup_url), entity, new JsonHttpResponseHandler() {
+        HttpUtils.post(this, getString(R.string.signup_url), jsonParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 errorTxt.setText(response.toString());
@@ -141,12 +139,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 System.out.println("ERROR STATUS: " + statusCode);
-                if (errorResponse != null)
-                {
-                    errorTxt.setText(errorResponse.toString());
-                }
+                errorTxt.setText(errorResponse.toString());
             }
 
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                errorTxt.setText(responseString);
+            }
         });
 
 
