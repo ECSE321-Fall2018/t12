@@ -48,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+
     //Make sure the user does not exist and try to log in
     public void signUpBtnClick(View view){
         String pass = passwordTbx.getText().toString();

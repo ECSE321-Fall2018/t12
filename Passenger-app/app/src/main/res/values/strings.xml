@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Passenger-app</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_display_specific_trip_already_signed_up">
+        DisplaySpecificTripAlreadySignedUpActivity
+    </string>
+    <string name="action_settings">Settings</string>
 </resources>
