@@ -60,8 +60,8 @@ public class VehicleControllerTests {
 				return null;
 			} else if (arg == 0) {
 				User user = new User("karl", "karl", "pass", 3, 3);
-				Optional<Vehicle> vehicle = Optional.of(new Vehicle("Camry","Toyota", "Blue", user));
-				vehicle.get().setId(0L);
+				Vehicle vehicle = new Vehicle("Camry","Toyota", "Blue", user);
+				vehicle.setId(0L);
 				return vehicle;
 			} else {
 				return null;
