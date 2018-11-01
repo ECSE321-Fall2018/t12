@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.passengerapp;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -8,7 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
@@ -66,16 +71,14 @@ public class LoginActivity extends AppCompatActivity {
         }
         else {
             if(saveUser(un, pass)){
-                login(un, pass);
+                //login(un, pass);
             }
         }
     }
 
     public boolean userExists(String username){
-        if(username.compareTo("admin") ==  0){
-            return true;
-        }
-        return false;
+
+        return true;
     }
 
     public boolean saveUser(String username, String password){
@@ -115,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
 
         System.out.println(jsonParams.toString());
 
-        HttpUtils.post(this, getString(R.string.signup_url), jsonParams, new JsonHttpResponseHandler() {
+        HttpUtils.postWithoutAuth(this, getString(R.string.signup_url), jsonParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 errorTxt.setText(response.toString());
@@ -166,7 +169,38 @@ public class LoginActivity extends AppCompatActivity {
     public boolean getAccessToken(String username, String password) {
 
 
+        RequestParams params = new RequestParams();
+        params.add("username", username);
+        params.add("password", password);
+        params.add("grant_type", getString(R.string.oauth_grantype));
 
+        HttpUtils.post(getString(R.string.get_access_token_url), params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                errorTxt.setText(response.toString());
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                System.out.println("ERROR STATUS: " + statusCode);
+                if (errorResponse != null) {
+                    errorTxt.setText(errorResponse.toString());
+                } else {
+                    Snackbar.make(findViewById(android.R.id.content), "Service is down!", Snackbar.LENGTH_LONG).show();
+                }
+            }
+
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                errorTxt.setText(responseString);
+            }
+
+
+        });
+
+        return false;
     }
 
 }
