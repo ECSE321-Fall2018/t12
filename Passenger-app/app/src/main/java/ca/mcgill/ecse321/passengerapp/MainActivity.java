@@ -3,6 +3,8 @@ package ca.mcgill.ecse321.passengerapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import ca.mcgill.ecse321.passengerapp.model.Vehicle;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -10,4 +12,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+    Vehicle vehicle = new Vehicle();
+
+    int[] SEATS_AVAILABLE = {1, 3, 4, 2, 1, 3, 4};
+
+
 }
