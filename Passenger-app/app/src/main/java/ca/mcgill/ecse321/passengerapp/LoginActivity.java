@@ -174,7 +174,9 @@ public class LoginActivity extends AppCompatActivity {
         params.add("password", password);
         params.add("grant_type", getString(R.string.oauth_grantype));
 
-        HttpUtils.post(getString(R.string.get_access_token_url), params, new JsonHttpResponseHandler() {
+        boolean result = false;
+
+        HttpUtils.post(this, getString(R.string.get_access_token_url), params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 errorTxt.setText(response.toString());

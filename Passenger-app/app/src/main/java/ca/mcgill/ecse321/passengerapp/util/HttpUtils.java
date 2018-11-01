@@ -22,17 +22,15 @@ public class HttpUtils {
 
     private static String baseUrl;
     private static AsyncHttpClient client = new AsyncHttpClient();
+    private static AsyncHttpClient noauthClient = new AsyncHttpClient();
 
     private static final String client_name = "12Client1";
     private static final String client_secret = "12SuperSecret";
 
-    private static String basic;
 
     static {
         baseUrl = DEFAULT_BASE_URL;
-
-        String credentials = client_name + ":" + client_secret;
-        basic = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+        client.setBasicAuth(client_name, client_secret);
     }
 
     public static String getAbsoluteUrl(String relativeUrl) {
@@ -55,8 +53,8 @@ public class HttpUtils {
         postByUrl(context, true, getAbsoluteUrl(relativeUrl), jsonData, responseHandler);
     }
 
-    public static void post(String relativeUrl, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-        postByUrl(getAbsoluteUrl(relativeUrl), true, params, responseHandler);
+    public static void post(Context context, String relativeUrl, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        postByUrl(context, true, getAbsoluteUrl(relativeUrl), params, responseHandler);
     }
 
     public static void postWithoutAuth(Context context, String relativeUrl, JSONObject jsonData, AsyncHttpResponseHandler responseHandler) throws UnsupportedEncodingException {
@@ -67,26 +65,26 @@ public class HttpUtils {
 
     private static void postByUrl(Context context, boolean auth, String url, JSONObject jsonData, AsyncHttpResponseHandler responseHandler) throws UnsupportedEncodingException {
 
+        AsyncHttpClient c = (auth) ? client : noauthClient;
+
         // convert json data into a StringEntity
         StringEntity entity = new StringEntity(jsonData.toString());
 
-        if (auth) client.addHeader("Authorization", basic);
-        client.addHeader("Content-Type", "application/json");
+        c.addHeader("Content-Type", "application/json");
 
         // Preform a POST request
-        client.post(context, url, entity, "application/json", responseHandler);
-        client.removeAllHeaders();
+        c.post(context, url, entity, "application/json", responseHandler);
+        c.removeAllHeaders();
     }
 
-    private static void postByUrl(String url, boolean auth, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+    private static void postByUrl(Context context, boolean auth, String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
 
-        client.setBasicAuth(client_name, client_secret);
+        AsyncHttpClient c = (auth) ? client : noauthClient;
 
-        //if (auth) client.addHeader("Authorization", basic);
-        client.addHeader("Content-Type", "application/x-www-form-urlencoded");
+        c.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
-        client.post(url, params, responseHandler);
-        client.removeAllHeaders();
+        c.post(url, params, responseHandler);
+        c.removeAllHeaders();
     }
 
     public static boolean isNetworkAvailable(Activity activity) {
