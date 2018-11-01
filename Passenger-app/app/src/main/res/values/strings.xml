@@ -5,4 +5,8 @@
         DisplaySpecificTripAlreadySignedUpActivity
     </string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_my_trips">MyTripsActivity</string>
+    <string name="search_for_trips">Search for Trips</string>
+    <string name="my_trips">My Trips</string>
+    <string name="title_activity_all_trips">AllTripsActivity</string>
 </resources>
