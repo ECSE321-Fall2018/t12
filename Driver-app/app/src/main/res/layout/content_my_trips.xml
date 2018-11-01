@@ -8,4 +8,14 @@
     tools:context=".MyTripsActivity"
     tools:showIn="@layout/activity_my_trips">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/MyTripsView"
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
