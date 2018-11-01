@@ -27,6 +27,10 @@
         <activity
             android:name=".CreateVehicleActivity"
             android:label="@string/title_activity_create_vehicle"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".editDeleteTripActivity"
+            android:label="@string/title_activity_edit_delete_trip"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
