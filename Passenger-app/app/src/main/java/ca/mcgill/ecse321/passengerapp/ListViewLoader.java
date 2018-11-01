@@ -3,8 +3,8 @@ package ca.mcgill.ecse321.passengerapp;
 import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
 
 
@@ -16,8 +16,7 @@ import java.util.ArrayList;
 
 public class ListViewLoader extends ListActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    SimpleCursorAdapter tripAdapter;
-    SimpleCursorAdapter nodeAdapter;
+
     ArrayList<Trip> tripList;
     ArrayList<User> userList;
     String searchText;
