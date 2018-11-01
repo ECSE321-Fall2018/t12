@@ -31,6 +31,10 @@
         <activity
             android:name=".editDeleteTripActivity"
             android:label="@string/title_activity_edit_delete_trip"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".edit_tripActivity"
+            android:label="@string/title_activity_edit_trip"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
