@@ -7,4 +7,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="signup_url">signup</string>
+
+    <string name="error_no_internet">No internet connection!</string>
+    <string name="error_exception_thrown">Exception thrown: </string>
 </resources>
