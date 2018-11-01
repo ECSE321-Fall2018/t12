@@ -40,6 +40,10 @@
             android:name=".MyVehiclesActivity"
             android:label="@string/title_activity_my_vehicles"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".edit_tripActivity"
+            android:label="@string/title_activity_edit_trip"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
