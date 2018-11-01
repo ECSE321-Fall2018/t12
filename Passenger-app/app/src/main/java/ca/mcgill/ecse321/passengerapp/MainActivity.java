@@ -2,6 +2,14 @@ package ca.mcgill.ecse321.passengerapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import ca.mcgill.ecse321.passengerapp.model.Vehicle;
 
@@ -11,11 +19,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // dont know if this part of the code is necesary
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //
     }
 
-    Vehicle vehicle = new Vehicle();
 
-    int[] SEATS_AVAILABLE = {1, 3, 4, 2, 1, 3, 4};
+    public void myTripBtnClick(View view){
+        //Changes view to main view
+        Intent myTripsIntent = new Intent(this, MyTripsActivity.class);
+        startActivity(myTripsIntent);
+
+    }
+
+
+    public void allTripsBtnClick(View view){
+        //Changes view to main view
+        Intent myTripsIntent = new Intent(this, AllTripsActivity.class);
+        startActivity(myTripsIntent);
+
+    }
 
 
 }
