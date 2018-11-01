@@ -24,15 +24,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DisplaySpecificTripAlreadySignedUpActivity"
-            android:label="@string/title_activity_display_specific_trip_already_signed_up"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ca.mcgill.ecse321.passengerapp.MainActivity" />
-        </activity>
-        <activity
             android:name=".MyTripsActivity"
             android:label="@string/title_activity_my_trips"
             android:parentActivityName=".MainActivity"
