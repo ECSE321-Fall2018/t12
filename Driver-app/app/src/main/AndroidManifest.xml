@@ -35,6 +35,10 @@
         <activity
             android:name=".edit_tripActivity"
             android:label="@string/title_activity_edit_trip"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".create_trip_nodeActivity"
+            android:label="@string/title_activity_create_trip_node"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

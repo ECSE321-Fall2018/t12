@@ -5,4 +5,5 @@
     <string name="title_activity_create_vehicle">CreateVehicleActivity</string>
     <string name="title_activity_edit_delete_trip">editDeleteTripActivity</string>
     <string name="title_activity_edit_trip">edit_tripActivity</string>
+    <string name="title_activity_create_trip_node">create_trip_nodeActivity</string>
 </resources>
