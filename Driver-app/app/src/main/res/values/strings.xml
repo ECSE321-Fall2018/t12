@@ -4,5 +4,7 @@
     <string name="title_activity_create_trip">CreateTripActivity</string>
     <string name="title_activity_create_vehicle">CreateVehicleActivity</string>
     <string name="title_activity_edit_delete_trip">editDeleteTripActivity</string>
+    <string name="title_activity_my_trips">MyTripsActivity</string>
+    <string name="title_activity_my_vehicles">MyVehiclesActivity</string>
     <string name="title_activity_edit_trip">edit_tripActivity</string>
 </resources>

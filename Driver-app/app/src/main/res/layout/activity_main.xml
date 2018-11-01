@@ -7,24 +7,29 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/createTripBtn"
-        android:layout_width="wrap_content"
+        android:id="@+id/viewMyTripsBtn"
+        android:layout_width="359dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="6dp"
-        android:onClick="createTripBtnClick"
-        android:text="Create Trip"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView2"
-        android:layout_width="368dp"
-        android:layout_height="448dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="3dp"
-        app:layout_constraintBottom_toTopOf="@+id/createTripBtn"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="9dp"
+        android:onClick="viewMyTripsBtnClick"
+        android:text="My Trips"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/viewMyVehiclesBtn"
+        android:layout_width="359dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="9dp"
+        android:onClick="viewMyVehiclesBtnClick"
+        android:text="My Vehicles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewMyTripsBtn" />
+
 </android.support.constraint.ConstraintLayout>
