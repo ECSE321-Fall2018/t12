@@ -33,6 +33,14 @@
             android:label="@string/title_activity_edit_delete_trip"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".MyTripsActivity"
+            android:label="@string/title_activity_my_trips"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyVehiclesActivity"
+            android:label="@string/title_activity_my_vehicles"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".edit_tripActivity"
             android:label="@string/title_activity_edit_trip"
             android:theme="@style/AppTheme.NoActionBar" />
