@@ -1,8 +1,5 @@
 package ca.mcgill.ecse321.passengerapp;
 
-import android.app.ListActivity;
-import android.app.LoaderManager;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
@@ -10,6 +7,9 @@ import android.widget.ListView;
 
 
 import java.util.ArrayList;
+
+import ca.mcgill.ecse321.passengerapp.model.Trip;
+import ca.mcgill.ecse321.passengerapp.model.User;
 
 /**
  * Created by michelabdelnour on 2018-10-31.

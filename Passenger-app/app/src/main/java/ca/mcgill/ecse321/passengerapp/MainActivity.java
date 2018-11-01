@@ -3,7 +3,7 @@ package ca.mcgill.ecse321.passengerapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import java.util.ArrayList;
+import ca.mcgill.ecse321.passengerapp.model.Vehicle;
 
 public class MainActivity extends AppCompatActivity {
 
