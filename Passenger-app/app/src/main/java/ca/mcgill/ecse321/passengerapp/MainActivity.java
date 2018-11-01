@@ -18,5 +18,4 @@ public class MainActivity extends AppCompatActivity {
     int[] SEATS_AVAILABLE = {1, 3, 4, 2, 1, 3, 4};
 
 
-
 }

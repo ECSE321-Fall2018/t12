@@ -17,6 +17,3 @@ public class DataModel {
 
 }
 
-    public DataModel(Long id, this.vehicle,)
-
-}
