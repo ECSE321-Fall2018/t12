@@ -26,4 +26,5 @@
     <string name="search_for_trips">Search for Trips</string>
     <string name="my_trips">My Trips</string>
     <string name="title_activity_all_trips">AllTripsActivity</string>
+    <string name="this_should_be_all_trips">this should be all trips</string>
 </resources>
