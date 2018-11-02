@@ -15,17 +15,30 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ca.mcgill.ecse321.passengerapp.adapters.TripAdapter;
 import ca.mcgill.ecse321.passengerapp.model.Position;
 import ca.mcgill.ecse321.passengerapp.model.Trip;
 import ca.mcgill.ecse321.passengerapp.model.TripNode;
+import ca.mcgill.ecse321.passengerapp.util.HttpRequest;
+import cz.msebera.android.httpclient.Header;
 
 
 public class AllTripsActivity extends AppCompatActivity  implements TripAdapter.ItemClickListener {
@@ -34,6 +47,7 @@ public class AllTripsActivity extends AppCompatActivity  implements TripAdapter.
     private EditText searchText;
 
     private List<Trip> trips = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,19 +78,20 @@ public class AllTripsActivity extends AppCompatActivity  implements TripAdapter.
     private void populateAllTripsView(){
         RecyclerView.LayoutManager lm = new LinearLayoutManager(this);
 
-        httpUpdateTrips();
         adapter = new TripAdapter(this, trips);
 
         allTripsView.setLayoutManager(lm);
         allTripsView.setAdapter(adapter);
         adapter.setClickListener(this);
+
+        httpGetAllTrips();
     }
 
 
     private void populateAllTripsViewSearch(String citySearched){
         RecyclerView.LayoutManager lm = new LinearLayoutManager(this);
 
-        httpUpdateTrips();
+        httpGetAllTrips();
         adapter = new TripAdapter(this, searchTrips(citySearched));
 
         allTripsView.setLayoutManager(lm);
@@ -115,9 +130,6 @@ public class AllTripsActivity extends AppCompatActivity  implements TripAdapter.
         }
         */
 
-
-
-
     }
 
     public void searchBtnClick (View view){
@@ -126,31 +138,37 @@ public class AllTripsActivity extends AppCompatActivity  implements TripAdapter.
     }
 
 
-    private void httpUpdateTrips(){
-        trips = new ArrayList<Trip>();
+    private void httpGetAllTrips(){
 
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
+        String url = "api/trips/";
+        HttpRequest.withToken(MainActivity.token).get(url, new RequestParams(), new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                Gson gson = new GsonBuilder().create();
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        Trip trip = (Trip) gson.fromJson(obj.toString(), Trip.class);
+                        trips.add(trip);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    throw(throwable);
+                } catch (Throwable throwable1) {
+                    throwable1.printStackTrace();
+                }
+            }
+        });
+
     }
 
     public void onItemClick(View view, int position) {

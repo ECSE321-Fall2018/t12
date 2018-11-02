@@ -11,9 +11,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import ca.mcgill.ecse321.passengerapp.model.User;
 import ca.mcgill.ecse321.passengerapp.model.Vehicle;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static String token;
+    public static User mainUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

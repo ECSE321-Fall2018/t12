@@ -209,8 +209,6 @@ public class LogInActivity extends AppCompatActivity {
 
                 Gson gson = new GsonBuilder().create();
 
-                //User user = (User) gson.fromJson(response.toString(), User.class);
-
                 User user = (User) gson.fromJson(response.toString(), User.class);
 
                 MainActivity.mainUser = user;
@@ -225,13 +223,6 @@ public class LogInActivity extends AppCompatActivity {
 
     }
 
-    public static <T> List<T> toList(String json, Class<T> clazz) {
-        if (null == json) {
-            return null;
-        }
-        Gson gson = new Gson();
-        return gson.fromJson(json, new TypeToken<T>(){}.getType());
-    }
 
 }
 
