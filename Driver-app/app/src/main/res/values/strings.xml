@@ -7,7 +7,9 @@
     <string name="title_activity_my_trips">MyTripsActivity</string>
     <string name="title_activity_my_vehicles">MyVehiclesActivity</string>
     <string name="title_activity_edit_trip">edit_tripActivity</string>
+    <string name="title_activity_create_trip_node">create_trip_nodeActivity</string>
     <string name="title_activity_edit_delete_vehicle">editDeleteVehicleActivity</string>
+    <string name="title_activity_edit_vehicle">EditVehicleActivity</string>
 
     <string name="action_settings">Settings</string>
 

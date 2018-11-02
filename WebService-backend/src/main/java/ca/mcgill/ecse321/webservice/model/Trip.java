@@ -81,14 +81,15 @@ public class Trip {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public void setCost_per_customer(int i) {
 		this.cost_per_customer= i; 
 	}
 	public int getCost_per_customer() {
 		return this.cost_per_customer;
 	}
-	public String getStartpoint() {
+
+  public String getStartpoint() {
 		return startpoint;
 	}
 

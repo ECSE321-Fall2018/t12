@@ -71,7 +71,8 @@ public class Trip implements Serializable {
     public int getCost_per_customer() {
         return this.cost_per_customer;
     }
-    public String getStartpoint() {
+
+  public String getStartpoint() {
         return startpoint;
     }
 

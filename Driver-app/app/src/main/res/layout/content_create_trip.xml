@@ -38,14 +38,13 @@
         android:id="@+id/Destinationbox"
         android:layout_width="152dp"
         android:layout_height="35dp"
-        android:layout_marginStart="120dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="4dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toEndOf="@+id/textboxDate" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline3"
@@ -95,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Date:"
+        android:text="Date: (dd/mm/yyyy)"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -117,7 +116,7 @@
         android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.962"
+        app:layout_constraintHorizontal_bias="0.915"
         app:layout_constraintStart_toEndOf="@+id/textboxDate"
         app:layout_constraintTop_toBottomOf="@+id/Locationbox"
         app:layout_constraintVertical_bias="1.0" />
@@ -129,7 +128,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Time:"
+        android:text="Time: (24:00)"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -139,14 +138,11 @@
         android:id="@+id/Timebox"
         android:layout_width="150dp"
         android:layout_height="35dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="12dp"
         android:ems="10"
         android:inputType="time"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toEndOf="@+id/Timetxt" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline6"
@@ -160,29 +156,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="32dp"
         android:text="Choose your vehicle:"
         android:textAppearance="@style/TextAppearance.AppCompat"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
 
-    <ScrollView
-        android:id="@+id/Vehiclebox"
-        android:layout_width="160dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintStart_toEndOf="@+id/Vehciletxt">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/createvehiclebtn"
+        android:id="@+id/createVehiclebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
@@ -206,7 +187,7 @@
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/createTripBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="124dp"
@@ -233,18 +214,35 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/TripNodeBox"
         android:layout_width="141dp"
         android:layout_height="63dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
-        app:layout_constraintStart_toEndOf="@+id/textView8">
+        app:layout_constraintEnd_toStartOf="@+id/CreateTripNodebtn"
+        app:layout_constraintStart_toEndOf="@+id/textView8" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/Vehiclebox"
+        android:layout_width="165dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toStartOf="@+id/createVehiclebtn"
+        app:layout_constraintStart_toEndOf="@+id/Vehciletxt" />
+
+    <TextView
+        android:id="@+id/Errortxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="88dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
 </android.support.constraint.ConstraintLayout>
