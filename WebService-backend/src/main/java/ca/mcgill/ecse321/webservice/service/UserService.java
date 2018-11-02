@@ -44,6 +44,15 @@ public class UserService {
 		
 		return user;
 	}
+	
+	/**
+	 * Get a specific user given a username
+	 * @param username
+	 * @return
+	 */
+	public User getUser(String username) {
+		return userRepository.findByUsername(username);
+	}
 
 	/**
 	 * Updates a user given an id to get the User stored in the DB

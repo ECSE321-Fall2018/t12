@@ -51,6 +51,17 @@ public class UserController {
 		
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="/users/name/{username}", method = RequestMethod.GET)
+	public ResponseEntity<?> getUser(@PathVariable("username") String username){
+		
+		User user =  userService.getUser(username);
+		if (user == null) {
+			return new ResponseEntity<String>("Username does not exist", HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(user, HttpStatus.OK);
+	}
 
 	
 	/**
