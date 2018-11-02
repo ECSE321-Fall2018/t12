@@ -74,7 +74,6 @@ public class Vehicle implements Serializable {
     }
 
 
-
     public User getUser() {
         return this.user;
     }
@@ -82,5 +81,4 @@ public class Vehicle implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-
 }

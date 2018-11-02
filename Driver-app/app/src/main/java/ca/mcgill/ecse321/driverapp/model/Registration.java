@@ -52,5 +52,4 @@ public class Registration implements Serializable {
     public void setTrip(Trip trip) {
         this.trip = trip;
     }
-
 }
