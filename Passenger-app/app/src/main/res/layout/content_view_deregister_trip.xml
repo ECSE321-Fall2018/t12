@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".editDeleteTripActivity"
-    tools:showIn="@layout/activity_edit_delete_trip">
+    tools:context=".viewDeregisterTripActivity"
+    tools:showIn="@layout/activity_view_deregister_trip">
 
     <TextView
         android:id="@+id/ArrivalDisplay"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
+        android:layout_height="15dp"
         android:layout_marginEnd="8dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat"
@@ -251,26 +251,18 @@
         tools:layout_editor_absoluteX="74dp" />
 
     <Button
-        android:id="@+id/Editbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
-        android:text="Edit"
-        app:layout_constraintEnd_toStartOf="@+id/Deletebtn"
-        app:layout_constraintHorizontal_bias="0.026"
-        app:layout_constraintStart_toStartOf="@+id/guideline12"
-        app:layout_constraintTop_toTopOf="@+id/guideline17" />
-
-    <Button
         android:id="@+id/Deletebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="71dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
-        android:text="Delete"
+        android:layout_marginBottom="35dp"
+        android:onClick="deRegisterBtnClick"
+        android:text="Deregister"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
+        app:layout_constraintStart_toEndOf="@+id/guideline15"
         app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
     <android.support.v7.widget.RecyclerView
@@ -299,4 +291,32 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline17"
         app:layout_constraintEnd_toStartOf="@+id/guideline13" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="126dp"
+        android:layout_marginBottom="84dp"
+        android:text="Driver:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline17" />
+
+    <TextView
+        android:id="@+id/textViewDriverInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginBottom="51dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 </android.support.constraint.ConstraintLayout>

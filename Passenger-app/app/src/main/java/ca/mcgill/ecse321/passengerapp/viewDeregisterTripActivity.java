@@ -46,35 +46,39 @@ public class viewDeregisterTripActivity extends AppCompatActivity {
     private TextView Location;
     private TextView Date;
     private TextView Time;
+    private TextView ArrivalTime;
     private TextView Length;
     private TextView Seats;
     private RecyclerView Vehicle;
     private RecyclerView Tripnodes;
     private RecyclerView Passenger;
     private VehicleAdapter adapter;
-
+    private TextView DriverText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_deregister_trip);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+
+
+        trip =(Trip) getIntent().getSerializableExtra("TRIP_ID");
+
+        DriverText = (TextView) findViewById(R.id.textViewDriverInfo);
+        Iterable<Registration> registrations = trip.getRegistrations();
+        User driver= new User();
+        for (Registration r: registrations){
+            if (r.getRole()==Role.DRIVER){
+                driver= r.getUser();
+
             }
-        });
-        */
+        }
+        //un comment this !!!!!!!! when we are using acutal code
+        //DriverText.setText(driver.getName());
 
-        //trip = getIntent().getStringExtra("Trip_ID");
-        //trip =(Trip) getIntent().getSerializableExtra("Trip_ID");
-        //example
-        trip = new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, new Vehicle("model","make","color", new User()));
-
+        ArrivalTime= (TextView) findViewById(R.id.ArrivalDisplay);
+        ArrivalTime.setText( trip.getEnd_time()+"");
 
         Destination =(TextView) findViewById(R.id.DestinationDisplay);
         Destination.setText(trip.getEndpoint());
@@ -84,7 +88,7 @@ public class viewDeregisterTripActivity extends AppCompatActivity {
         Format formatter = new SimpleDateFormat("dd/MM/yyyy");
         //something about a date fix the date later
 
-
+        // model still fixed
        // String printedDate= formatter.format(trip.getDate());
         //Date.setText(printedDate);
         Time = (TextView) findViewById(R.id.TimeDisplay);
@@ -92,7 +96,7 @@ public class viewDeregisterTripActivity extends AppCompatActivity {
         Length = (TextView) findViewById(R.id.LengthDisplay);
         Length.setText(trip.getEst_Trip_time()+ " hours");
         Seats = (TextView) findViewById(R.id.SeatsDisplay);
-       // Seats.setText(trip.getSeats_available());
+        Seats.setText(trip.getSeats_available()+"");
         Vehicle = (RecyclerView) findViewById(R.id.VehicleDisplay);
        // populateVehicle();
         Tripnodes = (RecyclerView) findViewById(R.id.TripNodeDisplay);
@@ -116,16 +120,19 @@ public class viewDeregisterTripActivity extends AppCompatActivity {
     private void populateTripNode(){
 
     }
-    private void editbtnClick(){
-        //Intent editIntent = new Intent(this, edit_tripActivity.class);
-       // startActivity(editIntent);
 
-        // USETHIS BUTTON TO DO SOMETHING USEFUL LIKE DEREGISTERING FROM A TRIP
+    public void deRegisterBtnClick(View view){
+        //here i must call the backend to deregister this user from this trip
 
+        long tripId = trip.getId();
 
-
+        //call back end here ask brendan how to do this
         Intent editIntent = new Intent(this, MyTripsActivity.class);//return to my trips activity
-         startActivity(editIntent);
+        startActivity(editIntent);
+
     }
+
+
+
 
 }

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".editDeleteTripActivity"
-    tools:showIn="@layout/activity_edit_delete_trip">
+    tools:context=".viewDeregisterTripActivity"
+    tools:showIn="@layout/activity_view_deregister_trip">
 
     <TextView
         android:id="@+id/ArrivalDisplay"
@@ -253,26 +253,17 @@
         tools:layout_editor_absoluteX="74dp" />
 
     <Button
-        android:id="@+id/Editbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
-        android:text="Edit"
-        app:layout_constraintEnd_toStartOf="@+id/Deletebtn"
-        app:layout_constraintHorizontal_bias="0.026"
-        app:layout_constraintStart_toStartOf="@+id/guideline12"
-        app:layout_constraintTop_toTopOf="@+id/guideline17" />
-
-    <Button
         android:id="@+id/Deletebtn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginStart="109dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
-        android:text="Delete"
+        android:layout_marginBottom="35dp"
+        android:text="Deregister"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
+        app:layout_constraintStart_toEndOf="@+id/guideline15"
         app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
     <android.support.v7.widget.RecyclerView

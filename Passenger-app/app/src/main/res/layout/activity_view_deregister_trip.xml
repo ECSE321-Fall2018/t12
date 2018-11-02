@@ -20,6 +20,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_view_register_trip" />
+    <include layout="@layout/content_view_deregister_trip" />
 
 </android.support.design.widget.CoordinatorLayout>
