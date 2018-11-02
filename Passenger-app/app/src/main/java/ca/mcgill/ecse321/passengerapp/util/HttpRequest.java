@@ -20,6 +20,7 @@ public class HttpRequest {
     public static final String DEFAULT_BASE_URL = "https://webservice-backend-12.herokuapp.com/";
 
     private AsyncHttpClient client;
+    private String contentType;
 
     /**
      * Public constructor
@@ -52,7 +53,7 @@ public class HttpRequest {
         return new HttpRequest(new AsyncHttpClient());
     }
 
-
+    // --- POST ---
     public void post(Context context, String url, JSONObject jsonData, AsyncHttpResponseHandler responseHandler) throws UnsupportedEncodingException {
 
         // convert json data into a StringEntity
@@ -67,10 +68,33 @@ public class HttpRequest {
         client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 
+    // --- GET ---
+    public void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.get(getAbsoluteUrl(url), params, responseHandler);
+    }
+
+    // --- PUT ---
+    public void put(Context context, String url, JSONObject jsonData, AsyncHttpResponseHandler responseHandler) throws UnsupportedEncodingException {
+
+        // convert json data into a StringEntity
+        StringEntity entity = new StringEntity(jsonData.toString());
+
+        // Preform a POST request
+        client.put(context, getAbsoluteUrl(url), entity, "application/json", responseHandler);
+    }
+
+    public void put(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.put(getAbsoluteUrl(url), params, responseHandler);
+    }
+
+    // -- DELETE --
+    public void delete(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.delete(getAbsoluteUrl(url), params, responseHandler);
+    }
+
 
     public String getAbsoluteUrl(String relativeUrl) {
         return DEFAULT_BASE_URL + relativeUrl;
     }
-
 
 }

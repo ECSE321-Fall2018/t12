@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         else {
             if(saveUser(un, pass)){
-                //login(un, pass);
+                login(un, pass);
             }
         }
     }
@@ -154,7 +154,8 @@ public class LoginActivity extends AppCompatActivity {
         params.add("password", password);
         params.add("grant_type", getString(R.string.oauth_grantype));
 
-        HttpUtils.post(this, getString(R.string.get_access_token_url), params, new JsonHttpResponseHandler() {
+        HttpRequest.withBasicAuth(getString(R.string.client_name), getString(R.string.client_secret), getString(R.string.content_type_xform))
+                .post(getString(R.string.get_access_token_url), params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 errorTxt.setText(response.toString());
@@ -170,8 +171,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 System.out.println(token);
 
-                HttpUtils.client.addHeader("Authorization", "Bearer " + token);
-                HttpUtils.get("api/users/", new RequestParams(), new JsonHttpResponseHandler() {
+                HttpRequest.withToken(token).get("api/users/", new RequestParams(), new JsonHttpResponseHandler() {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
