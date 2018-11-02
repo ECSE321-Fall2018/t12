@@ -4,12 +4,13 @@ package ca.mcgill.ecse321.passengerapp.model;
  * Created by michelabdelnour on 2018-11-01.
  */
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Trip {
+public class Trip implements Serializable {
 
     private Long id;
     private String startpoint;
