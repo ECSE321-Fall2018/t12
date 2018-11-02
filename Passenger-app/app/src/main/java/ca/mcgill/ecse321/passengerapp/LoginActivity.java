@@ -1,7 +1,5 @@
 package ca.mcgill.ecse321.passengerapp;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -14,9 +12,12 @@ import android.widget.TextView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
+
+import ca.mcgill.ecse321.passengerapp.util.HttpRequest;
 import ca.mcgill.ecse321.passengerapp.util.HttpUtils;
 import cz.msebera.android.httpclient.Header;
 
@@ -118,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
 
         System.out.println(jsonParams.toString());
 
-        HttpUtils.postWithoutAuth(this, getString(R.string.signup_url), jsonParams, new JsonHttpResponseHandler() {
+        HttpRequest.withNoAuth().post(this, getString(R.string.signup_url), jsonParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 errorTxt.setText(response.toString());
@@ -145,28 +146,7 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-
-
-    public boolean login(String username, String password) {
-
-        if (!getAccessToken(username, password)) {
-            return false;
-        }
-
-        if(username.compareTo("admin") == 0 && password.compareTo("password") == 0){
-            //Changes view to main view
-            Intent mainIntent = new Intent(this, MainActivity.class);
-            startActivity(mainIntent);
-
-            //Prevents user from pressing back to return to sign in page
-            finish();
-            return true;
-        }
-        return false;
-    }
-
-
-    public boolean getAccessToken(String username, String password) {
+    public void login(String username, String password) {
 
 
         RequestParams params = new RequestParams();
@@ -174,12 +154,62 @@ public class LoginActivity extends AppCompatActivity {
         params.add("password", password);
         params.add("grant_type", getString(R.string.oauth_grantype));
 
-        boolean result = false;
-
         HttpUtils.post(this, getString(R.string.get_access_token_url), params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 errorTxt.setText(response.toString());
+
+
+                String token = null;
+                try {
+                    token = response.getString("access_token");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                System.out.println(token);
+
+                HttpUtils.client.addHeader("Authorization", "Bearer " + token);
+                HttpUtils.get("api/users/", new RequestParams(), new JsonHttpResponseHandler() {
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                        System.out.println(response.toString());
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        errorTxt.setText(response.toString());
+                        System.out.println(response.toString());
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        System.out.println("ERROR CODE ON GET::: " + statusCode);
+                        if (errorResponse != null) {
+                            errorTxt.setText(errorResponse.toString());
+                        } else {
+                            Snackbar.make(findViewById(android.R.id.content), "Service is down!", Snackbar.LENGTH_LONG).show();
+                        }
+                    }
+
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        super.onFailure(statusCode, headers, responseString, throwable);
+                        errorTxt.setText(responseString);
+                    }
+
+                });
+
+                //Changes view to main view
+                Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(mainIntent);
+
+                //Prevents user from pressing back to return to sign in page
+                finish();
+
             }
 
             @Override
@@ -201,8 +231,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         });
-
-        return false;
     }
 
 }

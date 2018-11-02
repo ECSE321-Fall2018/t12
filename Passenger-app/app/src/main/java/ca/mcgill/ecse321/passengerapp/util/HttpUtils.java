@@ -21,16 +21,21 @@ public class HttpUtils {
     public static final String DEFAULT_BASE_URL = "https://webservice-backend-12.herokuapp.com/";
 
     private static String baseUrl;
-    private static AsyncHttpClient client = new AsyncHttpClient();
+    public static AsyncHttpClient client = new AsyncHttpClient();
     private static AsyncHttpClient noauthClient = new AsyncHttpClient();
 
     private static final String client_name = "12Client1";
     private static final String client_secret = "12SuperSecret";
 
+    // Enforce static class
+    private HttpUtils() {
+        throw new AssertionError();
+    }
 
     static {
         baseUrl = DEFAULT_BASE_URL;
         client.setBasicAuth(client_name, client_secret);
+
     }
 
     public static String getAbsoluteUrl(String relativeUrl) {
