@@ -39,7 +39,7 @@
         <activity
             android:name=".MyVehiclesActivity"
             android:label="@string/title_activity_my_vehicles"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".edit_tripActivity"
             android:label="@string/title_activity_edit_trip"
@@ -47,6 +47,10 @@
         <activity
             android:name=".create_trip_nodeActivity"
             android:label="@string/title_activity_create_trip_node"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".editDeleteVehicleActivity"
+            android:label="@string/title_activity_edit_delete_vehicle"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

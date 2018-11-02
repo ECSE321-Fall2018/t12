@@ -1,7 +1,9 @@
 package ca.mcgill.ecse321.driverapp.model;
 
 
-public class Admin{
+import java.io.Serializable;
+
+public class Admin implements Serializable {
 
     private Long id;
     private String username;

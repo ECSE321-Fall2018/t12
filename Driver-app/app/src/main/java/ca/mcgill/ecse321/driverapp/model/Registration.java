@@ -1,8 +1,9 @@
 package ca.mcgill.ecse321.driverapp.model;
 
 
+import java.io.Serializable;
 
-public class Registration {
+public class Registration implements Serializable {
 
     private Long id;
     private Role role;
