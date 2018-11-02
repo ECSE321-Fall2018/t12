@@ -29,4 +29,6 @@
     <string name="this_should_be_all_trips">this should be all trips</string>
     <string name="title_activity_view_deregister_trip">viewDeregisterTripActivity</string>
     <string name="title_activity_view_register_trip">viewRegisterTripActivity</string>
+
+    <string name="action_search">Search</string>
 </resources>
