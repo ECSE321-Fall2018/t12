@@ -33,7 +33,7 @@ public class Trip {
 	private int est_Trip_time;
 	private Date date;
 	private int seats_available;
-	private Date date;
+	private String date;
 	private int cost_per_customer;
 	private boolean compleated;
 	private Set<Registration> registrations = new HashSet<>();
@@ -54,7 +54,7 @@ public class Trip {
 			Time end_time, 
 			int est_Trip_time,
 			int seats_available, 
-			Date date,
+			String date,
 			boolean compleated,
 			Vehicle vehicle
 			, int cost_per_customer) {
@@ -154,11 +154,11 @@ public class Trip {
 		this.seats_available = seats_available;
 	}
 	
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 	
