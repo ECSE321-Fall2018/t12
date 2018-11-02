@@ -14,8 +14,8 @@ public class Trip implements Serializable {
     private String endpoint;
     private int distance;
     private boolean active;
-    private Time start_time;
-    private Time end_time;
+    private String start_time;
+    private String end_time;
     private int est_Trip_time;
     private String date;
     private int seats_available;
@@ -35,8 +35,8 @@ public class Trip implements Serializable {
             String endpoint,
             int distance,
             boolean active,
-            Time start_time,
-            Time end_time,
+            String start_time,
+            String end_time,
             int est_Trip_time,
             int seats_available,
             String date,
@@ -98,19 +98,19 @@ public class Trip implements Serializable {
         this.active = active;
     }
 
-    public Time getStart_time() {
+    public String getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(Time start_time) {
+    public void setStart_time(String start_time) {
         this.start_time = start_time;
     }
 
-    public Time getEnd_time() {
+    public String getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(Time end_time) {
+    public void setEnd_time(String end_time) {
         this.end_time = end_time;
     }
 
