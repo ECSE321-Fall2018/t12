@@ -17,8 +17,9 @@ public class Trip implements Serializable {
     private Time start_time;
     private Time end_time;
     private int est_Trip_time;
-    private Date date;
+    private String date;
     private int seats_available;
+    private int cost_per_customer;
     private boolean compleated;
     private Set<Registration> registrations = new HashSet<>();
     private Set<TripNode> tripNodes = new HashSet<>();
@@ -38,9 +39,10 @@ public class Trip implements Serializable {
             Time end_time,
             int est_Trip_time,
             int seats_available,
-            Date date,
+            String date,
             boolean compleated,
-            Vehicle vehicle) {
+            Vehicle vehicle,
+            int cost_per_customer) {
         this.startpoint = startpoint;
         this.endpoint = endpoint;
         this.distance = distance;
@@ -52,6 +54,7 @@ public class Trip implements Serializable {
         this.seats_available = seats_available;
         this.compleated = compleated;
         this.vehicle = vehicle;
+        this.cost_per_customer = cost_per_customer;
     }
 
     public Long getId() {
