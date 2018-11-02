@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tripByDriver" type="id" />
+    <item name="tripByDriver" type="id" />
+    <item name="driverTripIcon" type="id" />
+    <item name="driverTrip" type="id" />
+    <item name="driverCreatedByText" type="id" />
+    <item name="passengerTripView" type="id" />
+    <item name="passengerTripJoin" type="id" />
+</resources>
