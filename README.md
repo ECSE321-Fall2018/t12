@@ -84,20 +84,18 @@ October 17th: Sprint 2 begins
 
 October 22nd : Group Meeting, Created issues, discussed requirements within the Sprint 2 document, Created mock UI, Listed neccessary chnages/ updates to backend, Laid a timeline for sprint 2 and split up tasks,  
 
-October 23rd
+October 24th: Updates on the backend pushed, created more issues. 
 
-October 24th
+October 26th Group Meeting- Apps broken up into teams, UI mockups created and all neccesary panels brainstormed. More issues brainstormed
 
-October 25th
+October 28th: UI research seesion, solo research through Tutorials and online resources compiled 
 
-October 26th
+October 29th:  Some base UI elements posted to the end result, Group Meeting: More Issues created, UI elements broken down by person
 
-October 27th
+October 30th: Began final preparations for Sprint completeion. 
 
-October 28th
+October 31st: Original Sprint 2 end date, Code jam to build base UI
 
-October 29th: 
+November 1st: Code jam day, Edited model and backend, Finalized UI, built UI interactions with buttons fields, and Recycle views. Tested code with Android emulator, Enabled Fronted to communicate with backend, Search trips algorithm created.  
 
-October 30th
-
-October 31st: Sprint 2 ends 
+Novemebr 2nd: Sprint Due date extended Final prepartations created. 
