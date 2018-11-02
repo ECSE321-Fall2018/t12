@@ -10,7 +10,7 @@ import android.view.View;
 
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import ca.mcgill.ecse321.driverapp.adapters.TripAdapter;
