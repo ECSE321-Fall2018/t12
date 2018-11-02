@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,7 +30,6 @@ public class Trip {
 	private String start_time;
 	private String end_time;
 	private int est_Trip_time;
-	private Date date;
 	private int seats_available;
 	private String date;
 	private int cost_per_customer;
@@ -64,7 +62,6 @@ public class Trip {
 		this.active = active;
 		this.start_time = start_time;
 		this.end_time = end_time;
-		this.date = date;
 		this.est_Trip_time = est_Trip_time;
 		this.seats_available = seats_available;
 		this.date = date;
