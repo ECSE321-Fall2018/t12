@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_edit_delete_trip">
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/ArrivalDisplay"
         android:layout_width="wrap_content"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"
@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline13" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/SeatsDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -201,7 +201,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline15" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/TimeDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -274,7 +274,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/TripNodeList"
+        android:id="@+id/TripNodeDisplay"
         android:layout_width="168dp"
         android:layout_height="63dp"
         android:layout_marginEnd="8dp"
@@ -283,7 +283,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline13" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/PassengerList"
+        android:id="@+id/PassengerDisplay"
         android:layout_width="168dp"
         android:layout_height="63dp"
         android:layout_marginEnd="8dp"
@@ -292,7 +292,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline13" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/VehicleList"
+        android:id="@+id/VehicleDisplay"
         android:layout_width="168dp"
         android:layout_height="63dp"
         android:layout_marginEnd="8dp"

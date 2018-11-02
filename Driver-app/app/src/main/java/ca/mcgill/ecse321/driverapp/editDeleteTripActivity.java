@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+
 import ca.mcgill.ecse321.driverapp.model.Trip;
 
 public class editDeleteTripActivity extends AppCompatActivity {
@@ -21,6 +24,12 @@ public class editDeleteTripActivity extends AppCompatActivity {
     private TextView Destination;
     private TextView Location;
     private TextView Date;
+    private TextView Time;
+    private TextView Length;
+    private TextView Seats;
+    private RecyclerView Vehicle;
+    private RecyclerView Tripnodes;
+    private RecyclerView Passenger;
 
 
     @Override
@@ -29,23 +38,40 @@ public class editDeleteTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_delete_trip);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Trip trip =(Trip) getIntent().getSerializableExtra("Trip_ID");
+        trip =(Trip) getIntent().getSerializableExtra("Trip_ID");
         Destination =(TextView) findViewById(R.id.DestinationDisplay);
         Destination.setText(trip.getEndpoint());
         Location =(TextView) findViewById(R.id.StartpointDisplay);
         Location.setText(trip.getStartpoint());
         Date =(TextView) findViewById(R.id.DateDisplay);
-        Location.setText(trip.getDate());
-
+        Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String printedDate= formatter.format(trip.getDate());
+        Date.setText(printedDate);
+        Time = (TextView) findViewById(R.id.TimeDisplay);
+        Time.setText(trip.getStart_time().toString());
+        Length = (TextView) findViewById(R.id.LengthDisplay);
+        Length.setText(trip.getEst_Trip_time()+ " hours");
+        Seats = (TextView) findViewById(R.id.SeatsDisplay);
+        Seats.setText(trip.getSeats_available());
 
     }
 
+    private void populatePassengers(){
+
+    }
+    private void populateVehicle(){
+
+    }
+    private void populateTripNode(){
+
+    }
     private void editbtnClick(){
         Intent editIntent = new Intent(this, edit_tripActivity.class);
         startActivity(editIntent);
     }
     private void deletebtnClick(){
        //Delete Trip, notify all registered the trip is cancelled
+
     }
 
 }

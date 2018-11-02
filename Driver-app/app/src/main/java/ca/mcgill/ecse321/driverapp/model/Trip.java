@@ -63,6 +63,9 @@ public class Trip implements Serializable {
     }
 
 
+    public Date getDate(){return date; }
+
+    public void setDate(Date date){this.date =date;}
     public String getStartpoint() {
         return startpoint;
     }
