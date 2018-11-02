@@ -211,7 +211,7 @@ public class LogInActivity extends AppCompatActivity {
 
                 //User user = (User) gson.fromJson(response.toString(), User.class);
 
-                User[] users = (User[]) gson.fromJson(response.toString(), User[].class);
+                User users = (User) gson.fromJson(response.toString(), User.class);
 
                 //MainActivity.mainUser = user;
             }
