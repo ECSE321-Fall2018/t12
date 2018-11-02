@@ -13,6 +13,7 @@
 
     <string name="signup_url">signup</string>
     <string name="get_access_token_url">oauth/token</string>
+    <string name="get_user_by_username">api/users/name</string>
 
     <string name="error_no_internet">No internet connection!</string>
     <string name="error_exception_thrown">Exception thrown: </string>
