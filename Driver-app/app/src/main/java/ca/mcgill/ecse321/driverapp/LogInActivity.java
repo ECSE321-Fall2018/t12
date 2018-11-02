@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -19,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import ca.mcgill.ecse321.driverapp.model.User;
 import ca.mcgill.ecse321.driverapp.util.HttpRequest;
@@ -207,8 +209,11 @@ public class LogInActivity extends AppCompatActivity {
 
                 Gson gson = new GsonBuilder().create();
 
-                User user = (User) gson.fromJson(response.toString(), User.class);
-                MainActivity.mainUser = user;
+                //User user = (User) gson.fromJson(response.toString(), User.class);
+
+                User[] users = (User[]) gson.fromJson(response.toString(), User[].class);
+
+                //MainActivity.mainUser = user;
             }
 
             @Override
@@ -218,6 +223,14 @@ public class LogInActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static <T> List<T> toList(String json, Class<T> clazz) {
+        if (null == json) {
+            return null;
+        }
+        Gson gson = new Gson();
+        return gson.fromJson(json, new TypeToken<T>(){}.getType());
     }
 
 }
