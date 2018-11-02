@@ -1,7 +1,5 @@
 package ca.mcgill.ecse321.webservice.model;
 
-import java.sql.Time;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -21,19 +19,26 @@ public class TripNode{
 	private Long id; 
 	private Position position;
 	private PointType pointType;
-	private Time time;
+	private String name;
+	private String time;
 	private Trip trip;
+	// maybe in the future have an x and y position to put on a map 
 	
 	public TripNode() {
-		
+		this.setPosition(new Position("ontario"));
 	}
 	
-	public TripNode(Position position, PointType pointType, Time time, Trip trip) {
+	public TripNode(String name, PointType pointType,String time) {
 		super();
-		this.position = position;
+		this.name= name;
+		//this.position = position;
 		this.pointType = pointType;
 		this.time = time;
-		this.trip = trip;
+				//new Time(time);
+		//this.position= new Position("ontario");
+		this.setPosition(new Position("ontario"));
+		System.out.println(this.position.getId());
+		//this.trip = trip;
 	}
 
 	@Id 
@@ -54,6 +59,7 @@ public class TripNode{
 	public void setPosition(Position position) {
 		this.position = position;
 	}
+	
 
 
 	public void setPointType(PointType value) {
@@ -65,12 +71,20 @@ public class TripNode{
 		return this.pointType;
     }
    
-   public void setTime(Time value) {
+   public void setTime(String value) {
 	   this.time = value;
    }
 
-   public Time getTime() {
+   public String getTime() {
 	   return this.time;
+   }
+   
+   public void setName(String name) {
+	   this.name = name;
+   }
+
+   public String getName() {
+	   return this.name;
    }
 
    @ManyToOne(cascade=CascadeType.ALL, optional=false)
@@ -79,6 +93,7 @@ public class TripNode{
    }
 
    public void setTrip(Trip trip) {
+	   //trip.addTripNode(this);
 	   this.trip = trip;
    }
 
