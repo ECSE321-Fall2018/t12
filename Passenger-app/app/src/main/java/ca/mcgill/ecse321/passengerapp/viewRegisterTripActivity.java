@@ -9,8 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+
 import ca.mcgill.ecse321.passengerapp.adapters.VehicleAdapter;
+import ca.mcgill.ecse321.passengerapp.model.Registration;
+import ca.mcgill.ecse321.passengerapp.model.Role;
 import ca.mcgill.ecse321.passengerapp.model.Trip;
+import ca.mcgill.ecse321.passengerapp.model.User;
 
 public class viewRegisterTripActivity extends AppCompatActivity {
 
@@ -35,6 +41,7 @@ public class viewRegisterTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_register_trip);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +53,30 @@ public class viewRegisterTripActivity extends AppCompatActivity {
         });
         */
         trip =(Trip) getIntent().getSerializableExtra("TRIP_ID");
+
+        DriverText = (TextView) findViewById(R.id.textViewDriverInfo);
+        Iterable<Registration> registrations = trip.getRegistrations();
+        User driver= new User();
+        for (Registration r: registrations){
+            if (r.getRole()== Role.DRIVER){
+                driver= r.getUser();
+
+            }
+
+        ArrivalTime= (TextView) findViewById(R.id.ArrivalDisplay);
+        ArrivalTime.setText( trip.getEnd_time()+"");
+
+        Destination =(TextView) findViewById(R.id.DestinationDisplay);
+        Destination.setText(trip.getEndpoint());
+        Location =(TextView) findViewById(R.id.StartpointDisplay);
+        Location.setText(trip.getStartpoint());
+        Date =(TextView) findViewById(R.id.DateDisplay);
+        Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+
+        }
+
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
