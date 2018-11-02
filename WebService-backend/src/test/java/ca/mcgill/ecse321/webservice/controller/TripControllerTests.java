@@ -68,7 +68,7 @@ public class TripControllerTests {
 			if (arg == -1) {
 				return null;
 			} else if (arg == 0) {
-				Optional<Trip> trip = Optional.of(new Trip("foo", "foo", 0, true, null, null, 0, 0, false, null, 0));				
+				Optional<Trip> trip = Optional.of(new Trip("foo", "foo", 0, true, null, null, 0, 0, "", false, null, 0));				
 				return trip;
 			} else {
 				return null;
@@ -101,7 +101,7 @@ public class TripControllerTests {
 		
 		Trip resp = (Trip) trcontroller.getTrip(0).getBody();
 
-		Optional<Trip> expected = Optional.of(new Trip("foo", "foo", 0, true, null, null, 0, 0, false, null, 0));
+		Optional<Trip> expected = Optional.of(new Trip("foo", "foo", 0, true, null, null, 0, 0, "", false, null, 0));
 		assertTripEquals(expected.get(), resp);
 	}
 	
