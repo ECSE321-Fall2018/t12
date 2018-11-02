@@ -12,11 +12,16 @@
         android:id="@+id/searchText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Search"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="5dp" />
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/allTripsView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/allTripsView"
@@ -34,8 +39,15 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="5dp"
         android:onClick="searchBtnClick"
         android:text="Search"
-        tools:layout_editor_absoluteX="252dp"
-        tools:layout_editor_absoluteY="5dp" />
+        app:layout_constraintBottom_toTopOf="@+id/allTripsView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/searchText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 </android.support.constraint.ConstraintLayout>
