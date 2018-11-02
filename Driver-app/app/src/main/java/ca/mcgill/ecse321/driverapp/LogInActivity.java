@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -18,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
+import ca.mcgill.ecse321.driverapp.model.User;
 import ca.mcgill.ecse321.driverapp.util.HttpRequest;
 import ca.mcgill.ecse321.driverapp.util.HttpUtils;
 import cz.msebera.android.httpclient.Header;
@@ -153,11 +156,21 @@ public class LogInActivity extends AppCompatActivity {
         params.add("password", password);
         params.add("grant_type", getString(R.string.oauth_grantype));
 
+        final String u = username, p = password;
+
         HttpRequest.withBasicAuth(getString(R.string.client_name), getString(R.string.client_secret), getString(R.string.content_type_xform))
                 .post(getString(R.string.get_access_token_url), params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         errorTxt.setText(response.toString());
+
+                        try {
+                            MainActivity.token = response.getString("access_token");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        fetchUserID(u, p);
 
                         //Changes view to main view
                         Intent mainIntent = new Intent(LogInActivity.this, MainActivity.class);
@@ -181,6 +194,30 @@ public class LogInActivity extends AppCompatActivity {
                     }
 
                 });
+    }
+
+    public void fetchUserID(String username, String password) {
+
+        String url = getString(R.string.get_user_by_username) + "/" + username;
+
+        HttpRequest.withToken(MainActivity.token).get(url, new RequestParams(), new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                System.out.println(response.toString());
+
+                Gson gson = new GsonBuilder().create();
+
+                User user = (User) gson.fromJson(response.toString(), User.class);
+                MainActivity.mainUser = user;
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                System.out.println("------- ERROR ------");
+
+            }
+        });
+
     }
 
 }

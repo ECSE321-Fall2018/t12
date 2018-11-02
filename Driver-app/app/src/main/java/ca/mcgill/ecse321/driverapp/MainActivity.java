@@ -5,7 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import ca.mcgill.ecse321.driverapp.model.User;
+
 public class  MainActivity extends AppCompatActivity {
+
+    public static String token;
+    public static User mainUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
