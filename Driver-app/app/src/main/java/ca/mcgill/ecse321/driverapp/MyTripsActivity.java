@@ -13,6 +13,8 @@ import com.google.gson.GsonBuilder;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Time;
@@ -31,7 +33,7 @@ public class MyTripsActivity extends AppCompatActivity  implements TripAdapter.I
 
     private TripAdapter adapter;
 
-    private List<Trip> trips;
+    private List<Trip> trips = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +49,13 @@ public class MyTripsActivity extends AppCompatActivity  implements TripAdapter.I
 
     private void populateTrips(){
         RecyclerView.LayoutManager lm = new LinearLayoutManager(this);
-        httpGetTrips();
 
         adapter = new TripAdapter(this, trips);
         myTripsView.setLayoutManager(lm);
         myTripsView.setAdapter(adapter);
         adapter.setClickListener(this);
+
+        httpGetTrips();
     }
 
     private void httpGetTrips(){
@@ -60,10 +63,21 @@ public class MyTripsActivity extends AppCompatActivity  implements TripAdapter.I
 
         HttpRequest.withToken(MainActivity.token).get(url, new RequestParams(), new JsonHttpResponseHandler(){
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 Gson gson = new GsonBuilder().create();
 
-                trips = (List<Trip>) gson.fromJson(response.toString(), User.class);
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        Trip trip = (Trip) gson.fromJson(obj.toString(), Trip.class);
+                        trips.add(trip);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -76,6 +90,7 @@ public class MyTripsActivity extends AppCompatActivity  implements TripAdapter.I
             }
         });
     }
+
 
     @Override
     public void onItemClick(View view, int position) {
