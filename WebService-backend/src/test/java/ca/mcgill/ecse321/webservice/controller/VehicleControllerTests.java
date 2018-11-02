@@ -60,16 +60,16 @@ public class VehicleControllerTests {
 				return null;
 			} else if (arg == 0) {
 				User user = new User("karl", "karl", "pass", 3, 3);
-				Vehicle vehicle = new Vehicle("Camry","Toyota", "Blue", user);
-				vehicle.setId(0L);
+				Optional<Vehicle> vehicle = Optional.of(new Vehicle("Camry","Toyota", "Blue", user));
+				vehicle.get().setId(0L);
 				return vehicle;
 			} else {
 				return null;
 			}
 		});
 		
-		when(vehicleDAO.addVehicle(ArgumentMatchers.any(), ArgumentMatchers.any())).then((InvocationOnMock invocation)->{
-			Vehicle arg = invocation.getArgument(1);
+		when(vehicleDAO.addVehicle(ArgumentMatchers.any())).then((InvocationOnMock invocation)->{
+			Vehicle arg = invocation.getArgument(0);
 			
 			if(arg == null) {
 				return null;
@@ -82,8 +82,8 @@ public class VehicleControllerTests {
 			return arg;
 		});
 		
-		when(vehicleDAO.updateVehicle(ArgumentMatchers.anyLong(), ArgumentMatchers.any())).then((InvocationOnMock invocation)->{
-			Vehicle arg = invocation.getArgument(1);
+		when(vehicleDAO.updateVehicle(ArgumentMatchers.any())).then((InvocationOnMock invocation)->{
+			Vehicle arg = invocation.getArgument(0);
 			
 			if(arg == null) {
 				return null;

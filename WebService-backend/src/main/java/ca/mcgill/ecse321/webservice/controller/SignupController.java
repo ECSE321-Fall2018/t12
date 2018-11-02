@@ -21,30 +21,21 @@ public class SignupController {
 	private SignupService signupService;
  
     /**
+     * 
      * user signup
      * @param user
      * @return
      */
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseEntity<?> signup(@RequestBody User user) {
-
-		if (user == null) {
-			return new ResponseEntity<String>("User cannot be null", HttpStatus.NOT_ACCEPTABLE);
-		}
+   		if(user != null) {
+   			user.addRole(new UserRole("USER"));
+   	    	User newUser = signupService.addUser(user);
+   	    	return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+   		} else {
+   			return new ResponseEntity<String>("User cannot be null", HttpStatus.NOT_ACCEPTABLE);
+   		}
     	
-    	// Add USER role
-   		user.addRole(new UserRole("USER"));
-   		
-   		// Attempt to add the user
-    	User newUser = signupService.addUser(user);
-    	
-    	// If the new user is using a existing username
-    	if (newUser == null)
-    	{
-    		return new ResponseEntity<String>("Username: " + user.getUsername() + " is already in use.", HttpStatus.OK);
-    	}
-    	
-    	return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 	
 }

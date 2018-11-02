@@ -54,10 +54,11 @@ public class VehicleController {
 		
 		Iterable<Vehicle> vehicleList;
 		try {
-			User user = userService.getUser(userId);
+			User user = userService.getUser(userId).get();
 			vehicleList = user.getVehicles();
+			
 		} catch(NoSuchElementException e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("User with id " + userId + " not found", HttpStatus.NOT_FOUND);
 		}
 
 		return new ResponseEntity<>(vehicleList, HttpStatus.OK);
@@ -76,7 +77,7 @@ public class VehicleController {
 		
 		Vehicle vehicle;
 		try {
-			vehicle = vehicleService.getVehicle(v_id);
+			vehicle = vehicleService.getVehicle(v_id).get();
 		} catch(NoSuchElementException e) {
 			return new ResponseEntity<String>("Vehicle with id " + v_id + " not found", HttpStatus.NOT_FOUND);
 		} catch(NullPointerException e) {
@@ -96,17 +97,16 @@ public class VehicleController {
 	 */
 	@RequestMapping(value="/users/{user_id}/vehicles", method = RequestMethod.POST)
 	public ResponseEntity<?> addVehicle(@PathVariable long user_id, @RequestBody Vehicle vehicle){		
-
-		Vehicle newVehicle;
 		try {	
-			User user = userService.getUser(user_id);
-			newVehicle = vehicleService.addVehicle(user, vehicle);
+			User user = userService.getUser(user_id).get();
+			user.addVehicle(vehicle);
+			userService.updateUser(user.getId(), user);
 			
 		} catch(NoSuchElementException e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("User with id " + user_id + " not found", HttpStatus.NOT_FOUND);
 		}
 		
-		return new ResponseEntity<>(newVehicle, HttpStatus.CREATED);
+		return new ResponseEntity<>(vehicle, HttpStatus.CREATED);
 	}
 	
 	
@@ -121,13 +121,13 @@ public class VehicleController {
 	@RequestMapping(value="vehicles/{v_id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateVehicle(@PathVariable long v_id, @RequestBody Vehicle vehicle){
 		
-		Vehicle updatedVehicle;
 		try {
-			updatedVehicle = vehicleService.updateVehicle(v_id, vehicle);
+			vehicleService.getVehicle(v_id).get();
 		} catch(NoSuchElementException e) {
 			return new ResponseEntity<String>("Vehicle with id " + v_id + " not found", HttpStatus.NOT_FOUND);
 		}
-				
+		
+		Vehicle updatedVehicle = vehicleService.updateVehicle(vehicle);
 		return new ResponseEntity<>(updatedVehicle, HttpStatus.OK);
 	}
 	
@@ -144,19 +144,19 @@ public class VehicleController {
 		
 		Vehicle vehicle;
 		try {
-			vehicle = vehicleService.getVehicle(v_id);
+			vehicle = vehicleService.getVehicle(v_id).get();
 		} catch(NoSuchElementException e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("Vehicle with id " + v_id + " not found", HttpStatus.NOT_FOUND);
 		}
 		
 		User user;
 		try {
-			user = userService.getUser(u_id);
+			user = userService.getUser(u_id).get();
 		} catch(NoSuchElementException e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("User with id " + u_id + " not found", HttpStatus.NOT_FOUND);
 		}
 		
-		if (!userService.hasVehicle(user, vehicle)) {
+		if (!userService.containsVehicle(user, vehicle)) {
 			return new ResponseEntity<String>("Vehicle with id " + v_id + " does not belong to user with id " + u_id, HttpStatus.BAD_REQUEST);
 		}
 		

@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.webservice.controller;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,14 +40,12 @@ public class RegistrationController {
 	
 	@RequestMapping(value="/registrationsByUser/{userID}", method = RequestMethod.GET)   
 	public ResponseEntity<?> getRegistrationsByUserID(@PathVariable long userID) {
+		Optional<User> userO = userService.getUser(userID);
 		
-		User user;
-		try {
-			user = userService.getUser(userID);
-		} catch(NoSuchElementException e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		if (!(userO.isPresent())){
+			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
 		}
-		
+		User user = userO.get();
 		
 		Iterable<Registration> registrationList = user.getRegistrations();
 		return new ResponseEntity<>(registrationList, HttpStatus.OK);
@@ -82,15 +79,13 @@ public class RegistrationController {
 	
 	@RequestMapping(value="/users/{userID}/trips/{tripID}/registrations", method = RequestMethod.POST)
 	public ResponseEntity<?> addRegistration(@PathVariable long userID,@PathVariable long tripID) {
+		System.out.println("the");
+		System.out.println(userID);
 		
-		User user;
-		try {
-			user = userService.getUser(userID);
-		} catch(NoSuchElementException e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		Optional<User> user= userService.getUser(userID);
+		if (!(user.isPresent())) {
+			return new ResponseEntity<>("user of that id does not exist", HttpStatus.NOT_FOUND);
 		}
-		
-		//TODO: Change how optional trips are handled
 		Optional<Trip> trip = tripService.getTrip(tripID);
 		if (!(trip.isPresent())) {
 			return new ResponseEntity<>("trip of that id does not exist", HttpStatus.NOT_FOUND);
@@ -101,7 +96,7 @@ public class RegistrationController {
 		}
 		
 		Role role= Role.PASSENGER;
-		Registration newRegistration = registrationService.addRegistration(user, trip.get(), role);
+		Registration newRegistration = registrationService.addRegistration(user.get(), trip.get(), role);
 		return new ResponseEntity<>(newRegistration, HttpStatus.CREATED);
 	}
 	
