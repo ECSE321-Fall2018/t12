@@ -21,7 +21,6 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         errorTxt = (TextView)findViewById(R.id.errorTxt);
         usernameTbx = (EditText) findViewById(R.id.usernameTbx);
         passwordTbx = (EditText) findViewById(R.id.passwordTbx);
@@ -31,7 +30,6 @@ public class LogInActivity extends AppCompatActivity {
     public void loginBtnClick(View view){
         String pass = passwordTbx.getText().toString();
         String un = usernameTbx.getText().toString();
-
         if(pass == ""){
             errorTxt.setText("Unable to login: Please input a password");
         }
