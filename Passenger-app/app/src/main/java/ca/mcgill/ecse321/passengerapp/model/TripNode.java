@@ -14,6 +14,7 @@ public class TripNode{
     private PointType pointType;
     private Time time;
     private Trip trip;
+    private String name;
 
     public TripNode() {
 
@@ -26,7 +27,7 @@ public class TripNode{
         this.time = time;
         this.trip = trip;
     }
-
+    
     public Long getId() {
         return id;
     }

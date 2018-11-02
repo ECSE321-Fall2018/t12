@@ -9,19 +9,26 @@ public class TripNode implements Serializable {
     private Long id;
     private Position position;
     private PointType pointType;
-    private Time time;
+    private String name;
+    private String time;
     private Trip trip;
+    // maybe in the future have an x and y position to put on a map
 
     public TripNode() {
-
+        this.setPosition(new Position("ontario"));
     }
 
-    public TripNode(Position position, PointType pointType, Time time, Trip trip) {
+    public TripNode(String name, PointType pointType,String time) {
         super();
-        this.position = position;
+        this.name= name;
+        //this.position = position;
         this.pointType = pointType;
         this.time = time;
-        this.trip = trip;
+        //new Time(time);
+        //this.position= new Position("ontario");
+        this.setPosition(new Position("ontario"));
+        System.out.println(this.position.getId());
+        //this.trip = trip;
     }
 
     public Long getId() {
@@ -41,6 +48,7 @@ public class TripNode implements Serializable {
     }
 
 
+
     public void setPointType(PointType value) {
         this.pointType = value;
     }
@@ -49,12 +57,20 @@ public class TripNode implements Serializable {
         return this.pointType;
     }
 
-    public void setTime(Time value) {
+    public void setTime(String value) {
         this.time = value;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return this.time;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public Trip getTrip() {
@@ -62,7 +78,7 @@ public class TripNode implements Serializable {
     }
 
     public void setTrip(Trip trip) {
+        //trip.addTripNode(this);
         this.trip = trip;
     }
-
 }

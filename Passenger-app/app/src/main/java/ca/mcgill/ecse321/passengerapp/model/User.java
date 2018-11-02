@@ -4,11 +4,12 @@ package ca.mcgill.ecse321.passengerapp.model;
  * Created by michelabdelnour on 2018-10-31.
  */
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 
-public class User{
+public class User implements Serializable {
 
 
     private Long id;

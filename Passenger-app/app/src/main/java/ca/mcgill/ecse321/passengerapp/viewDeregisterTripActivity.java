@@ -7,12 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class DisplaySpecificTripAlreadySignedUpActivity extends AppCompatActivity {
+public class viewDeregisterTripActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_specific_trip_already_signed_up);
+        setContentView(R.layout.activity_view_deregister_trip);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -24,7 +24,6 @@ public class DisplaySpecificTripAlreadySignedUpActivity extends AppCompatActivit
                         .setAction("Action", null).show();
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }

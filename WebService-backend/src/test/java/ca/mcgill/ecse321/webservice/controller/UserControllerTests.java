@@ -1,16 +1,15 @@
 package ca.mcgill.ecse321.webservice.controller;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
 
-import java.awt.List;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Arrays;
+
 import java.util.Optional;
 
-import org.aopalliance.intercept.Invocation;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +35,7 @@ public class UserControllerTests {
 	
 	@Mock
 	private UserService userDAO;
+	
 	@InjectMocks
 	private UserController controller = new UserController();
 	
@@ -53,8 +53,10 @@ public class UserControllerTests {
 			if(arg == -1){
 				return null;
 			} else if (arg == 0) {
-				Optional<User> user = Optional.of(new User("Karlo", "Karlo", "pass", 3, 3));
-				user.get().setId(0L);
+
+				User user = new User("Karlo", "Karlo", "pass", 3, 3);
+				user.setId(0L);
+
 				return user;
 			} else {
 				return null;
@@ -119,10 +121,10 @@ public class UserControllerTests {
 	public void getExistingUser() {
 		User resp = (User) controller.getUser(0).getBody();
 
-		Optional<User> expected = Optional.of(new User("Karlo", "Karlo", "pass", 3, 3));
-		expected.get().setId(0L);
+		User expected = new User("Karlo", "Karlo", "pass", 3, 3);
+		expected.setId(0L);
 		
-		assertUserEquals(expected.get(), resp);
+		assertUserEquals(expected, resp);
 	}
 	
 	/**
