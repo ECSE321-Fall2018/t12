@@ -123,7 +123,8 @@ public class MyTripsActivity extends AppCompatActivity implements TripAdapter.It
                 });
             }
         });
-        
+    }
+
 
     public void onItemClick(View view, int position) {
         Intent intent = new Intent(this, viewDeregisterTripActivity.class);
