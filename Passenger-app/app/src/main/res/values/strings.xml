@@ -11,10 +11,15 @@
 
     <string name="error_no_internet">No internet connection!</string>
     <string name="error_exception_thrown">Exception thrown: </string>
+    <string name="error_service_down">Error: Service is down!</string>
+    <string name="error_invalid_credentials">Invalid username and password</string>
 
     <string name="accountType">ca.mcgill.ecse321</string>
 
     <string name="client_name">12Client1</string>
     <string name="client_secret">12SuperSecret</string>
     <string name="oauth_grantype">password</string>
+
+    <string name="content_type_xform">application/x-www-form-urlencoded</string>
+
 </resources>
