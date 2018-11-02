@@ -17,6 +17,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Set;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +32,15 @@ import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import ca.mcgill.ecse321.passengerapp.adapters.TripAdapter;
 import ca.mcgill.ecse321.passengerapp.adapters.VehicleAdapter;
 import ca.mcgill.ecse321.passengerapp.model.Registration;
@@ -38,6 +48,8 @@ import ca.mcgill.ecse321.passengerapp.model.Role;
 import ca.mcgill.ecse321.passengerapp.model.Trip;
 import ca.mcgill.ecse321.passengerapp.model.User;
 import ca.mcgill.ecse321.passengerapp.model.Vehicle;
+import ca.mcgill.ecse321.passengerapp.util.HttpRequest;
+import cz.msebera.android.httpclient.Header;
 
 public class viewDeregisterTripActivity extends AppCompatActivity {
     private Trip trip;
@@ -88,9 +100,7 @@ public class viewDeregisterTripActivity extends AppCompatActivity {
         Format formatter = new SimpleDateFormat("dd/MM/yyyy");
         //something about a date fix the date later
 
-        // model still fixed
-        //String printedDate= formatter.format(trip.getDate()+"");
-        //Date.setText(printedDate);
+        Date.setText(trip.getDate());
         Time = (TextView) findViewById(R.id.TimeDisplay);
         Time.setText(trip.getStart_time().toString());
         Length = (TextView) findViewById(R.id.LengthDisplay);
@@ -123,10 +133,84 @@ public class viewDeregisterTripActivity extends AppCompatActivity {
 
     public void deRegisterBtnClick(View view){
         //here i must call the backend to deregister this user from this trip
-        
-        //call back end here ask brendan how to do this
-        Intent editIntent = new Intent(this, MyTripsActivity.class);//return to my trips activity
-        startActivity(editIntent);
+        String userUrl = "api/users/name/" + MainActivity.mainUser.getUsername();
+
+        HttpRequest.withToken(MainActivity.token).get(userUrl, new RequestParams(), new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                Gson gson = new GsonBuilder().create();
+                User user = (User) gson.fromJson(response.toString(), User.class);
+
+                MainActivity.mainUser = user;
+
+                String tripsUrl = "api/users/" + MainActivity.mainUser.getId() + "/trips/";
+
+                HttpRequest.withToken(MainActivity.token).get(tripsUrl, new RequestParams(), new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                        Gson gson = new GsonBuilder().create();
+                        Set<Registration> userRegs = MainActivity.mainUser.getRegistrations();
+
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject obj = response.getJSONObject(i);
+                                Trip trip = (Trip) gson.fromJson(obj.toString(), Trip.class);
+
+                                Set<Registration> tripRegs = trip.getRegistrations();
+
+
+                                for (Iterator<Registration> tripIt = tripRegs.iterator(); tripIt.hasNext(); ) {
+                                    Registration tripReg = tripIt.next();
+
+                                    if (userRegs.contains(tripReg)) {
+                                        if (tripReg.getRole() == Role.PASSENGER) {
+
+                                            long registrationId = tripReg.getId();
+                                            String deletionUrl = "api/registrations/" + registrationId;
+
+                                            HttpRequest.withToken(MainActivity.token).delete(deletionUrl, new RequestParams(), new JsonHttpResponseHandler() {
+
+                                                @Override
+                                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                                    Intent editIntent = new Intent(viewDeregisterTripActivity.this, MyTripsActivity.class);//return to my trips activity
+                                                    startActivity(editIntent);
+                                                }
+
+                                                @Override
+                                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                                    try {
+                                                        throw (throwable);
+                                                    } catch (Throwable throwable1) {
+                                                        throwable1.printStackTrace();
+                                                    }
+                                                }
+
+                                            });
+
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        try {
+                            throw (throwable);
+                        } catch (Throwable throwable1) {
+                            throwable1.printStackTrace();
+                        }
+                    }
+
+                });
+            }
+        });
+
 
     }
 

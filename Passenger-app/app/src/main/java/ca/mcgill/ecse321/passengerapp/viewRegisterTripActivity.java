@@ -123,12 +123,15 @@ public class viewRegisterTripActivity extends AppCompatActivity {
     }
 
 
-        public void RegisterBtnClick(View view){
+    public void RegisterBtnClick(View view){
         //here i must call the backend to deregister this user from this trip
 
         //long tripId = trip.getId();
 
-        Intent editIntent = new Intent(this, AllTripsActivity.class);//return to my trips activity
+        String url = "api/users/" + MainActivity.mainUser.getId() + "/trips/" + tripId + "/registrations/";
+
+        Intent editIntent = new Intent(this, MyTripsActivity.class);//return to my trips activity
+
         startActivity(editIntent);
 
     }

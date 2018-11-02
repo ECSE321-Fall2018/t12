@@ -1,32 +1,33 @@
 package ca.mcgill.ecse321.passengerapp.model;
 
-/**
- * Created by michelabdelnour on 2018-11-01.
- */
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Trip implements Serializable {
+import ca.mcgill.ecse321.passengerapp.model.Registration;
+import ca.mcgill.ecse321.passengerapp.model.TripNode;
+import ca.mcgill.ecse321.passengerapp.model.Vehicle;
 
+public class Trip implements Serializable {
     private Long id;
     private String startpoint;
     private String endpoint;
     private int distance;
     private boolean active;
-    private Time start_time;
-    private Time end_time;
+    private String start_time;
+    private String end_time;
     private int est_Trip_time;
-    private Date date;
     private int seats_available;
+    private String date;
     private boolean compleated;
+    private Vehicle vehicle;
+    private int cost_per_customer;
+
     private Set<Registration> registrations = new HashSet<>();
     private Set<TripNode> tripNodes = new HashSet<>();
-    private Vehicle vehicle;
-
 
     public Trip() {
 
@@ -37,25 +38,28 @@ public class Trip implements Serializable {
             String endpoint,
             int distance,
             boolean active,
-            Time start_time,
-            Time end_time,
+            String start_time,
+            String end_time,
             int est_Trip_time,
             int seats_available,
-            Date date,
+            String date,
             boolean compleated,
-            Vehicle vehicle) {
+            Vehicle vehicle
+            , int cost_per_customer) {
         this.startpoint = startpoint;
         this.endpoint = endpoint;
         this.distance = distance;
         this.active = active;
         this.start_time = start_time;
         this.end_time = end_time;
-        this.date = date;
         this.est_Trip_time = est_Trip_time;
         this.seats_available = seats_available;
+        this.date = date;
         this.compleated = compleated;
         this.vehicle = vehicle;
+        this.cost_per_customer= cost_per_customer;
     }
+
 
     public Long getId() {
         return id;
@@ -65,7 +69,12 @@ public class Trip implements Serializable {
         this.id = id;
     }
 
-
+    public void setCost_per_customer(int i) {
+        this.cost_per_customer= i;
+    }
+    public int getCost_per_customer() {
+        return this.cost_per_customer;
+    }
     public String getStartpoint() {
         return startpoint;
     }
@@ -98,19 +107,19 @@ public class Trip implements Serializable {
         this.active = active;
     }
 
-    public Time getStart_time() {
+    public String getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(Time start_time) {
+    public void setStart_time(String start_time) {
         this.start_time = start_time;
     }
 
-    public Time getEnd_time() {
+    public String getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(Time end_time) {
+    public void setEnd_time(String end_time) {
         this.end_time = end_time;
     }
 
@@ -128,6 +137,14 @@ public class Trip implements Serializable {
 
     public void setSeats_available(int seats_available) {
         this.seats_available = seats_available;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public void decrementAvailableSeats() {
@@ -174,5 +191,4 @@ public class Trip implements Serializable {
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
-
 }
