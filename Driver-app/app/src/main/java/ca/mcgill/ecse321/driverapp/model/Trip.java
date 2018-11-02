@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Trip implements Serializable {
-
     private Long id;
     private String startpoint;
     private String endpoint;
@@ -17,8 +16,8 @@ public class Trip implements Serializable {
     private String start_time;
     private String end_time;
     private int est_Trip_time;
-    private String date;
     private int seats_available;
+    private String date;
     private int cost_per_customer;
     private boolean compleated;
     private Set<Registration> registrations = new HashSet<>();
@@ -41,21 +40,22 @@ public class Trip implements Serializable {
             int seats_available,
             String date,
             boolean compleated,
-            Vehicle vehicle,
-            int cost_per_customer) {
+            Vehicle vehicle
+            , int cost_per_customer) {
         this.startpoint = startpoint;
         this.endpoint = endpoint;
         this.distance = distance;
         this.active = active;
         this.start_time = start_time;
         this.end_time = end_time;
-        this.date = date;
         this.est_Trip_time = est_Trip_time;
         this.seats_available = seats_available;
+        this.date = date;
         this.compleated = compleated;
         this.vehicle = vehicle;
-        this.cost_per_customer = cost_per_customer;
+        this.cost_per_customer= cost_per_customer;
     }
+
 
     public Long getId() {
         return id;
@@ -65,7 +65,12 @@ public class Trip implements Serializable {
         this.id = id;
     }
 
-
+    public void setCost_per_customer(int i) {
+        this.cost_per_customer= i;
+    }
+    public int getCost_per_customer() {
+        return this.cost_per_customer;
+    }
     public String getStartpoint() {
         return startpoint;
     }
@@ -130,6 +135,14 @@ public class Trip implements Serializable {
         this.seats_available = seats_available;
     }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
     public void decrementAvailableSeats() {
         if (this.seats_available > 0) this.seats_available--;
     }
@@ -173,13 +186,5 @@ public class Trip implements Serializable {
     }
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 }
