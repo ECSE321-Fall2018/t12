@@ -33,7 +33,7 @@ public class MyTripsActivity extends AppCompatActivity implements TripAdapter.It
        // toolbar.setTitle("My Trips"); // i have no idea why this is may have to just delete the toolbar
 
         myTripsView = (RecyclerView) findViewById(R.id.myTripsView);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         populateMyTripsView();
     }
 
