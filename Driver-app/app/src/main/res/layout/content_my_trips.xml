@@ -17,5 +17,18 @@
         android:scrollbarAlwaysDrawHorizontalTrack="true"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/createTripBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="createTripBtnClick"
+        android:text="Create Trip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

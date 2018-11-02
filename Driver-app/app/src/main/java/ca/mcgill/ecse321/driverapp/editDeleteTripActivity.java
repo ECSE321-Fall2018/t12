@@ -32,15 +32,16 @@ public class editDeleteTripActivity extends AppCompatActivity {
     //This activity views a trip before editing/ deletion
     private Trip trip;
     private TextView errorTxt;
-    private TextView Destination;
-    private TextView Location;
-    private TextView Date;
-    private TextView Time;
-    private TextView Length;
-    private TextView Seats;
+    private TextView DestinationTxt;
+    private TextView LocationTxt;
+    private TextView DateTxt;
+    private TextView TimeTxt;
+    private TextView LengthTxt;
+    private TextView seatsTxt;
+    private TextView arrivalTxt;
     private RecyclerView Vehicle;
-    private RecyclerView Tripnodes;
-    private RecyclerView Passenger;
+    private RecyclerView TripnodesView;
+    private RecyclerView PassengerView;
     private VehicleAdapter adapter;
 
 
@@ -50,27 +51,37 @@ public class editDeleteTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_delete_trip);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         trip =(Trip) getIntent().getSerializableExtra("TRIP_ID");
-        Destination =(TextView) findViewById(R.id.DestinationDisplay);
-        Destination.setText(trip.getEndpoint());
-        Location =(TextView) findViewById(R.id.StartpointDisplay);
-        Location.setText(trip.getStartpoint());
-        Date =(TextView) findViewById(R.id.DateDisplay);
-        Format formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String printedDate= formatter.format(trip.getDate());
-        Date.setText(printedDate);
-        Time = (TextView) findViewById(R.id.TimeDisplay);
-        Time.setText(trip.getStart_time().toString());
-        Length = (TextView) findViewById(R.id.LengthDisplay);
-        Length.setText(trip.getEst_Trip_time()+ " hours");
-        Seats = (TextView) findViewById(R.id.SeatsDisplay);
-        Seats.setText(trip.getSeats_available());
+        DestinationTxt =(TextView) findViewById(R.id.DestinationDisplay);
+        DestinationTxt.setText(trip.getEndpoint());
+
+        LocationTxt =(TextView) findViewById(R.id.StartpointDisplay);
+        LocationTxt.setText(trip.getStartpoint());
+
+        DateTxt =(TextView) findViewById(R.id.DateDisplay);
+        DateTxt.setText(trip.getDate());
+
+        TimeTxt = (TextView) findViewById(R.id.TimeDisplay);
+        TimeTxt.setText(trip.getStart_time());
+
+        LengthTxt = (TextView) findViewById(R.id.LengthDisplay);
+        LengthTxt.setText(trip.getEst_Trip_time()+ " hours");
+
+        seatsTxt = (TextView) findViewById(R.id.seatsDisplay);
+        seatsTxt.setText(trip.getSeats_available() + "");
+
+        arrivalTxt = (TextView) findViewById(R.id.ArrivalDisplay);
+        arrivalTxt.setText(trip.getEnd_time() + "");
+
         Vehicle = (RecyclerView) findViewById(R.id.VehicleDisplay);
-        populateVehicle();
-        Tripnodes = (RecyclerView) findViewById(R.id.TripNodeDisplay);
-        populateTripNode();
-        Passenger = (RecyclerView) findViewById(R.id.PassengerDisplay);
-        populatePassengers();
+        //populateVehicle();
+
+        TripnodesView = (RecyclerView) findViewById(R.id.TripNodeDisplay);
+        //populateTripNode();
+
+        PassengerView = (RecyclerView) findViewById(R.id.PassengerDisplay);
+        //populatePassengers();
     }
 
     private void populatePassengers(){
@@ -87,11 +98,12 @@ public class editDeleteTripActivity extends AppCompatActivity {
     private void populateTripNode(){
 
     }
-    private void editbtnClick(){
+
+    public void editbtnClick(View view){
         Intent editIntent = new Intent(this, edit_tripActivity.class);
         startActivity(editIntent);
     }
-    private void deletebtnClick(){
+    public void deletebtnClick(View view){
        //Delete Trip, notify all registered the trip is cancelled
 
     }

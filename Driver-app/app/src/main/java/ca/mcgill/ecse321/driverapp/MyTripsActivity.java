@@ -145,6 +145,11 @@ public class MyTripsActivity extends AppCompatActivity  implements TripAdapter.I
         intent.putExtra("TRIP_ID", adapter.getItem(position));
         startActivity(intent);
     }
+
+    public void createTripBtnClick(View view){
+        Intent intent = new Intent(this, CreateTripActivity.class);
+        startActivity(intent);
+    }
 }
 
 
