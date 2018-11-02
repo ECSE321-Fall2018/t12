@@ -10,7 +10,7 @@ public class LocationDetails implements Serializable{
 
     String locationId,locationName;
 
-    public LocationDetails(String locationId, String locationName, String locationAddress, Double locLatitude, Double locLongitude) {
+    public LocationDetails(String locationId, String locationName) {
         this.locationId = locationId;
         this.locationName = locationName;
     }
