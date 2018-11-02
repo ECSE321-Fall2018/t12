@@ -17,6 +17,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.ViewHold
     private LayoutInflater mInflater;
     private VehicleAdapter.ItemClickListener mClickListener;
 
+
     // data is passed into the constructor
     public VehicleAdapter(Context context, List<Vehicle> data) {
         this.mInflater = LayoutInflater.from(context);
