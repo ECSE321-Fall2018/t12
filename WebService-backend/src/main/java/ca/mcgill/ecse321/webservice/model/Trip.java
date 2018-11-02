@@ -172,7 +172,7 @@ public class Trip {
 		this.compleated = compleated;
 	}
 	
-	@JsonBackReference
+	@JsonManagedReference(value="tr")
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="trip")
 	public Set<Registration> getRegistrations() {
 		return this.registrations;

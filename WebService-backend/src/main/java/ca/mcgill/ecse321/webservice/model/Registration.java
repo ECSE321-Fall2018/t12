@@ -61,7 +61,7 @@ public class Registration {
 		this.user = user;
 	}
 
-	@JsonBackReference(value="rt")
+	@JsonBackReference(value="tr")
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
 	public Trip getTrip() {
 		return this.trip;
