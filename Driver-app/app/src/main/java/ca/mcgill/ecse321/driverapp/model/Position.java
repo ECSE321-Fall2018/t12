@@ -47,5 +47,4 @@ public class Position implements Serializable {
     public String getPosition() {
         return this.position;
     }
-
 }

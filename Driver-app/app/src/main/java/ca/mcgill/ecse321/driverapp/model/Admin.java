@@ -42,5 +42,4 @@ public class Admin implements Serializable {
     public String getPassword() {
         return this.password;
     }
-
 }
