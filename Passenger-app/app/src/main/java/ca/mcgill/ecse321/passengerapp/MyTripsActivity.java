@@ -50,30 +50,6 @@ public class MyTripsActivity extends AppCompatActivity implements TripAdapter.It
     private List<Trip> htmlGetMyTrips(long id){
         List<Trip> trips = new ArrayList<Trip>();
 
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-
-
         return trips;
     }
 
