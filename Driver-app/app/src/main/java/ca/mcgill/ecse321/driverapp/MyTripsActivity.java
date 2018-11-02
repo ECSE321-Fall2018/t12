@@ -69,8 +69,7 @@ public class MyTripsActivity extends AppCompatActivity  implements TripAdapter.I
         httpGetTrips();
     }
 
-
-    private void httpGetTrips(){
+    private void httpGetTrips() {
 
         String userUrl = "api/users/name/" + MainActivity.mainUser.getUsername();
 
@@ -87,7 +86,7 @@ public class MyTripsActivity extends AppCompatActivity  implements TripAdapter.I
 
                 String tripsUrl = "api/users/" + MainActivity.mainUser.getId() + "/trips/";
 
-                HttpRequest.withToken(MainActivity.token).get(tripsUrl, new RequestParams(), new JsonHttpResponseHandler(){
+                HttpRequest.withToken(MainActivity.token).get(tripsUrl, new RequestParams(), new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                         Gson gson = new GsonBuilder().create();
@@ -101,13 +100,11 @@ public class MyTripsActivity extends AppCompatActivity  implements TripAdapter.I
                                 Set<Registration> tripRegs = trip.getRegistrations();
 
 
-
-
-                                for(Iterator<Registration> tripIt = tripRegs.iterator(); tripIt.hasNext(); ){
+                                for (Iterator<Registration> tripIt = tripRegs.iterator(); tripIt.hasNext(); ) {
                                     Registration tripReg = tripIt.next();
 
-                                    if(userRegs.contains(tripReg)) {
-                                        if(tripReg.getRole() == Role.DRIVER){
+                                    if (userRegs.contains(tripReg)) {
+                                        if (tripReg.getRole() == Role.DRIVER) {
                                             trips.add(trip);
                                         }
                                     }
@@ -123,7 +120,7 @@ public class MyTripsActivity extends AppCompatActivity  implements TripAdapter.I
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         try {
-                            throw(throwable);
+                            throw (throwable);
                         } catch (Throwable throwable1) {
                             throwable1.printStackTrace();
                         }
