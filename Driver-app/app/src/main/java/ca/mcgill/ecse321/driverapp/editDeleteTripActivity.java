@@ -13,6 +13,7 @@ import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import ca.mcgill.ecse321.driverapp.model.Registration;
 import ca.mcgill.ecse321.driverapp.model.Role;
 import ca.mcgill.ecse321.driverapp.model.Trip;
 import ca.mcgill.ecse321.driverapp.model.User;
+import ca.mcgill.ecse321.driverapp.model.Vehicle;
 
 public class editDeleteTripActivity extends AppCompatActivity {
 
@@ -73,23 +75,14 @@ public class editDeleteTripActivity extends AppCompatActivity {
 
     private void populatePassengers(){
         RecyclerView.LayoutManager lm = new LinearLayoutManager(this);
-     /*   Set<Registration> reg = trip.getRegistrations();
-        Set<String> pass =null;
-        for(Registration x :reg){
-            if(x.getRole() == Role.PASSENGER){
-                pass.add(x.getUser().getName());
-
-            }
-        }
-        Passenger.add(pass);
-
-
-        Passenger.setLayoutManager(lm);
-        */
     }
     private void populateVehicle(){
         RecyclerView.LayoutManager lm = new LinearLayoutManager(this);
-       // adapter = new VehicleAdapter(this, trip.getVehicle());
+        ArrayList<Vehicle> temp= null;
+        temp.add(trip.getVehicle());
+        adapter = new VehicleAdapter(this, temp);
+        Vehicle.setLayoutManager(lm);
+        Vehicle.setAdapter(adapter);
     }
     private void populateTripNode(){
 
