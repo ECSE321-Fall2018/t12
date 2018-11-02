@@ -131,7 +131,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline24" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editDestination"
         android:layout_width="209dp"
         android:layout_height="40dp"
         android:ems="10"
@@ -141,7 +141,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline26" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editLocation"
         android:layout_width="209dp"
         android:layout_height="40dp"
         android:ems="10"
@@ -160,7 +160,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline26" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/time_editor"
         android:layout_width="209dp"
         android:layout_height="40dp"
         android:ems="10"
@@ -168,34 +168,12 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline23"
         app:layout_constraintEnd_toStartOf="@+id/guideline26" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="20dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/guideline24"
-        app:layout_constraintEnd_toStartOf="@+id/guideline26"
-        app:srcCompat="@android:drawable/ic_input_add" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toStartOf="@+id/guideline26"
-        app:layout_constraintTop_toTopOf="@+id/guideline24"
-        app:srcCompat="@android:drawable/ic_input_add" />
-
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:onClick="editNodeClick"
         android:text="Edit Stop"
         app:layout_constraintBottom_toTopOf="@+id/guideline25"
         app:layout_constraintStart_toStartOf="@+id/guideline18" />
@@ -206,6 +184,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:onClick="deleteNodeClick"
         android:text="Delete Stop"
         app:layout_constraintBottom_toTopOf="@+id/guideline25"
         app:layout_constraintEnd_toStartOf="@+id/guideline26" />
@@ -216,11 +195,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
         android:layout_marginTop="36dp"
+        android:onClick="FinishUpdateClick"
         android:text="Finish Update"
         app:layout_constraintStart_toStartOf="@+id/guideline18"
         app:layout_constraintTop_toTopOf="@+id/guideline25" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/TripNodeEditable"
         android:layout_width="208dp"
         android:layout_height="87dp"
         android:layout_marginEnd="56dp"
@@ -229,10 +210,32 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline26" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/VehicleEditableList"
         android:layout_width="144dp"
         android:layout_height="63dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline24"
-        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton" />
+        tools:layout_editor_absoluteX="165dp" />
+
+    <Button
+        android:id="@+id/AddVehicle"
+        android:layout_width="40dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
+        android:onClick="UpdatevehButton"
+        android:text="+"
+        app:layout_constraintBottom_toTopOf="@+id/guideline24"
+        app:layout_constraintEnd_toStartOf="@+id/guideline26" />
+
+    <Button
+        android:id="@+id/AddEdit"
+        android:layout_width="40dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="92dp"
+        android:onClick="editNodeClick"
+        android:text="+"
+        app:layout_constraintBottom_toTopOf="@+id/guideline25"
+        app:layout_constraintEnd_toStartOf="@+id/guideline26" />
 </android.support.constraint.ConstraintLayout>

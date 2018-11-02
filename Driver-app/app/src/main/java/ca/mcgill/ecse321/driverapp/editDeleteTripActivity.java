@@ -50,7 +50,7 @@ public class editDeleteTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_delete_trip);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        trip =(Trip) getIntent().getSerializableExtra("Trip_ID");
+        trip =(Trip) getIntent().getSerializableExtra("TRIP_ID");
         Destination =(TextView) findViewById(R.id.DestinationDisplay);
         Destination.setText(trip.getEndpoint());
         Location =(TextView) findViewById(R.id.StartpointDisplay);

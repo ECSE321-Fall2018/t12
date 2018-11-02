@@ -37,11 +37,11 @@ public class editDeleteVehicleActivity extends AppCompatActivity {
         errortxt.setText("");
 
     }
-    private void EditVehiclebtn(){
+    public void EditVehiclebtnClick(View view){
         Intent editIntent = new Intent(this, EditVehicleActivity.class);
         startActivity(editIntent);
     }
-    private void DeleteVehiclebtn(){
+    public void DeleteVehiclebtnClick(View view){
         //Delete System 32
     }
 

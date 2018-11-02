@@ -22,7 +22,7 @@ public class EditVehicleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_vehicle);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        vehicle =(Vehicle) getIntent().getSerializableExtra("Vehicle_ID");
+        vehicle =(Vehicle) getIntent().getSerializableExtra("VEHICLE_ID");
         newMake = (EditText) findViewById(R.id.MakeEditable);
         newMake.setText(vehicle.getMake());
         newColor= (EditText) findViewById(R.id.ColorEditable);
