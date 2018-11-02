@@ -1,7 +1,5 @@
 package ca.mcgill.ecse321.webservice.model;
 
-import java.sql.Time;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,7 +20,7 @@ public class TripNode{
 	private Position position;
 	private PointType pointType;
 	private String name;
-	private Time time;
+	private String time;
 	private Trip trip;
 	// maybe in the future have an x and y position to put on a map 
 	
@@ -30,7 +28,7 @@ public class TripNode{
 		this.setPosition(new Position("ontario"));
 	}
 	
-	public TripNode(String name, PointType pointType,Time time) {
+	public TripNode(String name, PointType pointType,String time) {
 		super();
 		this.name= name;
 		//this.position = position;
@@ -73,11 +71,11 @@ public class TripNode{
 		return this.pointType;
     }
    
-   public void setTime(Time value) {
+   public void setTime(String value) {
 	   this.time = value;
    }
 
-   public Time getTime() {
+   public String getTime() {
 	   return this.time;
    }
    

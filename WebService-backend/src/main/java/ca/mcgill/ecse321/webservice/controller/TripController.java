@@ -153,7 +153,7 @@ public class TripController {
 		user.addRegistration(registration);
 		trip.addRegistration(registration);
 		vehicle.addTrip(trip);
-		Time time = trip.getEnd_time();
+		String time = trip.getEnd_time();
 		String name =trip.getEndpoint();
 		
 		
