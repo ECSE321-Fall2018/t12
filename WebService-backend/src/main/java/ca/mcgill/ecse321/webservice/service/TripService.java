@@ -65,6 +65,7 @@ public class TripService {
 		original.setEnd_time(trip.getEnd_time());
 		original.setStart_time(trip.getStart_time());
 		original.setSeats_available(trip.getSeats_available());
+		original.setDate(trip.getDate());
 		original.setEndpoint(trip.getEndpoint());
 		original.setStartpoint(trip.getStartpoint());
 		original.setEst_Trip_time(trip.getEst_Trip_time());

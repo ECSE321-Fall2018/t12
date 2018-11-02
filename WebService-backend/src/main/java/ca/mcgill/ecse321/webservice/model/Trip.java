@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.webservice.model;
 
 import javax.persistence.Entity;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.util.Date;
 import java.util.HashSet;
@@ -32,6 +33,7 @@ public class Trip {
 	private int est_Trip_time;
 	private Date date;
 	private int seats_available;
+	private Date date;
 	private int cost_per_customer;
 	private boolean compleated;
 	private Set<Registration> registrations = new HashSet<>();
@@ -51,7 +53,7 @@ public class Trip {
 			Time start_time, 
 			Time end_time, 
 			int est_Trip_time,
-			int seats_available,
+			int seats_available, 
 			Date date,
 			boolean compleated,
 			Vehicle vehicle
@@ -65,6 +67,7 @@ public class Trip {
 		this.date = date;
 		this.est_Trip_time = est_Trip_time;
 		this.seats_available = seats_available;
+		this.date = date;
 		this.compleated = compleated;
 		this.vehicle = vehicle;
 		this.cost_per_customer= cost_per_customer;
@@ -149,6 +152,14 @@ public class Trip {
 
 	public void setSeats_available(int seats_available) {
 		this.seats_available = seats_available;
+	}
+	
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	public Date getDate() {
+		return date;
 	}
 	
 	public void decrementAvailableSeats() {
