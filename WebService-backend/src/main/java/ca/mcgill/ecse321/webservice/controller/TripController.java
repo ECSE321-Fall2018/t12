@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.webservice.controller;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import ca.mcgill.ecse321.webservice.model.PointType;
 import ca.mcgill.ecse321.webservice.model.Registration;
 import ca.mcgill.ecse321.webservice.model.Role;
 import ca.mcgill.ecse321.webservice.model.Trip;
+import ca.mcgill.ecse321.webservice.model.TripNode;
 import ca.mcgill.ecse321.webservice.model.User;
 import ca.mcgill.ecse321.webservice.model.Vehicle;
+import ca.mcgill.ecse321.webservice.service.TripNodeService;
 import ca.mcgill.ecse321.webservice.service.TripService;
 import ca.mcgill.ecse321.webservice.service.UserService;
 import ca.mcgill.ecse321.webservice.service.VehicleService;
@@ -37,6 +41,9 @@ public class TripController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private TripNodeService tripNodeService;
 	
 	@Autowired
 	private VehicleService vehicleService;
@@ -74,7 +81,7 @@ public class TripController {
 		} catch(IllegalArgumentException e)
 		{
 			logger.error(e.getMessage());
-			return new ResponseEntity<String>("User with id " + userId + " not found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 		
 		List<Trip> trips = new ArrayList<>();
@@ -120,21 +127,23 @@ public class TripController {
 	@RequestMapping(value="/users/{userId}/vehicles/{vehicleId}/trips", method = RequestMethod.POST)
 	public ResponseEntity<?> addUsersTrip(@PathVariable long userId, @PathVariable long vehicleId, @RequestBody Trip trip) {
 		
-		// If user is not found
-		Optional<User> optionalUser =  userService.getUser(userId);
-		if (!optionalUser.isPresent()) {
-			return new ResponseEntity<String>("User with id " + userId + " not found", HttpStatus.NOT_FOUND);
+		User user;
+		Vehicle vehicle;
+		
+		// Get User
+		try {
+			user = userService.getUser(userId);
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 		
-		// if vehicle is not found
-		Optional<Vehicle> optionalVehicle = vehicleService.getVehicle(vehicleId);
-		if (!optionalVehicle.isPresent()) {
-			return new ResponseEntity<String>("Vehicle with id " + vehicleId + " not found", HttpStatus.NOT_FOUND);
+		// Get Trip
+		try{
+			vehicle = vehicleService.getVehicle(vehicleId);
+		} catch(NoSuchElementException e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
-		
-		User user = optionalUser.get();
-		Vehicle vehicle = optionalVehicle.get();
-		
+				
 		// If the user does not own the vehicle
 		if (!user.getVehicles().contains(vehicle)) {
 			return new ResponseEntity<String>("Vehicle with id " + vehicleId + " does not belong to user with id " + userId, HttpStatus.BAD_REQUEST);
@@ -144,6 +153,18 @@ public class TripController {
 		user.addRegistration(registration);
 		trip.addRegistration(registration);
 		vehicle.addTrip(trip);
+		String time = trip.getEnd_time();
+		String name =trip.getEndpoint();
+		
+		
+		TripNode endTripNode = new TripNode(name, PointType.END ,time);
+		TripNode startTripNode= new TripNode(trip.getStartpoint(), PointType.START, trip.getStart_time());
+		//endTripNode.setTrip(trip);
+		//startTripNode.setTrip(trip);
+		trip.addTripNode(endTripNode);
+		trip.addTripNode(startTripNode);
+		
+		
 		
 		Trip newTrip = tripService.addTrip(trip);
 		
@@ -159,6 +180,13 @@ public class TripController {
 	 */
 	@RequestMapping(value="/trips/{tripId}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateTrip(@PathVariable long tripId, @RequestBody Trip trip) {
+		Optional<Trip> trip2 = tripService.getTrip(tripId);
+		Trip trip1;
+		if (trip2.isPresent()) {
+			trip1 = trip2.get();
+		} else {
+			return new ResponseEntity<String>("Trip with id " + tripId + " not found", HttpStatus.NOT_FOUND);
+		}
 		Trip updatedTrip = tripService.updateTrip(tripId, trip);
 		return new ResponseEntity<>(updatedTrip, HttpStatus.OK);
 		
@@ -179,6 +207,56 @@ public class TripController {
 		
 	}
 	
+	// there will generally be no reason to use this one! because making a trip node puts it into a trip
+	@RequestMapping(value="/trips/{tripID}/tripNode/{tripNodeID}", method= RequestMethod.PUT)
+	public ResponseEntity<?> addTripNode(@PathVariable long tripID, @PathVariable long tripNodeID){
+		Optional<Trip> trip = tripService.getTrip(tripID);
+		Trip trip1;
+		if (trip.isPresent()) {
+			trip1 = trip.get();
+		} else {
+			return new ResponseEntity<String>("Trip with id " + tripID + " not found", HttpStatus.NOT_FOUND);
+		}
+		Optional<TripNode> tripNode = tripNodeService.getTripNode(tripNodeID);
+		//getTripNode(tripNodeID);
+		TripNode tripNode1;
+		if (tripNode.isPresent()) {
+			tripNode1 = tripNode.get();
+		} else {
+			return new ResponseEntity<String>("Trip Node with id " + tripNodeID + " not found", HttpStatus.NOT_FOUND);
+		}
+		
+		//trip1.addTripNode(tripNode1);
+		tripService.addTripNode(trip1, tripNode1);
+		
+		return new ResponseEntity<>(trip1, HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value="/trips/{tripID}/tripNodeToRemove/{tripNodeID}", method= RequestMethod.PUT)
+	public ResponseEntity<?> removeTripNode(@PathVariable long tripID, @PathVariable long tripNodeID){
+		Optional<Trip> trip = tripService.getTrip(tripID);
+		Trip trip1;
+		if (trip.isPresent()) {
+			trip1 = trip.get();
+		} else {
+			return new ResponseEntity<String>("Trip with id " + tripID + " not found", HttpStatus.NOT_FOUND);
+		}
+		Optional<TripNode> tripNode = tripNodeService.getTripNode(tripNodeID);
+		//getTripNode(tripNodeID);
+		TripNode tripNode1;
+		if (tripNode.isPresent()) {
+			tripNode1 = tripNode.get();
+		} else {
+			return new ResponseEntity<String>("Trip Node with id " + tripNodeID + " not found", HttpStatus.NOT_FOUND);
+		}
+		
+		//trip1.addTripNode(tripNode1);
+		tripService.removeTripNode(trip1, tripNode1);
+		
+		return new ResponseEntity<>(trip1, HttpStatus.OK);
+		
+	}
 	
 	
 	
