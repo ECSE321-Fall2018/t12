@@ -10,20 +10,38 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ca.mcgill.ecse321.driverapp.adapters.TripAdapter;
 import ca.mcgill.ecse321.driverapp.adapters.VehicleAdapter;
 import ca.mcgill.ecse321.driverapp.model.Trip;
+import ca.mcgill.ecse321.driverapp.model.User;
 import ca.mcgill.ecse321.driverapp.model.Vehicle;
+import ca.mcgill.ecse321.driverapp.util.HttpRequest;
+import cz.msebera.android.httpclient.Header;
 
 public class MyVehiclesActivity extends AppCompatActivity implements VehicleAdapter.ItemClickListener {
     private RecyclerView myVehiclesView;
 
     private VehicleAdapter adapter;
+
+    private List<Vehicle> vehicles = new ArrayList<>();
+
+    private Timer autoUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,21 +57,75 @@ public class MyVehiclesActivity extends AppCompatActivity implements VehicleAdap
 
     private void populateTrips(){
         RecyclerView.LayoutManager lm = new LinearLayoutManager(this);
-        adapter = new VehicleAdapter(this, htmlGetVehicles());
+        adapter = new VehicleAdapter(this, vehicles);
 
         myVehiclesView.setLayoutManager(lm);
         myVehiclesView.setAdapter(adapter);
         adapter.setClickListener(this);
+
+        htmlGetVehicles();
+
     }
 
-    private List<Vehicle> htmlGetVehicles(){
-        List<Vehicle> vehicles = new ArrayList<Vehicle>();
+    private void htmlGetVehicles(){
+        //List<Vehicle> vehicles = new ArrayList<Vehicle>();
 
-        vehicles.add(new Vehicle("Camry", "Toyota", "Blue", null));
-        vehicles.add(new Vehicle("Camry", "Toyota", "Blue", null));
+        long userId = MainActivity.mainUser.getId();
 
+        String url = getString(R.string.users_api) + "/" + userId + "/vehicles/";
+        HttpRequest.withToken(MainActivity.token).get(url, new RequestParams(), new JsonHttpResponseHandler() {
 
-        return vehicles;
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                Gson gson = new GsonBuilder().create();
+
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject obj = response.getJSONObject(i);
+                            Vehicle vehicle = (Vehicle) gson.fromJson(obj.toString(), Vehicle.class);
+                            vehicles.add(vehicle);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                }
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    throw(throwable);
+                } catch (Throwable throwable1) {
+                    throwable1.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        autoUpdate = new Timer();
+        autoUpdate.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        vehicles.clear();
+                        htmlGetVehicles();
+                    }
+                });
+            }
+        }, 0, 5000); // updates each 5 secs
+    }
+
+    @Override
+    public void onPause() {
+        autoUpdate.cancel();
+        super.onPause();
     }
 
     public void onItemClick(View view, int position) {
