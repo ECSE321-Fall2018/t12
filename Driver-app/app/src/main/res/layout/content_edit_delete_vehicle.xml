@@ -122,4 +122,14 @@
         android:text="Delete "
         app:layout_constraintEnd_toStartOf="@+id/guideline33"
         app:layout_constraintTop_toTopOf="@+id/guideline36" />
+
+    <TextView
+        android:id="@+id/ErrrorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="96dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/guideline29"
+        app:layout_constraintTop_toTopOf="@+id/guideline36" />
 </android.support.constraint.ConstraintLayout>

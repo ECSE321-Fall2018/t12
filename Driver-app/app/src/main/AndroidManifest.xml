@@ -51,6 +51,10 @@
         <activity
             android:name=".editDeleteVehicleActivity"
             android:label="@string/title_activity_edit_delete_vehicle"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditVehicleActivity"
+            android:label="@string/title_activity_edit_vehicle"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
