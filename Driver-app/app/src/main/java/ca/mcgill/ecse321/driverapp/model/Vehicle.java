@@ -1,10 +1,11 @@
 package ca.mcgill.ecse321.driverapp.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 
-public class Vehicle{
+public class Vehicle implements Serializable {
 
     private Long id;
     private String model;

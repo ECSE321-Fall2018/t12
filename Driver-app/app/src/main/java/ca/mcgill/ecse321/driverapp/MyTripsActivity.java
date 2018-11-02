@@ -72,8 +72,9 @@ public class MyTripsActivity extends AppCompatActivity  implements TripAdapter.I
 
     @Override
     public void onItemClick(View view, int position) {
-        Intent mainIntent = new Intent(this, editDeleteTripActivity.class);
-        startActivity(mainIntent);
+        Intent intent = new Intent(this, editDeleteTripActivity.class);
+        intent.putExtra("TRIP_ID", adapter.getItem(position));
+        startActivity(intent);
     }
 }
 
