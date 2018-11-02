@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline13" />
 
     <TextView
-        android:id="@+id/SeatsDisplay"
+        android:id="@+id/seatsDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -114,10 +114,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="21dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintBottom_toTopOf="@+id/DateDisplay"
         app:layout_constraintStart_toEndOf="@+id/textView" />
 
     <android.support.constraint.Guideline
@@ -257,6 +257,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
+        android:onClick="editbtnClick"
         android:text="Edit"
         app:layout_constraintEnd_toStartOf="@+id/Deletebtn"
         app:layout_constraintHorizontal_bias="0.026"
@@ -269,6 +270,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
+        android:onClick="deletebtnClick"
         android:text="Delete"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
         app:layout_constraintTop_toTopOf="@+id/guideline17" />
