@@ -30,7 +30,7 @@ public class MyTripsActivity extends AppCompatActivity implements TripAdapter.It
         setContentView(R.layout.activity_my_trips);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("My Trips"); // i have no idea why this is may have to just delete the toolbar
+       // toolbar.setTitle("My Trips"); // i have no idea why this is may have to just delete the toolbar
 
         myTripsView = (RecyclerView) findViewById(R.id.myTripsView);
 
