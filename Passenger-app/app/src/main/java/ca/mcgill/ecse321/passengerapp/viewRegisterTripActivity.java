@@ -128,7 +128,8 @@ public class viewRegisterTripActivity extends AppCompatActivity {
 
         long tripId = trip.getId();
 
-        //call back end here ask brendan how to do this
+        String url = "api/users/" + MainActivity.mainUser.getId() + "/trips/" + tripId + "/registrations/";
+
         Intent editIntent = new Intent(this, MyTripsActivity.class);//return to my trips activity
         startActivity(editIntent);
 
