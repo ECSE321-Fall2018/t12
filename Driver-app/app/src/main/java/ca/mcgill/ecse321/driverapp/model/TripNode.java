@@ -1,9 +1,10 @@
 package ca.mcgill.ecse321.driverapp.model;
 
+import java.io.Serializable;
 import java.sql.Time;
 
 
-public class TripNode{
+public class TripNode implements Serializable {
 
     private Long id;
     private Position position;

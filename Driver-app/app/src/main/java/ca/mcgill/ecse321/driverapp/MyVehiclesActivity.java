@@ -57,7 +57,8 @@ public class MyVehiclesActivity extends AppCompatActivity implements VehicleAdap
     }
 
     public void onItemClick(View view, int position) {
-        Intent mainIntent = new Intent(this, editDeleteVehicleActivity.class);
-        startActivity(mainIntent);
+        Intent intent = new Intent(this, editDeleteVehicleActivity.class);
+        intent.putExtra("VEHICLE_ID", adapter.getItem(position));
+        startActivity(intent);
     }
 }
