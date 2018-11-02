@@ -133,7 +133,6 @@ public class viewDeregisterTripActivity extends AppCompatActivity {
 
     public void deRegisterBtnClick(View view){
         //here i must call the backend to deregister this user from this trip
-
         String userUrl = "api/users/name/" + MainActivity.mainUser.getUsername();
 
         HttpRequest.withToken(MainActivity.token).get(userUrl, new RequestParams(), new JsonHttpResponseHandler() {

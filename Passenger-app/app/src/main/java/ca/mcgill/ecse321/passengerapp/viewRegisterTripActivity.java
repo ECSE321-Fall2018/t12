@@ -103,7 +103,7 @@ public class viewRegisterTripActivity extends AppCompatActivity {
         Passenger = (RecyclerView) findViewById(R.id.PassengerDisplay);
         populatePassengers();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -126,11 +126,12 @@ public class viewRegisterTripActivity extends AppCompatActivity {
     public void RegisterBtnClick(View view){
         //here i must call the backend to deregister this user from this trip
 
-        long tripId = trip.getId();
+        //long tripId = trip.getId();
 
         String url = "api/users/" + MainActivity.mainUser.getId() + "/trips/" + tripId + "/registrations/";
 
         Intent editIntent = new Intent(this, MyTripsActivity.class);//return to my trips activity
+
         startActivity(editIntent);
 
     }
