@@ -52,4 +52,18 @@ public class Registration implements Serializable {
     public void setTrip(Trip trip) {
         this.trip = trip;
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Registration){
+            return id == ((Registration) obj).getId();
+        }
+        return false;
+    }
+
+
+    @Override
+    public int hashCode(){
+        return id.intValue();
+    }
 }

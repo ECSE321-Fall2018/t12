@@ -25,10 +25,6 @@ public class Trip implements Serializable {
     private Set<Registration> registrations = new HashSet<>();
     private Set<TripNode> tripNodes = new HashSet<>();
 
-    public Trip() {
-
-    }
-
     public Trip(
             String startpoint,
             String endpoint,
@@ -39,8 +35,7 @@ public class Trip implements Serializable {
             int est_Trip_time,
             int seats_available,
             String date,
-            boolean compleated,
-            Vehicle vehicle
+            boolean compleated
             , int cost_per_customer) {
         this.startpoint = startpoint;
         this.endpoint = endpoint;
