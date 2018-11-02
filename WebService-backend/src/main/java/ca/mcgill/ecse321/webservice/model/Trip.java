@@ -32,11 +32,12 @@ public class Trip {
 	private int est_Trip_time;
 	private int seats_available;
 	private String date;
-	private int cost_per_customer;
 	private boolean compleated;
+	private Vehicle vehicle;
+	private int cost_per_customer;
+	
 	private Set<Registration> registrations = new HashSet<>();
 	private Set<TripNode> tripNodes = new HashSet<>();
-	private Vehicle vehicle;
 	
 	
 	public Trip() {
