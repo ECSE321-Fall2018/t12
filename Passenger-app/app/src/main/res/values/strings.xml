@@ -22,11 +22,11 @@
 
     <string name="content_type_xform">application/x-www-form-urlencoded</string>
 
-    <string name="title_activity_my_trips">MyTripsActivity</string>
+    <string name="title_activity_my_trips">My Trips</string>
     <string name="search_for_trips">Search for Trips</string>
     <string name="my_trips">My Trips</string>
-    <string name="title_activity_all_trips">AllTripsActivity</string>
+    <string name="title_activity_all_trips">All Trips</string>
     <string name="this_should_be_all_trips">this should be all trips</string>
-    <string name="title_activity_view_deregister_trip">viewDeregisterTripActivity</string>
-    <string name="title_activity_view_register_trip">viewRegisterTripActivity</string>
+    <string name="title_activity_view_deregister_trip">View Trip to Deregister</string>
+    <string name="title_activity_view_register_trip">View Trip to Register</string>
 </resources>
