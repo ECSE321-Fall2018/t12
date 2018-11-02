@@ -45,6 +45,8 @@ public class RegistrationService {
 	public Registration deleteRegistration (long registrationID) {
 		Optional<Registration> registrationO = registrationRepository.findById(registrationID);
 		Registration registration = registrationO.get();
+		registration.setUser(null);
+		registration.setTrip(null);
 		registrationRepository.delete(registration);
 		return registration; 
 		

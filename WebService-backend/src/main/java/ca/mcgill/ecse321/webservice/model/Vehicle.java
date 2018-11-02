@@ -76,8 +76,8 @@ public class Vehicle{
 	}
 		  
 
+	@JsonBackReference(value="vt")
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="vehicle")
-	@JsonManagedReference
 	public Set<Trip> getTrips() {
 		return this.trips;
 	}
@@ -91,9 +91,8 @@ public class Vehicle{
 		trip.setVehicle(this);
 	}
 
-
+	@JsonBackReference(value="vu")
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
-	@JsonBackReference
 	public User getUser() {
 		return this.user;
 	}

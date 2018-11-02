@@ -16,10 +16,10 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
 public class Trip {
 
 	private Long id; 
@@ -173,6 +173,7 @@ public class Trip {
 		this.compleated = compleated;
 	}
 	
+	@JsonManagedReference(value="tr")
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="trip")
 	public Set<Registration> getRegistrations() {
 		return this.registrations;
@@ -187,6 +188,7 @@ public class Trip {
 		registration.setTrip(this);
 	}
 	
+	@JsonBackReference(value="ttn")
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="trip")
 	public Set<TripNode> getTripNodes() {
 		return this.tripNodes;
@@ -201,8 +203,8 @@ public class Trip {
 		tripNode.setTrip(this);
 	}
 	
+	@JsonBackReference(value="tv")
 	@ManyToOne(cascade=CascadeType.ALL,optional=false)
-	@JsonBackReference
 	public Vehicle getVehicle() {
 		return this.vehicle;
 	}

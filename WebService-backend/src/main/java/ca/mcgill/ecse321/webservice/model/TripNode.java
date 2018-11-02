@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -51,6 +52,7 @@ public class TripNode{
 		this.id = id;
 	}
 	
+	@JsonBackReference(value="tnp")
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
 	public Position getPosition() {
 		return this.position;
@@ -87,6 +89,7 @@ public class TripNode{
 	   return this.name;
    }
 
+   @JsonBackReference(value="tnt")
    @ManyToOne(cascade=CascadeType.ALL, optional=false)
    public Trip getTrip() {
 	   return this.trip;
