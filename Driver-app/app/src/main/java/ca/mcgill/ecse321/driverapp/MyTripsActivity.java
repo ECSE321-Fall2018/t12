@@ -8,6 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONObject;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,12 +22,16 @@ import java.util.List;
 
 import ca.mcgill.ecse321.driverapp.adapters.TripAdapter;
 import ca.mcgill.ecse321.driverapp.model.Trip;
+import ca.mcgill.ecse321.driverapp.model.User;
 import ca.mcgill.ecse321.driverapp.util.HttpRequest;
+import cz.msebera.android.httpclient.Header;
 
 public class MyTripsActivity extends AppCompatActivity  implements TripAdapter.ItemClickListener{
     private RecyclerView myTripsView;
 
     private TripAdapter adapter;
+
+    private List<Trip> trips;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,41 +47,34 @@ public class MyTripsActivity extends AppCompatActivity  implements TripAdapter.I
 
     private void populateTrips(){
         RecyclerView.LayoutManager lm = new LinearLayoutManager(this);
-        adapter = new TripAdapter(this, htmlGetTrips());
+        httpGetTrips();
 
+        adapter = new TripAdapter(this, trips);
         myTripsView.setLayoutManager(lm);
         myTripsView.setAdapter(adapter);
         adapter.setClickListener(this);
     }
 
-    private List<Trip> htmlGetTrips(){
-        List<Trip> trips = new ArrayList<Trip>();
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Toronto", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
-        trips.add(new Trip("Montreal", "Quebec", 200, true, new Time(1000000), new Time(1000000000), 200, 3, new Date(1000000), false, null));
+    private void httpGetTrips(){
+        String url = "api/users/" + MainActivity.mainUser.getId() + "/trips/";
 
-        //HttpRequest.withToken(MainActivity.token).
+        HttpRequest.withToken(MainActivity.token).get(url, new RequestParams(), new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                Gson gson = new GsonBuilder().create();
 
-        return trips;
+                trips = (List<Trip>) gson.fromJson(response.toString(), User.class);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    throw(throwable);
+                } catch (Throwable throwable1) {
+                    throwable1.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override
