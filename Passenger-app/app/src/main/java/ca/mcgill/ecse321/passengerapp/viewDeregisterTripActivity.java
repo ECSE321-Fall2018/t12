@@ -89,7 +89,7 @@ public class viewDeregisterTripActivity extends AppCompatActivity {
         //something about a date fix the date later
 
         // model still fixed
-       // String printedDate= formatter.format(trip.getDate());
+        //String printedDate= formatter.format(trip.getDate()+"");
         //Date.setText(printedDate);
         Time = (TextView) findViewById(R.id.TimeDisplay);
         Time.setText(trip.getStart_time().toString());
