@@ -103,7 +103,7 @@ public class viewRegisterTripActivity extends AppCompatActivity {
         Passenger = (RecyclerView) findViewById(R.id.PassengerDisplay);
         populatePassengers();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -128,8 +128,7 @@ public class viewRegisterTripActivity extends AppCompatActivity {
 
         long tripId = trip.getId();
 
-        //call back end here ask brendan how to do this
-        Intent editIntent = new Intent(this, MyTripsActivity.class);//return to my trips activity
+        Intent editIntent = new Intent(this, AllTripsActivity.class);//return to my trips activity
         startActivity(editIntent);
 
     }
