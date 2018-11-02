@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -49,9 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         else if (un == ""){
             errorTxt.setText("Unable to login: Please input a username");
         }
-        else if(!userExists(un)){
-            errorTxt.setText("Unable to login: Username does not exist");
-        }
         else {
             login(un, pass);
         }
@@ -71,9 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             errorTxt.setText("Please input a username");
         }
         else {
-            if(saveUser(un, pass)){
-                login(un, pass);
-            }
+            saveUser(un, pass);
         }
     }
 
@@ -82,25 +78,22 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean saveUser(String username, String password){
+    public void saveUser(String username, String password){
 
-        boolean result = false;
         try {
-            result = signupUser(username, password);
+            signupUser(username, password);
         } catch (JSONException | UnsupportedEncodingException e) {
             e.printStackTrace();
             Snackbar.make(findViewById(android.R.id.content), getString(R.string.error_exception_thrown) + e.getMessage(), Snackbar.LENGTH_LONG).show();
         }
 
-        return result;
     }
 
-    public boolean signupUser(String username, String password) throws JSONException, UnsupportedEncodingException {
+    public void signupUser(String username, String password) throws JSONException, UnsupportedEncodingException {
         // Check if the network is available
         if (!HttpUtils.isNetworkAvailable(this)) {
             Snackbar.make(findViewById(android.R.id.content), getString(R.string.error_no_internet), Snackbar.LENGTH_LONG).show();
-
-            return false;
+            return;
         }
 
         /**
@@ -119,10 +112,13 @@ public class LoginActivity extends AppCompatActivity {
 
         System.out.println(jsonParams.toString());
 
+        final String u = username, p = password;
+
         HttpRequest.withNoAuth().post(this, getString(R.string.signup_url), jsonParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 errorTxt.setText(response.toString());
+                login(u, p);
             }
 
             @Override
@@ -143,11 +139,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        return true;
     }
 
     public void login(String username, String password) {
-
+        // Check if the network is available
+        if (!HttpUtils.isNetworkAvailable(this)) {
+            Snackbar.make(findViewById(android.R.id.content), getString(R.string.error_no_internet), Snackbar.LENGTH_LONG).show();
+            return;
+        }
 
         RequestParams params = new RequestParams();
         params.add("username", username);
@@ -160,49 +159,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 errorTxt.setText(response.toString());
 
-
-                String token = null;
-                try {
-                    token = response.getString("access_token");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-                System.out.println(token);
-
-                HttpRequest.withToken(token).get("api/users/", new RequestParams(), new JsonHttpResponseHandler() {
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                        System.out.println(response.toString());
-                    }
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        errorTxt.setText(response.toString());
-                        System.out.println(response.toString());
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                        System.out.println("ERROR CODE ON GET::: " + statusCode);
-                        if (errorResponse != null) {
-                            errorTxt.setText(errorResponse.toString());
-                        } else {
-                            Snackbar.make(findViewById(android.R.id.content), "Service is down!", Snackbar.LENGTH_LONG).show();
-                        }
-                    }
-
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        super.onFailure(statusCode, headers, responseString, throwable);
-                        errorTxt.setText(responseString);
-                    }
-
-                });
-
                 //Changes view to main view
                 Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(mainIntent);
@@ -214,21 +170,15 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                System.out.println("ERROR STATUS: " + statusCode);
                 if (errorResponse != null) {
+
                     errorTxt.setText(errorResponse.toString());
+                    Snackbar.make(findViewById(android.R.id.content), LoginActivity.this.getString(R.string.error_invalid_credentials), Snackbar.LENGTH_LONG).show();
+
                 } else {
-                    Snackbar.make(findViewById(android.R.id.content), "Service is down!", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(findViewById(android.R.id.content), LoginActivity.this.getString(R.string.error_service_down), Snackbar.LENGTH_LONG).show();
                 }
             }
-
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-                errorTxt.setText(responseString);
-            }
-
 
         });
     }
