@@ -44,7 +44,21 @@
         <activity
             android:name=".viewDeregisterTripActivity"
             android:label="@string/title_activity_view_deregister_trip"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+            android:parentActivityName=".MyTripsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="ca.mcgill.ecse321.passengerapp.MyTripsActivity" />
+        <activity
+            android:name=".viewRegisterTripActivity"
+            android:label="@string/title_activity_view_register_trip"
+            android:parentActivityName=".AllTripsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.mcgill.ecse321.passengerapp.AllTripsActivity" />
+        </activity>
 
     </application>
 

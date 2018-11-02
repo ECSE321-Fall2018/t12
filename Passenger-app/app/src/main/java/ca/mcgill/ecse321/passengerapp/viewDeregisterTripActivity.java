@@ -15,7 +15,7 @@ public class viewDeregisterTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_deregister_trip);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,6 +24,8 @@ public class viewDeregisterTripActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        */
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }
