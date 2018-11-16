@@ -31,7 +31,7 @@ import ca.mcgill.ecse321.webservice.service.TripService;
 import ca.mcgill.ecse321.webservice.service.UserService;
 import ca.mcgill.ecse321.webservice.service.VehicleService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8087")
 @RestController
 @RequestMapping("/api/")
 public class TripController {
