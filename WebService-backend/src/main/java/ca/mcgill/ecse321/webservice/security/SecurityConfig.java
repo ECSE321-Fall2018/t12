@@ -93,18 +93,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Order(Ordered.HIGHEST_PRECEDENCE)
     protected void configure(HttpSecurity http) throws Exception {
-		http
-		.sessionManagement()
-		.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and()
-		.csrf().disable()
-	  	.authorizeRequests()
-        .antMatchers("/signup").permitAll()			// "/signup" and "/oauth/token" will not be protected (publicly accessible)
-	  	.antMatchers("/oauth/token").permitAll()
-        .anyRequest().authenticated()				// All other end-points shall be authenticated
-	  	.and()
-	  	.httpBasic()
-	  	.realmName("12_REALM");
+    	
+    	http.authorizeRequests().anyRequest().permitAll();
+//		http
+//		.sessionManagement()
+//		.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//		.and()
+//		.csrf().disable()
+//	  	.authorizeRequests()
+//        .antMatchers("/signup").permitAll()			// "/signup" and "/oauth/token" will not be protected (publicly accessible)
+//	  	.antMatchers("/oauth/token").permitAll()
+//	  	.antMatchers("/**").permitAll()
+//        //.anyRequest().authenticated()				// All other end-points shall be authenticated
+//	  	.and()
+//	  	.httpBasic()
+//	  	.realmName("12_REALM");
     }
  
 	
