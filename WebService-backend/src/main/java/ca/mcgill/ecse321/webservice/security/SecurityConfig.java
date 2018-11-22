@@ -94,7 +94,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     protected void configure(HttpSecurity http) throws Exception {
     	
-    	http.authorizeRequests().anyRequest().permitAll();
+    	http
+    		.sessionManagement()
+    		.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    		.and()
+    		.cors()
+    		.and()
+    		.authorizeRequests()
+    		.anyRequest().permitAll();
+    	
 //		http
 //		.sessionManagement()
 //		.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
