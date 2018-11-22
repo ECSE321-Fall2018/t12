@@ -22,24 +22,22 @@ public class TripNode{
 	private PointType pointType;
 	private String name;
 	private String time;
-	private Trip trip;
 	// maybe in the future have an x and y position to put on a map 
 	
 	public TripNode() {
 		this.setPosition(new Position("ontario"));
 	}
 	
-	public TripNode(String name, PointType pointType,String time) {
+	public TripNode(
+			String name, 
+			PointType pointType,
+			String time) {
 		super();
 		this.name= name;
-		//this.position = position;
 		this.pointType = pointType;
 		this.time = time;
-				//new Time(time);
-		//this.position= new Position("ontario");
 		this.setPosition(new Position("ontario"));
 		System.out.println(this.position.getId());
-		//this.trip = trip;
 	}
 
 	@Id 
@@ -87,17 +85,6 @@ public class TripNode{
 
    public String getName() {
 	   return this.name;
-   }
-
-   @JsonBackReference(value="tnt")
-   @ManyToOne(cascade=CascadeType.ALL, optional=false)
-   public Trip getTrip() {
-	   return this.trip;
-   }
-
-   public void setTrip(Trip trip) {
-	   //trip.addTripNode(this);
-	   this.trip = trip;
    }
 
 }

@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -188,8 +189,7 @@ public class Trip {
 		registration.setTrip(this);
 	}
 	
-	@JsonBackReference(value="ttn")
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="trip")
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	public Set<TripNode> getTripNodes() {
 		return this.tripNodes;
 	}
@@ -200,7 +200,6 @@ public class Trip {
 	
 	public void addTripNode(TripNode tripNode) {
 		this.tripNodes.add(tripNode);
-		tripNode.setTrip(this);
 	}
 	
 	@JsonBackReference(value="tv")
