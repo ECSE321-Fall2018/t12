@@ -100,7 +100,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     		.and()
     		.cors()
     		.and()
-    		.csrf().disable()
     		.authorizeRequests()
     		.anyRequest().permitAll();
     	
