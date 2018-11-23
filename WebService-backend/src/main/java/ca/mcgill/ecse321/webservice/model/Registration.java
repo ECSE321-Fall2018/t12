@@ -12,7 +12,9 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
+@JsonIdentityInfo(generator=JSOGGenerator.class)
 @Entity
 public class Registration {
 	
