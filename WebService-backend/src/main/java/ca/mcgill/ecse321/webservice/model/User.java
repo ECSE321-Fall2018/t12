@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "Usr")
-//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
 public class User{
 	
 	
@@ -130,7 +130,6 @@ public class User{
 		registration.setUser(this);
 	}
 
-	@JsonBackReference(value="uv")
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
 	public Set<Vehicle> getVehicles() {
 		return this.vehicles;
@@ -150,7 +149,6 @@ public class User{
 		vehicle.setUser(null);
 	}
 	
-	@JsonBackReference(value="ur")
 	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	public Set<UserRole> getRoles() {
 		return this.roles;

@@ -51,7 +51,6 @@ public class Registration {
 		return this.role;
 	}
 
-	@JsonBackReference(value="ru")
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
 	public User getUser() {
 		return this.user;
@@ -61,7 +60,6 @@ public class Registration {
 		this.user = user;
 	}
 
-	@JsonBackReference(value="tr")
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
 	public Trip getTrip() {
 		return this.trip;

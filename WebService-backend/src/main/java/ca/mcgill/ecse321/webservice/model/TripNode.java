@@ -50,7 +50,6 @@ public class TripNode{
 		this.id = id;
 	}
 	
-	@JsonBackReference(value="tnp")
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
 	public Position getPosition() {
 		return this.position;
