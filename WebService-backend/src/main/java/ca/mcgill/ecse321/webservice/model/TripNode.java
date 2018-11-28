@@ -12,9 +12,10 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="id")
+@JsonIdentityInfo(generator=JSOGGenerator.class)
 public class TripNode{
 
 	private Long id; 
@@ -50,7 +51,6 @@ public class TripNode{
 		this.id = id;
 	}
 	
-	@JsonBackReference(value="tnp")
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
 	public Position getPosition() {
 		return this.position;

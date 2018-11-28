@@ -19,8 +19,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 @Entity
+@JsonIdentityInfo(generator=JSOGGenerator.class)
 public class Trip {
 
 	private Long id; 
@@ -174,7 +176,6 @@ public class Trip {
 		this.compleated = compleated;
 	}
 	
-	@JsonManagedReference(value="tr")
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="trip")
 	public Set<Registration> getRegistrations() {
 		return this.registrations;
@@ -202,7 +203,6 @@ public class Trip {
 		this.tripNodes.add(tripNode);
 	}
 	
-	@JsonBackReference(value="tv")
 	@ManyToOne(cascade=CascadeType.ALL,optional=false)
 	public Vehicle getVehicle() {
 		return this.vehicle;
