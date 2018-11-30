@@ -15,6 +15,7 @@ import android.widget.EditText;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -65,7 +66,12 @@ public class AllTripsActivity extends AppCompatActivity  implements TripAdapter.
         });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        httpGetAllTrips();
     }
 
     private void populateAllTripsView(){

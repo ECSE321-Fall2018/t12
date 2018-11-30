@@ -56,6 +56,11 @@ public class MyTripsActivity extends AppCompatActivity implements TripAdapter.It
         populateMyTripsView();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        httpGetMyTrips();
+    }
 
     private void populateMyTripsView(){
         RecyclerView.LayoutManager lm = new LinearLayoutManager(this);
@@ -65,10 +70,10 @@ public class MyTripsActivity extends AppCompatActivity implements TripAdapter.It
         myTripsView.setAdapter(adapter);
         adapter.setClickListener(this);
 
-        htmlGetMyTrips();
+        httpGetMyTrips();
     }
 
-    private void htmlGetMyTrips() {
+    private void httpGetMyTrips() {
         String userUrl = "api/users/name/" + MainActivity.mainUser.getUsername();
 
         HttpRequest.withToken(MainActivity.token).get(userUrl, new RequestParams(), new JsonHttpResponseHandler() {
