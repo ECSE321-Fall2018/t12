@@ -13,6 +13,7 @@
     <string name="error_exception_thrown">Exception thrown: </string>
     <string name="error_service_down">Error: Service is down!</string>
     <string name="error_invalid_credentials">Invalid username and password</string>
+    <string name="error_deregister">Error: Unexpected issue with de-register</string>
 
     <string name="accountType">ca.mcgill.ecse321</string>
 

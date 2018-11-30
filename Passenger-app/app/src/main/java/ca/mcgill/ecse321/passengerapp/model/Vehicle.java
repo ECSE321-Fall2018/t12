@@ -85,4 +85,17 @@ public class Vehicle implements Serializable {
         this.user = user;
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Vehicle){
+            return id.equals(((Vehicle) obj).getId());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode(){
+        return id.intValue();
+    }
+
 }

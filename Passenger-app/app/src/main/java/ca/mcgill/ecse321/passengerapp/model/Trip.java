@@ -197,4 +197,18 @@ public class Trip implements Serializable{
         this.vehicle = vehicle;
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Trip) {
+            return id.equals(((Trip) obj).getId());
+        }
+        return false;
+    }
+
+
+    @Override
+    public int hashCode(){
+        return id.intValue();
+    }
+
 }

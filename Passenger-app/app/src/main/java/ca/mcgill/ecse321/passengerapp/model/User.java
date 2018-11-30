@@ -166,4 +166,18 @@ public class User implements Serializable {
             this.drivingRate = drivingRate - (score / Dweight);
         }
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof User){
+            return id.equals(((User) obj).getId());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode(){
+        return id.intValue();
+    }
+
 }

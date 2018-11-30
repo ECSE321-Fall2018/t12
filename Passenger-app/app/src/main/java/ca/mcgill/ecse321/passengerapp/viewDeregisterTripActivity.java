@@ -66,6 +66,8 @@ public class viewDeregisterTripActivity extends AppCompatActivity {
     private RecyclerView Passenger;
     private VehicleAdapter adapter;
     private TextView DriverText;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,87 +137,116 @@ public class viewDeregisterTripActivity extends AppCompatActivity {
         //here i must call the backend to deregister this user from this trip
         String userUrl = "api/users/name/" + MainActivity.mainUser.getUsername();
 
+        String url = "api/registrations/";
+
+        Registration registration = null;
+
+        /**
+         * Determine associated registration for trip
+         */
         for (Registration reg : MainActivity.mainUser.getRegistrations()) {
             Trip t = reg.getTrip();
-            //if (t.equals())
+
+            if (trip.equals(t)) {
+                registration = reg;
+                break;
+            }
         }
 
+        // Catch unexpected errors
+        if (registration == null) {
+            Snackbar.make(findViewById(android.R.id.content), viewDeregisterTripActivity.this.getString(R.string.error_deregister), Snackbar.LENGTH_LONG).show();
+            return;
+        }
 
-        HttpRequest.withToken(MainActivity.token).get(userUrl, new RequestParams(), new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                Gson gson = new GsonBuilder().create();
-                User user = (User) gson.fromJson(response.toString(), User.class);
-
-                MainActivity.mainUser = user;
-
-                String tripsUrl = "api/users/" + MainActivity.mainUser.getId() + "/trips/";
-
-                HttpRequest.withToken(MainActivity.token).get(tripsUrl, new RequestParams(), new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                        Gson gson = new GsonBuilder().create();
-                        Set<Registration> userRegs = MainActivity.mainUser.getRegistrations();
-
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject obj = response.getJSONObject(i);
-                                Trip trip = (Trip) gson.fromJson(obj.toString(), Trip.class);
-
-                                Set<Registration> tripRegs = trip.getRegistrations();
-
-
-                                for (Iterator<Registration> tripIt = tripRegs.iterator(); tripIt.hasNext(); ) {
-                                    Registration tripReg = tripIt.next();
-
-                                    if (userRegs.contains(tripReg)) {
-                                        if (tripReg.getRole() == Role.PASSENGER) {
-
-                                            long registrationId = tripReg.getId();
-                                            String deletionUrl = "api/registrations/" + registrationId;
-
-                                            HttpRequest.withToken(MainActivity.token).delete(deletionUrl, new RequestParams(), new JsonHttpResponseHandler() {
-
-                                                @Override
-                                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                                    Intent editIntent = new Intent(viewDeregisterTripActivity.this, MyTripsActivity.class);//return to my trips activity
-                                                    startActivity(editIntent);
-                                                }
-
-                                                @Override
-                                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                                                    try {
-                                                        throw (throwable);
-                                                    } catch (Throwable throwable1) {
-                                                        throwable1.printStackTrace();
-                                                    }
-                                                }
-
-                                            });
-
-                                        }
-                                    }
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    }
+        HttpRequest.withToken(MainActivity.token).delete(url + registration.getId().longValue(),
+                new RequestParams(),
+                new JsonHttpResponseHandler() {
 
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                        try {
-                            throw (throwable);
-                        } catch (Throwable throwable1) {
-                            throwable1.printStackTrace();
-                        }
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        System.out.println("Deregistered!");
+                        viewDeregisterTripActivity.super.onBackPressed();
                     }
 
-                });
-            }
         });
+
+//
+//        HttpRequest.withToken(MainActivity.token).get(userUrl, new RequestParams(), new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//
+//                Gson gson = new GsonBuilder().create();
+//                User user = (User) gson.fromJson(response.toString(), User.class);
+//
+//                MainActivity.mainUser = user;
+//
+//                String tripsUrl = "api/users/" + MainActivity.mainUser.getId() + "/trips/";
+//
+//                HttpRequest.withToken(MainActivity.token).get(tripsUrl, new RequestParams(), new JsonHttpResponseHandler() {
+//                    @Override
+//                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+//                        Gson gson = new GsonBuilder().create();
+//                        Set<Registration> userRegs = MainActivity.mainUser.getRegistrations();
+//
+//                        for (int i = 0; i < response.length(); i++) {
+//                            try {
+//                                JSONObject obj = response.getJSONObject(i);
+//                                Trip trip = (Trip) gson.fromJson(obj.toString(), Trip.class);
+//
+//                                Set<Registration> tripRegs = trip.getRegistrations();
+//
+//
+//                                for (Iterator<Registration> tripIt = tripRegs.iterator(); tripIt.hasNext(); ) {
+//                                    Registration tripReg = tripIt.next();
+//
+//                                    if (userRegs.contains(tripReg)) {
+//                                        if (tripReg.getRole() == Role.PASSENGER) {
+//
+//                                            long registrationId = tripReg.getId();
+//                                            String deletionUrl = "api/registrations/" + registrationId;
+//
+//                                            HttpRequest.withToken(MainActivity.token).delete(deletionUrl, new RequestParams(), new JsonHttpResponseHandler() {
+//
+//                                                @Override
+//                                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                                                    Intent editIntent = new Intent(viewDeregisterTripActivity.this, MyTripsActivity.class);//return to my trips activity
+//                                                    startActivity(editIntent);
+//                                                }
+//
+//                                                @Override
+//                                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+//                                                    try {
+//                                                        throw (throwable);
+//                                                    } catch (Throwable throwable1) {
+//                                                        throwable1.printStackTrace();
+//                                                    }
+//                                                }
+//
+//                                            });
+//
+//                                        }
+//                                    }
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+//                        try {
+//                            throw (throwable);
+//                        } catch (Throwable throwable1) {
+//                            throwable1.printStackTrace();
+//                        }
+//                    }
+//
+//                });
+//            }
+//        });
 
 
     }

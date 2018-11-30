@@ -31,6 +31,5 @@ public class UserRole implements Serializable {
         this.name = name;
     }
 
-
 }
 

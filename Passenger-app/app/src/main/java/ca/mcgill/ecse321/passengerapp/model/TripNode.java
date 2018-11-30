@@ -69,4 +69,18 @@ public class TripNode implements Serializable {
     public String getName() {
         return this.name;
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof TripNode){
+            return id.equals(((TripNode) obj).getId());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode(){
+        return id.intValue();
+    }
+
 }
