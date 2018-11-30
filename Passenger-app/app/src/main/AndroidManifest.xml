@@ -60,6 +60,17 @@
                 android:value="ca.mcgill.ecse321.passengerapp.AllTripsActivity" />
         </activity>
 
+        <activity
+            android:name=".ViewTrip"
+            android:label="View Trip"
+            android:parentActivityName=".AllTripsActivity"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.mcgill.ecse321.passengerapp.AllTripsActivity" />
+        </activity>
+
+
     </application>
 
 </manifest>

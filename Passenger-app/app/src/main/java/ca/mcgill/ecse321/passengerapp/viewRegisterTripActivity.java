@@ -111,7 +111,6 @@ public class viewRegisterTripActivity extends AppCompatActivity {
 
 
     public void RegisterBtnClick(View view){
-        //here i must call the backend to deregister this user from this trip
 
         long tripId = trip.getId();
 

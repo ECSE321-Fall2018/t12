@@ -173,7 +173,7 @@ public class AllTripsActivity extends AppCompatActivity  implements TripAdapter.
     }
 
     public void onItemClick(View view, int position) {
-        Intent intent = new Intent(this, viewRegisterTripActivity.class);
+        Intent intent = new Intent(this, ViewTrip.class);
         intent.putExtra("TRIP_ID", adapter.getItem(position));
         startActivity(intent);
     }
