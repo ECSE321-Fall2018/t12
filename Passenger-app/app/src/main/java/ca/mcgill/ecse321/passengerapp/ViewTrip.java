@@ -19,7 +19,7 @@ import ca.mcgill.ecse321.passengerapp.model.TripNode;
 
 public class ViewTrip extends AppCompatActivity {
 
-    private Trip trip;
+    protected Trip trip;
     private List<String> stops;
     private List<String> passengers;
 
@@ -75,24 +75,6 @@ public class ViewTrip extends AppCompatActivity {
 
     }
 
-    // handle button activities
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        if (id == R.id.mybutton) {
-            // do something here
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        int a = R.menu.menu_view_trip;
-        getMenuInflater().inflate(R.menu.menu_view_trip, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
 }

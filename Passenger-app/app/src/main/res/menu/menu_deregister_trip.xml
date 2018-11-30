@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/mybutton"
-        android:title="Test"
+        android:title="Leave trip"
         app:showAsAction="always"
         />
 </menu>
