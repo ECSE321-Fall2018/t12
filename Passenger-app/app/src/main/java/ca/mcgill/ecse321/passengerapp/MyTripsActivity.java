@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -19,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -69,61 +71,26 @@ public class MyTripsActivity extends AppCompatActivity implements TripAdapter.It
     private void htmlGetMyTrips() {
         String userUrl = "api/users/name/" + MainActivity.mainUser.getUsername();
 
-
         HttpRequest.withToken(MainActivity.token).get(userUrl, new RequestParams(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                Gson gson = new GsonBuilder().create();
-                User user = (User) gson.fromJson(response.toString(), User.class);
-
-                MainActivity.mainUser = user;
-
-                String tripsUrl = "api/users/" + MainActivity.mainUser.getId() + "/trips/";
-
-                HttpRequest.withToken(MainActivity.token).get(tripsUrl, new RequestParams(), new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                        Gson gson = new GsonBuilder().create();
-                        Set<Registration> userRegs = MainActivity.mainUser.getRegistrations();
-
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject obj = response.getJSONObject(i);
-                                Trip trip = (Trip) gson.fromJson(obj.toString(), Trip.class);
-
-                                Set<Registration> tripRegs = trip.getRegistrations();
-
-
-                                for (Iterator<Registration> tripIt = tripRegs.iterator(); tripIt.hasNext(); ) {
-                                    Registration tripReg = tripIt.next();
-
-                                    if (userRegs.contains(tripReg)) {
-                                        if (tripReg.getRole() == Role.PASSENGER) {
-                                            trips.add(trip);
-                                        }
-                                    }
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        adapter.notifyDataSetChanged();
+                try {
+                    User user = new ObjectMapper().readValue(response.toString(), User.class);
+                    MainActivity.mainUser = user;
+                    trips.clear();
+                    for (Registration reg : user.getRegistrations()) {
+                        trips.add(reg.getTrip());
                     }
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                        try {
-                            throw (throwable);
-                        } catch (Throwable throwable1) {
-                            throwable1.printStackTrace();
-                        }
-                    }
+                } catch(IOException e) {
+                    e.printStackTrace();
+                }
 
-                });
+                adapter.notifyDataSetChanged();
             }
         });
+
     }
 
 

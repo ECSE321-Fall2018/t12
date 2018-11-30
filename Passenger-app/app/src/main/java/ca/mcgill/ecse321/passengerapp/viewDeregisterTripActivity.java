@@ -135,6 +135,12 @@ public class viewDeregisterTripActivity extends AppCompatActivity {
         //here i must call the backend to deregister this user from this trip
         String userUrl = "api/users/name/" + MainActivity.mainUser.getUsername();
 
+        for (Registration reg : MainActivity.mainUser.getRegistrations()) {
+            Trip t = reg.getTrip();
+            //if (t.equals())
+        }
+
+
         HttpRequest.withToken(MainActivity.token).get(userUrl, new RequestParams(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
