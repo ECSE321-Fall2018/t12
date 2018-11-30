@@ -10,14 +10,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import com.google.gson.GsonBuilder;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import ca.mcgill.ecse321.passengerapp.model.User;
@@ -58,8 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
-
     //Make sure the user does not exist and try to log in
     public void signUpBtnClick(View view){
         String pass = passwordTbx.getText().toString();
@@ -93,20 +93,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signupUser(String username, String password) throws JSONException, UnsupportedEncodingException {
-        // Check if the network is available
+
+        // --- Check if the network is available ---
         if (!HttpUtils.isNetworkAvailable(this)) {
             Snackbar.make(findViewById(android.R.id.content), getString(R.string.error_no_internet), Snackbar.LENGTH_LONG).show();
             return;
         }
-
-        /**
-         * Example request:
-         * {
-         * 	   "name": "Alex",
-         *     "username": "Bshizzl",
-         *     "password": "123123"
-         * }
-         */
 
         JSONObject jsonParams = new JSONObject();
         jsonParams.put("name", "test");
@@ -121,7 +113,20 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 errorTxt.setText(response.toString());
-                login(u, p);
+
+                ObjectMapper mapper = new ObjectMapper();
+
+                try {
+                    MainActivity.mainUser = mapper.readValue(response.toString(), User.class);
+
+                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(mainIntent);
+
+                    finish();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -162,7 +167,6 @@ public class LoginActivity extends AppCompatActivity {
                 .post(getString(R.string.get_access_token_url), params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                errorTxt.setText(response.toString());
 
                 try {
                     MainActivity.token = response.getString("access_token");
@@ -203,13 +207,13 @@ public class LoginActivity extends AppCompatActivity {
         HttpRequest.withToken(MainActivity.token).get(url, new RequestParams(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                System.out.println(response.toString());
+                ObjectMapper mapper = new ObjectMapper();
 
-                Gson gson = new GsonBuilder().create();
-
-                User user = (User) gson.fromJson(response.toString(), User.class);
-
-                MainActivity.mainUser = user;
+                try {
+                    MainActivity.mainUser = mapper.readValue(response.toString(), User.class);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

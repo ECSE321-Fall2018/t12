@@ -1,9 +1,10 @@
 package ca.mcgill.ecse321.passengerapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import java.io.Serializable;
-import java.sql.Time;
 
-
+@JsonIdentityInfo(generator=JSOGGenerator.class)
 public class TripNode implements Serializable {
 
     private Long id;
@@ -11,24 +12,22 @@ public class TripNode implements Serializable {
     private PointType pointType;
     private String name;
     private String time;
-    private Trip trip;
-    // maybe in the future have an x and y position to put on a map
+
 
     public TripNode() {
         this.setPosition(new Position("ontario"));
     }
 
-    public TripNode(String name, PointType pointType,String time) {
+    public TripNode(
+            String name,
+            PointType pointType,
+            String time) {
         super();
         this.name= name;
-        //this.position = position;
         this.pointType = pointType;
         this.time = time;
-        //new Time(time);
-        //this.position= new Position("ontario");
         this.setPosition(new Position("ontario"));
         System.out.println(this.position.getId());
-        //this.trip = trip;
     }
 
     public Long getId() {
@@ -46,8 +45,6 @@ public class TripNode implements Serializable {
     public void setPosition(Position position) {
         this.position = position;
     }
-
-
 
     public void setPointType(PointType value) {
         this.pointType = value;
@@ -71,14 +68,5 @@ public class TripNode implements Serializable {
 
     public String getName() {
         return this.name;
-    }
-
-    public Trip getTrip() {
-        return this.trip;
-    }
-
-    public void setTrip(Trip trip) {
-        //trip.addTripNode(this);
-        this.trip = trip;
     }
 }

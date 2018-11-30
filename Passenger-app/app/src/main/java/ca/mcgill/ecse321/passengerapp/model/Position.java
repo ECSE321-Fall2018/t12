@@ -1,14 +1,14 @@
 package ca.mcgill.ecse321.passengerapp.model;
 
-/**
- * Created by michelabdelnour on 2018-11-01.
- */
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 
+@JsonIdentityInfo(generator=JSOGGenerator.class)
 public class Position implements Serializable {
 
     private Long id;
@@ -53,4 +53,3 @@ public class Position implements Serializable {
     }
 
 }
-

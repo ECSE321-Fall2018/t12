@@ -1,14 +1,15 @@
 package ca.mcgill.ecse321.passengerapp.model;
 
-/**
- * Created by michelabdelnour on 2018-10-31.
- */
+
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 
+@JsonIdentityInfo(generator=JSOGGenerator.class)
 public class User implements Serializable {
 
 
@@ -48,12 +49,15 @@ public class User implements Serializable {
         return Dweight;
 
     }
+
     public float getPweight() {
         return Pweight;
     }
+
     public void setPweight(float Pweight) {
         this.Pweight = Pweight;
     }
+
     public void setDweight(float Dweight) {
         this.Dweight = Dweight;
     }
@@ -145,24 +149,21 @@ public class User implements Serializable {
         roles.add(role);
     }
 
-    public void updatePassRating(int score){
+    public void updatePassRating(int score) {
         Pweight++;
-        if (score > this.passRate){
-            this.passRate = passRate + (score/Pweight);
-        }
-        else if(score < this.passRate){
-            this.passRate = passRate - (score/Pweight);
+        if (score > this.passRate) {
+            this.passRate = passRate + (score / Pweight);
+        } else if (score < this.passRate) {
+            this.passRate = passRate - (score / Pweight);
         }
     }
 
-    public void updateDriverRating(int score){
+    public void updateDriverRating(int score) {
         Dweight++;
-        if (score > this.drivingRate){
-            this.drivingRate = drivingRate + (score/Dweight);
-        }
-        else if(score < this.drivingRate){
-            this.drivingRate = drivingRate - (score/Dweight);
+        if (score > this.drivingRate) {
+            this.drivingRate = drivingRate + (score / Dweight);
+        } else if (score < this.drivingRate) {
+            this.drivingRate = drivingRate - (score / Dweight);
         }
     }
-
 }

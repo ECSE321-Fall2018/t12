@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".viewDeregisterTripActivity"
-    tools:showIn="@layout/activity_view_deregister_trip">
+    >
 
     <TextView
         android:id="@+id/ArrivalDisplay"
@@ -59,6 +59,16 @@
         app:layout_constraintStart_toStartOf="@+id/guideline12" />
 
     <TextView
+        android:id="@+id/DestinationDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintStart_toEndOf="@+id/textView" />
+
+    <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,16 +119,6 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toStartOf="@+id/guideline13" />
 
-    <TextView
-        android:id="@+id/DestinationDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="20dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
-        app:layout_constraintStart_toEndOf="@+id/textView" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline8"

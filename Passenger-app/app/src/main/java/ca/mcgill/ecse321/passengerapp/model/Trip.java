@@ -1,6 +1,9 @@
 package ca.mcgill.ecse321.passengerapp.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+
 import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Date;
@@ -11,7 +14,9 @@ import ca.mcgill.ecse321.passengerapp.model.Registration;
 import ca.mcgill.ecse321.passengerapp.model.TripNode;
 import ca.mcgill.ecse321.passengerapp.model.Vehicle;
 
-public class Trip implements Serializable {
+@JsonIdentityInfo(generator=JSOGGenerator.class)
+public class Trip implements Serializable{
+
     private Long id;
     private String startpoint;
     private String endpoint;
@@ -28,6 +33,7 @@ public class Trip implements Serializable {
 
     private Set<Registration> registrations = new HashSet<>();
     private Set<TripNode> tripNodes = new HashSet<>();
+
 
     public Trip() {
 
@@ -60,7 +66,6 @@ public class Trip implements Serializable {
         this.cost_per_customer= cost_per_customer;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -75,6 +80,7 @@ public class Trip implements Serializable {
     public int getCost_per_customer() {
         return this.cost_per_customer;
     }
+
     public String getStartpoint() {
         return startpoint;
     }
@@ -182,7 +188,6 @@ public class Trip implements Serializable {
 
     public void addTripNode(TripNode tripNode) {
         this.tripNodes.add(tripNode);
-        tripNode.setTrip(this);
     }
 
     public Vehicle getVehicle() {
@@ -191,4 +196,5 @@ public class Trip implements Serializable {
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
+
 }

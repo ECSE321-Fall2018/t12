@@ -69,6 +69,7 @@ public class MyTripsActivity extends AppCompatActivity implements TripAdapter.It
     private void htmlGetMyTrips() {
         String userUrl = "api/users/name/" + MainActivity.mainUser.getUsername();
 
+
         HttpRequest.withToken(MainActivity.token).get(userUrl, new RequestParams(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.passengerapp;
 
-import android.app.SearchManager;
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,12 +8,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -24,19 +24,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Time;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import ca.mcgill.ecse321.passengerapp.adapters.TripAdapter;
-import ca.mcgill.ecse321.passengerapp.model.Position;
 import ca.mcgill.ecse321.passengerapp.model.Trip;
-import ca.mcgill.ecse321.passengerapp.model.TripNode;
 import ca.mcgill.ecse321.passengerapp.util.HttpRequest;
 import cz.msebera.android.httpclient.Header;
 
@@ -139,19 +132,21 @@ public class AllTripsActivity extends AppCompatActivity  implements TripAdapter.
 
 
     private void httpGetAllTrips(){
-
         String url = "api/trips/";
         HttpRequest.withToken(MainActivity.token).get(url, new RequestParams(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                Gson gson = new GsonBuilder().create();
+
+                System.out.println(response.toString());
+
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject obj = response.getJSONObject(i);
-                        Trip trip = (Trip) gson.fromJson(obj.toString(), Trip.class);
+
+                        Trip trip = new ObjectMapper().readValue(obj.toString(), Trip.class);
                         trips.add(trip);
 
-                    } catch (JSONException e) {
+                    } catch (JSONException | IOException e) {
                         e.printStackTrace();
                     }
                 }

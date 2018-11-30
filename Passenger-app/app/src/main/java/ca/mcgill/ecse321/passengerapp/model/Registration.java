@@ -1,12 +1,13 @@
 package ca.mcgill.ecse321.passengerapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+
 import java.io.Serializable;
 
-/**
- * Created by michelabdelnour on 2018-11-01.
- */
 
-public class Registration  implements Serializable {
+@JsonIdentityInfo(generator=JSOGGenerator.class)
+public class Registration implements Serializable {
 
     private Long id;
     private Role role;
@@ -54,20 +55,6 @@ public class Registration  implements Serializable {
 
     public void setTrip(Trip trip) {
         this.trip = trip;
-    }
-
-    @Override
-    public boolean equals(Object obj){
-        if(obj instanceof Registration){
-            return id == ((Registration) obj).getId();
-        }
-        return false;
-    }
-
-
-    @Override
-    public int hashCode(){
-        return id.intValue();
     }
 
 }
